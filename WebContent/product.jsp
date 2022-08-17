@@ -5,10 +5,13 @@
 <head>
 
 <style type="text/css">
-<!-------------------------------------scroolbar and footer------------------------------ -->
-body {data-spy ="scroll";
+<!--
+-----------------------------------scroolbar
+ 
+and footer------------------------------ -->body {data-spy ="scroll";
 	overflow: hidden;
-font-family: "Brackley Demo Italic";	height: 100%;
+	font-family: "Brackley Demo Italic";
+	height: 100%;
 }
 
 #content {
@@ -24,20 +27,20 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+
 #search {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  left: -22px;
- 
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	position: relative;
+	left: -22px;
 }
+
 header {
 	width: 100%;
 	height: 0px;
 	background: #5795d2;
 	position: fixed;
-	
 }
 
 #product_name {
@@ -60,27 +63,27 @@ header {
 	box-sizing: border-box;
 	font-size: 20px;
 }
-#category{
+
+#category {
 	background-color: #004d80;
 	border-color: #004d80;
 	color: black;
 	font-color: black;
-	
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
-
-
-<!------------------------------------css for cart display button------------------------------ --> 
- body {
+<!--
+----------------------------------css
+ 
+for cart display button------------------------------ -->body {
 	margin: 0;
-	font-family:Brackley Demo Italic;
+	font-family: Brackley Demo Italic;
 	font-size: .8125rem;
 	font-weight: 400;
 	line-height: 1.5385;
 	color: #333;
-	text-align: left; 
+	text-align: left;
 	background-color: #2196F3;
 }
 
@@ -123,10 +126,10 @@ header {
 #product_id {
 	background-color: #004d80;
 	color: #fff;
-	
-	}
+}
+
 #product_price {
-color:black;
+	color: black;
 }
 
 #product_id:hover {
@@ -162,17 +165,43 @@ color:black;
 	background-color: #ffa500;
 	color: #fff;
 }
-.quantity-right-plus btn  btn-number:focus{
-  
-  outline: none !important;
-  box-shadow: none;
+.quantity-left-minus{ /* btn btn-number*/
+    outline:0;
+	outline: 0 !important;
+	box-shadow: none;
+	border:0;
+	border: none !important;
+    background-color: Transparent;
+    background-repeat:no-repeat; 
 }
-.quantity-right-minus btn  btn-number:focus{
-  
-  outline: none !important;
-  box-shadow: none;
+.quantity-left-minus:focus { /* btn btn-number*/
+    outline:0;
+	outline: 0 !important;
+	box-shadow: none;
+	border:0;
+	border: none !important;
+    background-color: Transparent;
+    background-repeat:no-repeat;  
 }
-
+.quantity-right-plus{
+    outline:0;
+	outline: 0 !important;
+	box-shadow: none;
+	border:0;
+	border: none !important;
+    background-color: Transparent;
+    background-repeat:no-repeat; 
+   
+}
+.quantity-right-plus:focus {
+    outline:0;
+	outline: 0 !important;
+	box-shadow: none;
+	border:0;
+	border: none !important;
+	background-color: Transparent;
+    background-repeat:no-repeat;
+}
 
 .quantity {
 	width: 70px;
@@ -181,7 +210,7 @@ color:black;
 	margin-top: 10px;
 }
 /*--for scroll---- */
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
 	width: 4px;
 	height: 12px;
 }
@@ -203,10 +232,6 @@ color:black;
 	background: #004d80;
 	border-color: #004d80;
 }
-
-
-
-
 </style>
 
 <meta name="viewport"
@@ -230,8 +255,9 @@ color:black;
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-	
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
+
 
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -250,7 +276,7 @@ color:black;
                         var result;
                         var getObj;
                         var username = localStorage.getItem('username');
-                        document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+                        //document.getElementById('username').innerHTML = "Welcome" +" "+ username; //"Welcome" +" "+ username
                         //val =  document.getElementById('quantity').value;
                         var quantity=0;
                         $('.quantity-right-plus').click(function(e){
@@ -289,7 +315,7 @@ color:black;
                         
                         var jwt = localStorage.getItem('token');
                         var username = localStorage.getItem('username');
-						document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+						//document.getElementById('username').innerHTML =  "Welcome" +" "+ username ; //"Welcome" +" "+ username
 					
 			                    
 			                       getObj = localStorage.getItem('product_Id');
@@ -461,7 +487,7 @@ $.ajax({
 																						.slideDown();
 																				setTimeout(
 																						function() {
-																							window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																							window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 																							
 																						},
 																						2000);
@@ -480,7 +506,7 @@ $.ajax({
 																				localStorage.setItem('product_Id',product);
 																				setTimeout(
 																						function() {
-																							window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																							window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 																						},
 																						2000);
 																				
@@ -524,12 +550,12 @@ displayProductInfo();
 			<ul class="nav navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="home.jsp">
 						Home</a></li>
-					</ul>	
-		
+			</ul>
 
 
 
-		 <a class="navbar-brand" href="#" id ="username" ></a> 
+
+			<a class="navbar-brand" href="#" id="username"></a>
 			<ul class="nav navbar-nav navbar-right">
 				<div class="dropdown ">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
@@ -580,28 +606,31 @@ displayProductInfo();
 			<div class="row" id="form"></div>
 			<div class=" col-md-6">
 				<h3 class="text-justify" id="product_name"></h3>
-				<p class="text-justify" id="product_description"
+				<p  id="product_description"
 					style="font-size: 18px;"></p>
-			
-							<div class="col-md-6">
+
+				<div class="col-md-6">
 					<p class="label">
 						<b class="text-justify" style="font-size: 18px;"> Quantity</b>
 					</p>
 					<div class="input-group"
 						style="width: 110px; height: 40px; margin: 1px auto 0; border: 1px solid #ddd;">
 						<span class="input-group-btn">
-							<button type="button" class="quantity-left-minus btn  btn-number"
+<!--  btn btn-number -->    <button type="button" class="quantity-left-minus" 
 								data-type="minus" data-field=""
-								style="width: 35px; height: 100% ; outline:none !important;">
-								<span ><i class="fa fa-minus" style="padding-bottom: 200px;color: Black; "> </i></span>
+								style="width: 35px; height: 100%; border:none !important; outline: none !important;">
+								<span><i class="fa fa-minus"
+									style="padding-bottom: 0px; color: Black;"> </i></span>
 							</button>
 						</span> <input type="text" id="quantity" name="quantity"
 							class="form-control input-number" value="1" min="1" max="100">
 						<span class="input-group-btn">
-							<button type="button" class="quantity-right-plus btn  btn-number"
-								data-type="plus" data-field="" style="outline:none !important;">
-										<span ><i class="fa fa-plus" style="padding-bottom: 200px;color: Black"> </i></span>
-						
+							<button type="button" class="quantity-right-plus"
+								data-type="plus" data-field="" 
+								style="width: 35px; height: 100%; border:none !important; outline: none !important;">
+								<span><i class="fa fa-plus"
+									style="padding-bottom: 0px; border:none !important; color: Black"> </i></span>
+
 							</button>
 						</span>
 
@@ -609,18 +638,27 @@ displayProductInfo();
 
 				</div>
 				<br>
-		  <div class="col-sm">
+				<div class="col-sm">
 					<h6 class="text-justify">
-						<b class="text-justify" style="font-size: 18px; style="padding-right: 3px !important;"> Price</b> <strong><i
-							class="fa fa-rupee" id="symbol" style="padding-right: 3px !important;"> </i><span id="product_price"
-							style="color: black !important; font-size: 20px; "></span></strong>
+						<b class="text-justify" style="font-size: 18px;"padding-right: 3px !important;">
+							Price</b> <strong><i class="fa fa-rupee" id="symbol"
+							style="padding-right: 3px !important;"> </i><span
+							id="product_price"
+							style="color: black !important; font-size: 20px;"></span></strong>
 					</h6>
 				</div>
-          <div class="col-sm" style="margin-top:0 !important;">	<button type="button" class="btn btn-default"
-					id="product_id" style="margin-top:0 !important;  ">
-					<i class="fa fa-shopping-cart pr-2"></i>Add to cart
-				</button></div>
-			
+				<div class="col-sm" style="margin-top: 0 !important;">
+					<button type="button" class="btn btn-default" id="product_id"
+						style="margin-top: 0 !important;">
+						<i class="fa fa-shopping-cart pr-2"></i>Add to cart
+					</button>
+					<button type="button" class="btn btn-default" id="product_id"
+						style="margin-top: 0 !important;">Buy Now
+					</button>
+
+					
+				</div>
+
 			</div>
 
 		</div>

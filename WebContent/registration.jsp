@@ -52,6 +52,17 @@
 	margin-bottom: 4px;
 }
 
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+  height: 40px;
+}
+
 .group label {
 	font-size: 16px;
 }
@@ -310,7 +321,7 @@ var regex = /^\d{10}$/;
 if (!regex.test(phonenum) || phonenum == '') {
 $('#phonenumcheck').show();
 $('#phonenumcheck').html(
-"**Please Fill the phone correctly ");
+"**Please enter a valid phone number "); //Please Fill the phone correctly
 $('#phonenumcheck').focus();
 $('#phonenumcheck').css("color", "red");
 document.getElementById('sign_in').disabled = true;
@@ -355,7 +366,9 @@ var lastname = $('#lastname').val();
 var phonenum = $('#phonenum').val();
 var address = $('#address').val();
 var dob = $('#dob').val();
-var gender = $('#gender').val();
+//var gender = $('#gender').val();
+var security_id = $('#security_id').val();
+var security_answer = $('#security_answer').val();
 if (username == ''
 || password == ''
 || confirmpassword == ''
@@ -442,7 +455,7 @@ console.log(error);
 <body>
 
 	<!-- ----------------header-------------- -->
-
+    <!--
 	<nav class="navbar navbar-dark navbar-expand-md"
 		style="background-color:#112549;">
 	<div class="container-fluid">
@@ -465,13 +478,16 @@ console.log(error);
 		</div>
 	</div>
 	</nav>
-
+    -->
 	<!-- ----------------------------form------------------------------ -->
 	<div id="content">
 		<!-- scrool button id -->
 
 		<div id="form">
 			<form>
+			<div class="navbar-header" align="center">
+			    <a class="navbar-brand" href="#">AIMORC Innovations </a>
+		    </div>
 				<div class="bgBox ">
 					<h2>Register</h2>
 					<div class="inputRow">
@@ -528,7 +544,7 @@ console.log(error);
 
 					<div class="inputRow">
 						<label for="phonenum">Phone Number :</label> <input type="tel"
-							name="phonenum" placeholder="Enter phonenum" id="phonenum">
+							name="phonenum" maxlength="10" placeholder="Enter phonenum" id="phonenum">
 						<small id='phonenumcheck'></small>
 					</div>
 
@@ -545,7 +561,7 @@ console.log(error);
 								<label for="security_id">Security Question :</label> <select
 									class="combobox input-large form-control" name="security_id"
 									id="security_id">
-									<option value="0">Select security question?</option>
+									<option value="0" hidden>Select security question?</option>
 									<option value="1">What is your pet name?</option>
 									<option value="2">Which city were you born?</option>
 									<option value="3">Favorite place to vacation?</option>
@@ -568,10 +584,19 @@ console.log(error);
 					<div class="inputRow submit ">
 					
 						<input type="button" value="Register" class="signIn" id="sign_in">
-
-
+						<br><br>
 					</div>
+					<div class="inputRow" align="center">
+			               <br><br>
+			              <ul class="nav navbar-nav navbar-right">
+				                <li class="nav-item active"><h6>Already have an account?<a class="nav-link"
+					           href="login.jsp" style="height:50px;"><i class="fa fa-sign-in" aria-hidden="true"></i>
+						       Login</a></h6></li>
+			              </ul>
+			              
+		           </div>
 				</div>
+				<div class="footer">This will always appear at the bottom of the page, but <strong>not fixed</strong>.</div>
 			</form>
 		</div>
 	</div>

@@ -5,11 +5,13 @@
 <html>
 <head>
 <style type="text/css">
-<!-------------------------------------scrool bar and footer------------------------------ -->
-body {
-data-spy="scroll";
-overflow: hidden;
-font-family: "Brackley Demo Italic";height: 100%;
+<!--
+-----------------------------------scrool
+ 
+bar and footer------------------------------ -->body {data-spy ="scroll";
+	overflow: hidden;
+	font-family: "Brackley Demo Italic";
+	height: 100%;
 }
 
 #content {
@@ -90,8 +92,9 @@ footer {
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-	
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
+
 <link rel="stylesheet" type="text/css" href="style.css">
 
 
@@ -119,9 +122,10 @@ footer {
 				</ul>
 
 				<div class="navbar-header">
-					<a class="navbar-brand" href="home.jsp" id="username">Welcome ${username}</a>
+					<a class="navbar-brand" href="home.jsp" id="username">
+						${username}</a>
 				</div>
-	
+
 				<ul class="nav navbar-nav navbar-right">
 					<div class="dropdown ">
 						<button class="btn btn-secondary dropdown-toggle" type="button"
@@ -133,12 +137,13 @@ footer {
 						<div class="dropdown-menu dropdown-menu-right" id="dropdown-item">
 							<a class="dropdown-item " id="text"
 								href="loginsecurityquestion.jsp"><i class="fa fa-edit"
-								aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a class="dropdown-item " id="text" href="logoutServlet"><i
+								aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a
+								class="dropdown-item " id="text" href="logoutServlet"><i
 								class="fa fa-sign-out" aria-hidden="true" style="padding: 5px;"></i>
 								Logout</a>
 						</div>
 					</div>
-					
+
 				</ul>
 			</div>
 		</div>
@@ -161,10 +166,11 @@ footer {
 
 		<form class="editform">
 
-		<div class="table-responsive" class="bgBoxeditprofile ">
-				<table class="table table-striped">
-
+			<div class="table-responsive" class="bgBoxeditprofile ">
+				<table class="table table-borderless"><!--  table-striped-->
+				    <br>
 					<h2>Edit Profile</h2>
+					<hr>
 					<tr>
 						<th>First Name</th>
 						<td><input type="text" class="form-control" id="firstname"
@@ -217,11 +223,12 @@ footer {
 					</tr>
 					</div>
 				</table>
+				<hr>
 
 				<button type="button" id="save-profile-button"
 					class="btn btn-primary">Save</button>
 
-				
+
 
 				<a href="profile.jsp">
 					<button type="button" id="edit-profile-button"
@@ -232,15 +239,15 @@ footer {
 	</div>
 	</form>
 	</div>
-	
-<!--------------------- ----------------Script------------------------------ -->
+
+	<!--------------------- ----------------Script------------------------------ -->
 
 	<script type="text/javascript">
 		$(document)
 				.ready(
 						function() {
 							var username = localStorage.getItem('username');
-							document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+							//document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
 							$('#useredited').hide();
 							$('#usereditfail').hide();
 
@@ -300,7 +307,7 @@ footer {
 																			.slideDown();
 																	setTimeout(
 																			function() {
-																				window.location.href = "http://localhost:8080/AIMORC_Client/profile.jsp";
+																				window.location.href = "http://localhost:8080/AIMORCProject/profile.jsp";
 																			},
 																			3000);
 																},
@@ -324,7 +331,7 @@ footer {
 																			.log("successfully profile updated");
 																	setTimeout(
 																			function() {
-																				window.location.href = "http://localhost:8080/AIMORC_Client/profile.jsp";
+																				window.location.href = "http://localhost:8080/AIMORCProject/profile.jsp";
 																			},
 																			3000);
 
@@ -341,7 +348,7 @@ footer {
 											});
 						});
 	</script>
-	
+
 
 
 </body>

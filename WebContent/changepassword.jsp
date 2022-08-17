@@ -5,13 +5,13 @@
 <head>
 
 <style type="text/css">
-
-<!-------------------------------------scrool bar and footer------------------------------ -->
-
-body {
-data-spy="scroll";
-overflow: hidden;
-font-family: "Brackley Demo Italic";height: 100%;
+<!--
+-----------------------------------scrool
+ 
+bar and footer------------------------------ -->body {data-spy ="scroll";
+	overflow: hidden;
+	font-family: "Brackley Demo Italic";
+	height: 100%;
 }
 
 #content {
@@ -19,6 +19,16 @@ font-family: "Brackley Demo Italic";height: 100%;
 	overflow-y: scroll;
 	padding: 0px 10% !important;
 	margin-top: 0px !important;
+}
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+  height: 40px;
 }
 
 html, body {
@@ -35,11 +45,10 @@ footer {
 	position: fixed;
 	bottom: 0;
 }
-
-
 </style>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="description" content="$1">
@@ -61,9 +70,10 @@ footer {
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
 
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
 
- 
+
 <script type="text/javascript">
 
 <!--------------------- ----------------Login screen Browser back button disable------------------------------ -->
@@ -191,8 +201,8 @@ footer {
 												
 											};
 											console.log(data);
-											alert(data);
-											alert(newpassword);
+											//alert(data);
+											//alert(newpassword);
 
 										
 	<!--------------------- ----------------callback function------------------------------ -->									
@@ -205,7 +215,7 @@ footer {
 														success : function(response) {
 															
 															
-															window.location.href = "http://localhost:8080/AIMORC_Client/login.jsp";
+															window.location.href = "http://localhost:8080/AIMORCProject/login.jsp";
 														}
 
 													});
@@ -214,8 +224,8 @@ footer {
 </script>
 </head>
 <body data-spy="scroll">
-<!--------------------- ----------------header------------------------------ -->
-	<nav class="navbar navbar-dark navbar-expand-md mb-3" 
+	<!--------------------- ----------------header------------------------------ -->
+	<nav class="navbar navbar-dark navbar-expand-md mb-3"
 		style="background-color:#112549;">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -227,51 +237,54 @@ footer {
 		</button>
 		<div class="collapse navbar-collapse" id="navbarToggler">
 			<ul class="nav navbar-nav  mr-auto">
-				
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-			<li class="nav-item active"><a class="nav-link"
+				<li class="nav-item active"><a class="nav-link"
 					href="registration.jsp"><i class="fa fa-user"
 						aria-hidden="true"></i> Register</a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="login.jsp"><i class="fa fa-sign-in"
-						aria-hidden="true"></i> Login</a></li>
+					href="login.jsp"><i class="fa fa-sign-in" aria-hidden="true"></i>
+						Login</a></li>
 			</ul>
 		</div>
-		</div>
+	</div>
 	</nav>
 
- <!--------------------- ----------------form------------------------------ -->
+	<!--------------------- ----------------form------------------------------ -->
 
 	<form>
 		<div class="bgBox  ">
 			<h2>Change Password</h2>
 			<div class="inputRow">
-				<label for="newpassword">Enter New Password :</label> <i id="togglenew" class="fa fa-fw fa-eye pass-icon"></i>
-				<input type="password" name="newpassword" id="newpassword"
-					placeholder="Enter new password" value=""  autocomplete="off"> <small
-					id="passcheck"></small>
+				<label for="newpassword">Enter New Password :</label> <i
+					id="togglenew" class="fa fa-fw fa-eye pass-icon"></i> <input
+					type="password" name="newpassword" id="newpassword"
+					placeholder="Enter new password" value="" autocomplete="off">
+				<small id="passcheck"></small>
 			</div>
 
 			<div class="inputRow">
-				<label for="confirmpassword">Confirm Password:</label>
-				<i id="toggleconfirm"
-					class="fa fa-fw fa-eye pass-icon"></i> <input type="password"
-					name="confirmpassword" id="confirmpassword" value=""
-					placeholder="confirm password" autocomplete="off"> 
-					<small id="conpasscheck"></small>
+				<label for="confirmpassword">Confirm Password:</label> <i
+					id="toggleconfirm" class="fa fa-fw fa-eye pass-icon"></i> <input
+					type="password" name="confirmpassword" id="confirmpassword"
+					value="" placeholder="confirm password" autocomplete="off">
+				<small id="conpasscheck"></small>
 			</div>
 
 			<div class="inputRow submit">
-				   <input type="button" value="Submit" class="signIn" id="sign_in">
+				<input type="button" value="Submit" class="signIn" id="sign_in">
 			</div>
 
 		</div>
-	
-	</form>
-	
+		<div class="footer">This will always appear at the bottom of the page, but <strong>not fixed</strong>.</div>
 
-	
+		
+
+	</form>
+
+
+
 
 </body>
 </html>

@@ -4,7 +4,8 @@
 <html>
 <head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="description" content="$1">
@@ -22,17 +23,18 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-	
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
+
 <link rel="stylesheet" type="text/css" href="style.css">
 
 <!-- -------------------------------------css---------------------------------------------------- -->
 
 <style type="text/css">
-body {
-data-spy="scroll";
-overflow: hidden;
-font-family: "Brackley Demo Italic";height: 100%;
+body {data-spy ="scroll";
+	overflow: hidden;
+	font-family: "Brackley Demo Italic";
+	height: 100%;
 }
 
 #content {
@@ -56,9 +58,15 @@ footer {
 	position: fixed;
 	bottom: 0;
 }
+.table > tbody > tr:first-child > th {
+    border: none;
+}
+.table > tbody > tr:first-child > td {
+    border: none;
+}
 
-	
-		/* 	#dropdownMenuButton{
+
+/* 	#dropdownMenuButton{
 			background:#ffa500;
 			border-color:#ffa500;
 			}
@@ -75,11 +83,10 @@ footer {
 			#text:hover {
     		background: #3c78b3;
 			} */
-
 </style>
 
 </head>
-<body >
+<body>
 
 	<!--------------------- ----------------header------------------------------ -->
 
@@ -100,7 +107,8 @@ footer {
 						href="home.jsp"> Home</a></li>
 				</ul>
 
-				<a class="navbar-brand" href="#" id="username">Welcome ${username}</a>
+				<a class="navbar-brand" href="#" id="username">
+					${username}</a>
 				<ul class="nav navbar-nav navbar-right">
 					<div class="dropdown ">
 						<button class="btn btn-secondary dropdown-toggle" type="button"
@@ -110,28 +118,31 @@ footer {
 								style="padding: 5px; margin-top: 5px;"></i> Account
 						</button>
 						<div class="dropdown-menu dropdown-menu-right" id="dropdown-item">
-							 <a class="dropdown-item " id="text"
-								href="productimage.jsp"><i class="fa fa-list-alt"
-								aria-hidden="true" style="padding: 5px;"></i> Product</a> <a
-								class="dropdown-item " id="text"
+							<a class="dropdown-item " id="text" href="productimage.jsp"><i
+								class="fa fa-list-alt" aria-hidden="true" style="padding: 5px;"></i>
+								Product</a> <a class="dropdown-item " id="text"
 								href="loginsecurityquestion.jsp"><i class="fa fa-edit"
-								aria-hidden="true" style="padding: 5px;"></i> Change Password</a> 
-								 <a class="dropdown-item " id="text" href="logoutServlet"><i
-							class="fa fa-sign-out" aria-hidden="true" style="padding: 5px;"></i>
-							Logout</a>
-					
+								aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a
+								class="dropdown-item " id="text" href="logoutServlet"><i
+								class="fa fa-sign-out" aria-hidden="true" style="padding: 5px;"></i>
+								Logout</a>
+
 						</div>
 					</div>
 	</nav>
 
-<!--------------------- ----------------form------------------------------ -->
+	<!--------------------- ----------------form------------------------------ -->
 
 	<p id="demo" align="center"></p>
 	<form>
 		<div class="container">
 
 			<div class="table-responsive">
-				<table class="table table-striped">
+				<table class="table table-condensed"> <!--table-striped  -->
+				<br>
+				<h2>Profile Details</h2>
+				<hr>
+				<br>
 
 					<tr>
 						<th>First Name</th>
@@ -162,8 +173,9 @@ footer {
 						<th scope="row">Address</th>
 						<td id="address"></td>
 					</tr>
-
 				</table>
+				<br>
+				<hr>
 				<a href="editprofile.jsp">
 					<button type="button" id="edit-profile-button"
 						class="btn btn-primary">Edit</button>
@@ -172,13 +184,13 @@ footer {
 		</div>
 	</form>
 
-<!--------------------- ----------------ajax------------------------------ -->
+	<!--------------------- ----------------ajax------------------------------ -->
 
 	<script type="text/javascript">
 		$(document)
 				.ready(function() {
 					var username = localStorage.getItem('username');
-					document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+					//document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
 					var jwt = localStorage.getItem('token');
 				//	  alert(jwt);
 					var data1 = {

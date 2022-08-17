@@ -1,22 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <style type="text/css">
-<!-------------------------------------scrool bar and footer----------------------------------->
-body {
-data-spy="scroll";
-overflow: hidden;
-font-family: "Brackley Demo Italic";height: 100%;
+<!--
+-----------------------------------scrool
+ 
+bar and footer----------------------------------->body {data-spy
+	="scroll";
+	overflow: hidden;
+	font-family: "Brackley Demo Italic";
+	height: 100%;
 }
+
 #content {
-max-height: calc(108.6% - 120px);
-overflow-y: scroll;
-padding: 0px 10% !important;
-margin-top: 0px !important;
+	max-height: calc(108.6% - 120px);
+	overflow-y: scroll;
+	padding: 0px 10% !important;
+	margin-top: 0px !important;
 }
+
 html, body {
 	height: 100%;
 	width: 100%;
@@ -32,17 +37,20 @@ footer {
 	bottom: 0;
 }
 
-<!------------------------------------css for cart display button------------------------------ --> 
- body {
+<!--
+----------------------------------css
+ 
+for cart display button------------------------------ -->body {
 	margin: 0;
-	font-family:Brackley Demo Italic;
+	font-family: font-weight-semibold; /*Brackley Demo Italic*/
 	font-size: .8125rem;
 	font-weight: 400;
 	line-height: 1.5385;
 	color: #333;
-	text-align: left; 
+	text-align: left;
 	background-color: #2196F3;
 }
+
 .mt-50 {
 	margin-top: 50px;
 }
@@ -50,13 +58,15 @@ footer {
 .mb-50 {
 	margin-bottom: 50px;
 }
+
 #category_id {
 	background-color: #004d80;
 	color: #fff
 }
- .input-group.md-form.form-sm.form-2 input.red-border {
-  border: 1px solid #ef9a9a;
-} 
+
+.input-group.md-form.form-sm.form-2 input.red-border {
+	border: 1px solid #ef9a9a;
+}
 
 .card {
 	position: relative;
@@ -89,16 +99,24 @@ footer {
 .card-img {
 	width: 350px;
 }
+
+.center-justify{
+  background-color: #f1f3f4; /*F1F3F6*/
+  width:95%;
+  align:center;
+  margin: auto;
+  height: 130%;
+}
+
 .a {
 	text-decoration: none !important;
 }
 /*----------side bar------------------ */
- .text-justify {
+.text-justify {
 	height: 60px;
 	responsive-font-size: 2rem;
 	overflow-y: scroll;
 }
-
 
 #text {
 	color: white;
@@ -111,12 +129,13 @@ footer {
 .fa_custom {
 	color: #f9f9f9
 }
+
 ::-webkit-scrollbar {
 	width: 4px;
 	height: 12px;
 }
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
 	border: 1px solid transparent;
 	border-radius: 10px;
 }
@@ -134,6 +153,7 @@ footer {
 	background: #004d80;
 	border-color: #004d80;
 }
+
 #dropdown-item {
 	background-color: #004d80;
 	border-color: #004d80;
@@ -142,9 +162,8 @@ footer {
 }
 
 section {
-  display: block;
+	display: block;
 }
-
 </style>
 
 <meta name="viewport"
@@ -166,7 +185,8 @@ section {
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
 
 <link rel="stylesheet" type="text/css" href="style.css">
 <script>
@@ -180,11 +200,38 @@ section {
 						var data1;
 						var jwt = localStorage.getItem('token');
 						var username = localStorage.getItem('username');
-						document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+						var firstname = localStorage.getItem('firstname');
+						//document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+						//document.getElementById('firstname').innerHTML ="Welcome" +" "+ firstname ;
+						
 						 localStorage.removeItem('category_Id');
 						var data = {
 								 token :jwt
 								};
+						$.ajax({
+							type : "Post",
+							url : 'http://localhost:8081/profile',
+							contentType : "application/json",
+							data : JSON
+							.stringify(data),
+							success : function(response) {
+								
+								var profileAddr = response.address;
+							    localStorage.setItem('profileAddress',profileAddr);
+								var firstname = response.firstname;
+								localStorage.setItem('firstname',firstname);
+								var lastname = response.lastname;
+								localStorage.setItem('lastname',lastname);
+								document.getElementById('username').innerHTML ="Welcome" +" "+ firstname+" "+lastname ;
+								localStorage.setItem('response',JSON.stringify(response));
+								
+							},
+							error : function(error) {
+								console.log(error);
+							}
+						});
+						
+						
 
 				
 						 function cart() {
@@ -302,7 +349,7 @@ section {
 														.appendChild(product_name);
 
 												var product_desc = document
-														.createElement('p');
+														.createElement('h4'); //p
 												product_desc.className = 'text-justify';
 												product_desc.id = "product_description";
 												product_desc.innerHTML = response[i].product_description;
@@ -315,7 +362,7 @@ section {
 												btn.type = "button"
 												btn.className = 'btn btn-primary';
 												btn.id = "product";
-												btn.value = response[i].product_id;
+												btn.value = response[i].product_id;												
 												childDiv.appendChild(btn);
 
 												var fontawsome = document
@@ -376,7 +423,7 @@ section {
 																			'#notadded')
 																			.slideDown();
 																	localStorage.removeItem('categoryId');
-																	window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																	window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 																	
 																},
 																200 : function(response) {
@@ -389,7 +436,7 @@ section {
 																			.log("Removed Successfully");
 																	localStorage.removeItem('categoryId');
 																	 
-																	window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																	window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 
 																}
 																
@@ -474,7 +521,7 @@ section {
 														.appendChild(product_name);
 
 												var product_desc = document
-														.createElement('p');
+														.createElement('h4'); //p
 												product_desc.className = 'text-justify';
 												product_desc.id = "product_description";
 												product_desc.innerHTML = result[i].product_description;
@@ -548,7 +595,7 @@ section {
 																					$(
 																							'#notadded')
 																							.slideDown();
-																					window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																					window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 																				},
 																				200 : function(response) {
 																			
@@ -560,7 +607,7 @@ section {
 																					console
 																							.log("Removed Successfully");
 																					 
-																					window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																					window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 
 																				}
 																				
@@ -638,7 +685,7 @@ section {
 														.appendChild(category_name);
 
 												var category_desc = document
-														.createElement('p');
+														.createElement('h4'); //p
 												category_desc.className = 'text-justify';
 												category_desc.id = "product_description";
 												category_desc.innerHTML = data[i].category_description;
@@ -657,7 +704,7 @@ section {
 
 												var fontawsome = document
 														.createElement('i');
-												//fontawsome.className="fa fa-cart-plus mr-2";
+												fontawsome.className="font-weight-semibold"; //fa fa-cart-plus mr-2
 												fontawsome.innerHTML = " View Category ";
 												btn.appendChild(fontawsome);
 
@@ -713,7 +760,7 @@ $(document).on('click','button[id]',function(e) {
 												'#notadded')
 												.slideDown();
 										
-										window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
+										window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
 									},
 									200 : function(response) {
 										
@@ -726,7 +773,7 @@ $(document).on('click','button[id]',function(e) {
 												.log("Removed Successfully");
 										 
 										 
-										window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
+										window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
 
 									}
 									
@@ -759,12 +806,12 @@ $(document).on('click','button[id]',function(e) {
 		<div class="collapse navbar-collapse" id="navbarToggler">
 			<ul class="nav navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="home.jsp">
-						Home</a></li>
+						</a></li> <!-- Home -->
 			</ul>
-						<!-- <ul>
+			<!-- <ul>
   <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" style="width:250px; margin-top: 40px; margin-bottom: 0px;">
 </ul> -->
-		 <a class="navbar-brand" href="#" id ="username" ></a> 
+			<a class="navbar-brand" href="#" id="username"></a>
 			<ul class="nav navbar-nav navbar-right">
 				<div class="dropdown ">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
@@ -777,11 +824,11 @@ $(document).on('click','button[id]',function(e) {
 						<a class="dropdown-item " id="text" href="profile.jsp"><i
 							class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
 							Profile</a><a class="dropdown-item " id="text"
-								href="productimage.jsp"><i class="fa fa-list-alt"
-								aria-hidden="true" style="padding: 5px;"></i> Product</a>
-								 <a class="dropdown-item " id="text"
-							href="datepicker.jsp"><i class="fa fa-calendar"
-							aria-hidden="true" style="padding: 5px;"></i> Schedule Pick Up</a>  <a class="dropdown-item " id="text"
+							href="productimage.jsp"><i class="fa fa-list-alt"
+							aria-hidden="true" style="padding: 5px;"></i> Product</a> <a
+							class="dropdown-item " id="text" href="datepicker.jsp"><i
+							class="fa fa-calendar" aria-hidden="true" style="padding: 5px;"></i>
+							Schedule Pick Up</a> <a class="dropdown-item " id="text"
 							href="loginsecurityquestion.jsp"><i class="fa fa-edit"
 							aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a
 							class="dropdown-item " id="text" href="login.jsp"><i
@@ -803,67 +850,71 @@ $(document).on('click','button[id]',function(e) {
 
 	<!------------------ ----------------form for category------------------------------ -->
 
-	
 
-		
-			 <section>
-<!--carousel  -->
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/carousel16.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="images/slider3.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="images/carousel3.jpg" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  	<div id="content">
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-</section>
-<br/>
 
-	<div>
+	<section> <!--carousel  -->
+
+	<div id="carouselExampleIndicators" class="carousel slide"
+		data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleIndicators" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img src="images/carousel16.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="images/slider3.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="images/carousel3.jpg" class="d-block w-100" alt="...">
+			</div>
+		</div>
+		<div id="content">
+			<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+	</section>
+	<br />
+
+	<div class="center-justify">
+	<br>
 		<h1 align="center">Upcoming Products</h1>
-
+        <hr style="height:2px;border-width:0;color:white;background-color:white">
 		<div class="container d-flex justify-content-center mt-50 mb-50">
 			<div class="row" id="form2"></div>
 		</div>
 	</div>
-<div>
-	
-		<h1 align="center">Trending Products</h1> 
-<div class="container d-flex justify-content-center mt-50 mb-50">
-<div class="row" id="form1"></div>
+	<br>
+	<div class="center-justify">
+	<br>
+		<h1 align="center">Trending Products</h1>
+		<hr style="height:2px;border-width:0;color:white;background-color:white">
+		<div class="container d-flex justify-content-center mt-50 mb-50">
+			<div class="row" id="form1"></div>
 		</div>
 	</div>
-	
-	
-
-	
-	<div>
+	<br>
+	<div class="center-justify">
+	<br>
 		<h1 align="center">Shop by Category</h1>
-
+		<hr style="height:2px;border-width:0;color:white;background-color:white">
 		<div class="container d-flex justify-content-center mt-50 mb-50">
 			<div class="row" id="form"></div>
 		</div>
 	</div>
+	<br>
 	</div>
 
 

@@ -4,14 +4,26 @@
 <html>
 <head>
 <style type="text/css">
-
- <!-------------------------------------scrool bar and footer----------------------------------->
-body {
-data-spy="scroll";
-overflow: hidden;
-font-family: "Brackley Demo Italic";height: 100%;
+<!--
+-----------------------------------scrool
+ 
+bar and footer----------------------------------->body {data-spy
+	="scroll";
+	overflow: hidden;
+	font-family: "Brackley Demo Italic";
+	height: 100%;
 }
-
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+  height: 40px;
+  
+}
 
 #content {
 	max-height: calc(100% - 120px);
@@ -57,7 +69,8 @@ html, body {
 	href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
 	integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
 	crossorigin="anonymous">
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
 <script type="text/javascript">
 
 
@@ -231,7 +244,7 @@ function parseJwt (token) {
 
     return JSON.parse(jsonPayload);
 };
-window.location.href = "http://localhost:8080/AIMORC_Client/home.jsp";
+window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
 }
 },
 
@@ -244,6 +257,7 @@ window.location.href = "http://localhost:8080/AIMORC_Client/home.jsp";
 </head>
 <body data-spy="scroll">
 	<!--------------------- ----------------header------------------------------ -->
+	<!--  
 	<nav class="navbar navbar-dark navbar-expand-md mb-3"
 		style="background-color:#112549;">
 	<div class="container-fluid">
@@ -267,14 +281,24 @@ window.location.href = "http://localhost:8080/AIMORC_Client/home.jsp";
 		</div>
 	</div>
 	</nav>
+	-->
 
 	<!--------------------- ----------------form------------------------------ -->
 
 	<form>
-		<div class="bgBox ">
+	<div style="text-align: center; height:80px;"> <!-- class="navbar-header text-center" -->
+			 <!--  <a class="navbar-brand" href="#">AIMORC Innovations</a> -->
+			<img height="100px" width=125px" src="https://media-exp1.licdn.com/dms/image/C4E0BAQE-SkEaq5vRnA/company-logo_200_200/0/1595501923133?e=2147483647&v=beta&t=-ZHFBvv2m1EWw4KBBepTPIZHfzf3rjc8_hInFQYJYo4">
+			 </div>
+		
+		<!-- <button data-toggle="collapse" data-target="#navbarToggler"
+			type="button" class="navbar-toggler">
+			<span class="navbar-toggler-icon"></span>
+		</button>  -->
+		<div class="bgBox">
 			<h2>Login</h2>
 			<div class="inputRow">
-				<label for="email">Username:</label> <i class="fa fa-user icon"></i>
+				<label for="email">Email:</label> <i class="fa fa-user icon"></i> <!-- Username -->
 				<input type="email" name="login" id="email"
 					placeholder="Enter your email" value="" autofocus> <small
 					id="usercheck"></small>
@@ -305,10 +329,20 @@ window.location.href = "http://localhost:8080/AIMORC_Client/home.jsp";
 				</p>
 
 			</div>
-
+			<div class="text-center">
+			<ul class="nav navbar-nav mr-auto">
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item active"><a class="nav-link"
+					href="registration.jsp"><i class="fa fa-user"
+						aria-hidden="true"></i> Register</a></li>
+			</ul>
+		    </div>
 		</div>
+		<div class="footer">Email : <strong>aimorc.ecomm@gmail.com</strong> &nbsp; Contact  us : <strong>+91-9887682458</strong></div>
 
 	</form>
+	
 
 
 

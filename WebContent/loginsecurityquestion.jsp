@@ -5,13 +5,15 @@
 <head>
 <title>forgot password</title>
 <style type="text/css">
-
-<!--------------------- ----------------scrool bar and footer------------------------------ -->
-
-body {
-data-spy="scroll";
-overflow: hidden;
-font-family: "Brackley Demo Italic";height: 100%;
+<!--
+-------------------
+ 
+----------------scrool
+ 
+bar and footer------------------------------ -->body {data-spy ="scroll";
+	overflow: hidden;
+	font-family: "Brackley Demo Italic";
+	height: 100%;
 }
 
 #content {
@@ -36,27 +38,29 @@ footer {
 	bottom: 0;
 }
 
-#dropdownMenuButton{
-			background:#ffa500;
-			border-color:#ffa500;
-			}
-			
-			#dropdown-item  {
-			 background-color:#ffa500; 
-			border-color:#ffa500; 
-			color:white;
-			font-color:white;
-			}
-			#text{
-			color:white;
-			}
-			#text:hover {
-    		background: #3c78b3;
-			}
+#dropdownMenuButton {
+	background: #ffa500;
+	border-color: #ffa500;
+}
 
+#dropdown-item {
+	background-color: #ffa500;
+	border-color: #ffa500;
+	color: white;
+	font-color: white;
+}
+
+#text {
+	color: white;
+}
+
+#text:hover {
+	background: #3c78b3;
+}
 </style>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="description" content="$1">
@@ -77,7 +81,8 @@ footer {
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
 
 <!--------------------- ----------------Login eye button icon style------------------------------ -->
 
@@ -181,8 +186,8 @@ footer {
 </script>
 </head>
 <body data-spy="scroll">
-<!--------------------- ----------------header------------------------------ -->
-	<nav class="navbar navbar-dark navbar-expand-md mb-3" 
+	<!--------------------- ----------------header------------------------------ -->
+	<nav class="navbar navbar-dark navbar-expand-md mb-3"
 		style="background-color:#112549;">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -194,51 +199,56 @@ footer {
 		</button>
 		<div class="collapse navbar-collapse" id="navbarToggler">
 			<ul class="nav navbar-nav  mr-auto">
-				<li class="nav-item active"><a class="nav-link"
-						href="home.jsp"> Home</a></li>
-				</ul>
-			<a class="navbar-brand" href="#">Welcome ${username}</a>
-			<ul class="nav navbar-nav navbar-right" >
-				<div class="dropdown " >
-  				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" 
-  				aria-haspopup="true" aria-expanded="false "><i class="fa fa-user" aria-hidden="true" style="padding:5px;"></i> Account
-  				</button>
- 				 <div class="dropdown-menu dropdown-menu-right"  id="dropdown-item" >
-  				  <a class="dropdown-item "  id="text" href="profile.jsp"><i class="fa fa-user" aria-hidden="true" style="padding:5px;"></i> Profile</a> <a class="dropdown-item " id="text" href="logoutServlet"><i
+				<li class="nav-item active"><a class="nav-link" href="home.jsp">
+						Home</a></li>
+			</ul>
+			<a class="navbar-brand" href="#"> ${username}</a>
+			<ul class="nav navbar-nav navbar-right">
+				<div class="dropdown ">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false ">
+						<i class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
+						Account
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" id="dropdown-item">
+						<a class="dropdown-item " id="text" href="profile.jsp"><i
+							class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
+							Profile</a> <a class="dropdown-item " id="text" href="logoutServlet"><i
 							class="fa fa-sign-out" aria-hidden="true" style="padding: 5px;"></i>
 							Logout</a>
 					</div>
-					</div>
-				
+				</div>
+
 			</ul>
 		</div>
-		</div>
+	</div>
 	</nav>
 
- <!--------------------- ----------------form------------------------------ -->
+	<!--------------------- ----------------form------------------------------ -->
 
 	<form>
 		<div class="bgBox  ">
 			<h2>Security Question</h2>
 
-				<div class="inputRow">
-						 <label for="security_id">Enter Security Question :</label>
-						  <select name="security_id" id="security_id">
-							<option value="0">Select Security Question?</option>
-							<option value="1">What is your pet name?</option>
-							<option value="2">Which city were you born?</option>
-							<option value="3">Favorite place to vacation?</option>
-							<option value="4">What is your school name?</option>
-							<option value="5">What is your nick name?</option>
-						</select>
-					</div> 
+			<div class="inputRow">
+				<label for="security_id">Enter Security Question :</label> <select
+					name="security_id" id="security_id">
+					<option value="0">Select Security Question?</option>
+					<option value="1">What is your pet name?</option>
+					<option value="2">Which city were you born?</option>
+					<option value="3">Favorite place to vacation?</option>
+					<option value="4">What is your school name?</option>
+					<option value="5">What is your nick name?</option>
+				</select>
+			</div>
 
-					 <div class="inputRow">
-						<label for="security_answer">Enter Security Answer :</label> 
-						 <input type="text" name="security_answer" placeholder="Enter Your Security Answer" 
-						 id="security_answer">
-					</div> 
-			
+			<div class="inputRow">
+				<label for="security_answer">Enter Security Answer :</label> <input
+					type="text" name="security_answer"
+					placeholder="Enter Your Security Answer" id="security_answer">
+			</div>
+
 
 			<div class="inputRow submit">
 				<input type="button" value="Submit" class="signIn" id="sign_in">
@@ -252,7 +262,7 @@ footer {
 		</div>
 		</div>
 	</form>
-	
+
 
 
 </body>

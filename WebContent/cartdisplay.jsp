@@ -5,8 +5,6 @@
 <head>
 
 <style type="text/css">
-
-
 body {
 	font-family: "Brackley Demo Italic";
 	height: 100%;
@@ -23,7 +21,6 @@ body {
 	margin-top: 10px;
 }
 
-
 html, body {
 	height: 100%;
 	width: 100%;
@@ -35,18 +32,21 @@ html, body {
 	height: 310px;
 	display: block;
 	overflow-y: scroll;
+	border:none !important;
 }
 
 .btn {
 	background-color: #004d80;
 	color: #fff;
 }
-#Addbtn{
-background-color: #004d80;
+
+#Addbtn {
+	background-color: #004d80;
 	color: #fff;
-	padding:1px auto;
-	margin-left:17px;
+	padding: 1px auto;
+	margin-left: 17px;
 }
+
 #product_id {
 	background-color: #004d80;
 	color: #fff;
@@ -66,8 +66,10 @@ background-color: #004d80;
 	margin-top: 5px;
 }
 
-<!------------------------------------cssforcart display button------------------------------ -->
-.mt-50 {
+<!--
+----------------------------------cssforcart
+ 
+display button------------------------------ -->.mt-50 {
 	margin-top: 50px;
 }
 
@@ -131,8 +133,8 @@ background-color: #004d80;
 /*----------side bar------------------ */
 .row {
 	border: none;
-	width: 500%;
-	height: 700px;
+	width: 350%;
+	height: 700px; /*---700---*/
 	overflow-y: scroll;
 }
 
@@ -146,10 +148,12 @@ background-color: #004d80;
 	width: 3.8px;
 	height: 12px;
 }
+
 #dropdownMenuButton {
 	background: #004d80;
 	border-color: #004d80;
 }
+
 #dropdown-item {
 	background-color: #004d80;
 	border-color: #004d80;
@@ -181,6 +185,7 @@ background-color: #004d80;
 	height: 295px;
 	display: block;
 	overflow-y: scroll;
+	border:none !important;
 }
 
 #product_id {
@@ -240,7 +245,7 @@ background-color: #004d80;
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-	
+
 
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -259,7 +264,7 @@ var jwt = localStorage.getItem('token');
 ProdileAddr();
 GetdeliveryAddress();
 var username = localStorage.getItem('username');
-document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+//document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
 var profileAddress = localStorage.getItem('profileAddress');
 
 function ProdileAddr(){
@@ -405,9 +410,9 @@ let casualWearData = responseData[3];
 if (responseData == '{}')
 {
 $('#page').hide();
-var textMore = "No items in cart";
+var textMore = "No items in cart"; //No items in cart
 
-$('#Noitem').append(textMore).css({"justify-content": "center","color":"red","font-size":"70px"}).show().hide(3000);
+$('#Noitem').append(textMore).css({"justify-content":"center","color":"Black","font-size":"70px"}).show(); //$('#Noitem').append(textMore).css({"justify-content": "center","color":"red","font-size":"70px"}).show().hide(3000);
 }
 
 console.log("westernWearData is" + westernWearData);
@@ -430,7 +435,7 @@ document.getElementById('Value').innerHTML = "[" + cartValue + "]";
 var categoryDiv = document.createElement('div');
 categoryDiv.className = 'container';
 categoryDiv.id = 'block';
-document .getElementsByClassName('row')[0].appendChild(categoryDiv);
+document .getElementsByClassName('row')[0].appendChild(categoryDiv); //row
 
 var categoryNameElement = document.createElement('h1');
 categoryNameElement.className = 'font-weight-semibold mb-2';
@@ -538,38 +543,41 @@ var totaltr = document
 totaltr.className = 'text-center';
 totaltr.id = "total_summary";
 
-document.getElementsByClassName('table')[0].appendChild(totaltr);
+document.getElementsByClassName('table')[0].appendChild(totaltr); 
 
 var totaldiv = document
-.createElement('td');
+.createElement('td'); //td
 totaldiv.className = 'text-center';
 totaldiv.id = "total_summary";
 totaldiv.innerHTML = base_name;
-totaltr
-.appendChild(totaldiv);
+totaltr.appendChild(totaldiv);  //totaltr
+totaldiv.style.borderColor = 'white';
 
 var totaldiv1 = document
-.createElement('td');
+.createElement('td'); //td
 totaldiv1.className = 'text-center';
 totaldiv1.id = "total_summary";
 totaldiv1.innerHTML = base_price;
 totaltr.appendChild(totaldiv1);
+totaldiv1.style.borderColor = 'white';
 
 var totaldiv2 = document
-.createElement('td');
+.createElement('td'); //td
 totaldiv2.className = 'text-center';
 totaldiv2.id = "total_summary";
 totaldiv2.innerHTML = base_quantity;
 totaltr
 .appendChild(totaldiv2);
+totaldiv2.style.borderColor = 'white';
 
 var totaldiv3 = document
-.createElement('td');
+.createElement('td'); //td
 totaldiv3.className = 'text-center';
 totaldiv3.id = "total_summary";
 totaldiv3.innerHTML = base_price * base_quantity;
 totaltr
 .appendChild(totaldiv3);
+totaldiv3.style.borderColor = 'white';
 
 var Rupees1 = document.createElement('i');
 Rupees1.className = "fa fa-rupee";
@@ -732,7 +740,8 @@ $(".bd-example-modal-sm").click(function(){
 				<li class="nav-item active"><a class="nav-link" href="home.jsp">
 						Home</a></li>
 			</ul>
-			<a class="navbar-brand" href="#" id="username">Welcome ${username}</a>
+			<a class="navbar-brand" href="#" id="username">
+				${username}</a>
 			<ul class="nav navbar-nav navbar-right">
 				<div class="dropdown ">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
@@ -780,41 +789,48 @@ $(".bd-example-modal-sm").click(function(){
 				style="display: none; text-align: center; margin-top: 10px;">
 				<strong>Product Not Removed</strong>
 			</div>
-			
-		
-	
-	</div>
+
+
+
+		</div>
 		</div>
 		<!-- form-------------------------------->
 
 		<div class="container d-flex justify-content-center mt-50 mb-50">
 			<div class="row " id="form"></div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Delivery Address</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Add Delivery
+								Address</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
 
-       <div class="form-group">
-       
-             <input type="text" class="form-control"  placeholder="Enter Delivery Address" id="message-text">
-            </div>
-           
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="send_button">Add address</button>
-      </div>
-    </div>
-  </div>
-</div>
+								<div class="form-group">
+
+									<input type="text" class="form-control"
+										placeholder="Enter Delivery Address" id="message-text">
+								</div>
+
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="send_button">Add
+								address</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<div class="col-sm justify-content-center totals" id="totals">
 				<div class="d-flex justify-content-center mt-1 pt-1" id="">
 					<p class="text-capitalize" style="font-size: 20px;">
@@ -825,15 +841,15 @@ $(".bd-example-modal-sm").click(function(){
 					<table class="table table-bordered table-striped mb-0">
 						<thead>
 							<tr>
-								<th style="width: 50%">Product Name</th>
-								<th style="width: 10%">Price</th>
-								<th style="width: 8%">Quantity</th>
-								<th style="width: 22%" class="text-center">Subtotal</th>
+								<th style="width: 50%; border: none;">Product Name</th>
+								<th style="width: 10%; border: none;">Price</th>
+								<th style="width: 8%; border: none;">Quantity</th>
+								<th style="width: 22%; border: none;" class="text-center">Subtotal</th>
 
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
+						<tbody style="border: none !important;">
+							<tr style="border: none !important;">
 
 							</tr>
 						</tbody>
@@ -856,25 +872,26 @@ $(".bd-example-modal-sm").click(function(){
 				</div>
 				<div>
 					<a href="#" class="btn btn-light" id="btn">Pay Now <span
-						class="totals-value cart-total" style="font-size: 25px;margin-left:17px;"></span></a>
-					
-						
+						class="totals-value cart-total"
+						style="font-size: 25px; margin-left: 17px;"></span></a>
+
+
 				</div>
-				
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="padding:10px auto"> Add Delivery Address</button>
-				<br>
-			<br>
-				<div id="selectaddress">
+
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#exampleModal" data-whatever="@mdo"
+					style="padding: 10px auto">Add Delivery Address</button>
+				<br> <br>
+				<div id="selectaddress"></div>
 				</div>
-				
-				
+				</div>
 
 
 
 
-	<div class="alert alert-success" role="alert" id="Noitem"
-		style="align-items: center; display: none"></div>
 
 
+				<div class="alert alert-success" role="alert" id="Noitem"
+					style="align-items: center; display: none"></div>
 </body>
-</html>
+</html>	

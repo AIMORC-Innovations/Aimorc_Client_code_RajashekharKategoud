@@ -47,7 +47,8 @@
 	crossorigin="anonymous"></script>
 
 <!-- -------------------------------------css_test---------------------------------------------------- -->
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet'>
 
 <style type="text/css">
 body {
@@ -56,7 +57,8 @@ body {
 
 body {data-spy ="scroll";
 	overflow: hidden;
-font-family: "Brackley Demo Italic";	height: 100%;
+	font-family: "Brackley Demo Italic";
+	height: 100%;
 }
 
 #content {
@@ -96,7 +98,44 @@ footer {
 	color: white;
 	font-color: white;
 }
+.close {
+    vertical-align: middle;
+    border: none;
+    color: inherit;
+    border-radius: 50%;
+    background: transparent;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    opacity: 0.6;
+}
+.close:focus,
+.close:hover {
+    opacity: 1;
+    background: none; /*rgba(128, 128, 128, 0.5)*/
+}
+.close:active {
+    background: none; /*rgba(128, 128, 128, 0.9)*/
+}
+/* tines of the X */
+.close::before,
+.close::after {
+    content: " ";
+    position: absolute;
+    top: 62%;
+    left: 55%;
+    height: 20px;
+    width: 4px;
+    background-color: currentColor; /*currentColor*/
+}
+.close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
 
+}
 #text {
 	color: white;
 }
@@ -113,7 +152,6 @@ footer {
 	font-size: 15px;
 }
 
-
 #datetimepicker1.timepicker-picker  table td  a span, #datetimepicker1.timepicker-picker  table td,
 	#datetimepicker1.timepicker-picker  table td  span {
 	height: 30px !important;
@@ -129,7 +167,7 @@ footer {
 $(document).ready(function() {
 	
 	var username = localStorage.getItem('username');
-	document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+	//document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
 
 	var jwt = localStorage.getItem('token');
 
@@ -419,7 +457,8 @@ $(document).ready(function() {
 				<li class="nav-item active"><a class="nav-link" href="home.jsp">
 						Home</a></li>
 			</ul>
-			<a class="navbar-brand" href="#" id="username">Welcome ${username}</a>
+			<a class="navbar-brand" href="#" id="username">
+				${username}</a>
 			<ul class="nav navbar-nav navbar-right">
 				<div class="dropdown ">
 					<button class="btn btn-secondary dropdown-toggle" type="button"
@@ -455,104 +494,111 @@ $(document).ready(function() {
 	</br>
 	<div id=content>
 		<div class="bgBox ">
-		<h1>Schedule Pick Up</h1>
+			<h1>Schedule Pick Up</h1>
 			<!-- <div class="inputRow"> -->
 			<div class="container">
-					
-				<div class="row">
-				
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Schedule Pick Up Address</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-      
-     
-            	<div class="form-group">
-						<label class="d-flex justify-content-center">Select Pick
-							Up Date and Time</label>
-						<div class="input-group date" id="datetimepicker1"
-							data-target-input="nearest">
-							<input type="text" class="form-control datetimepicker-input"
-								id="datetime" data-target="#datetimepicker1" />
-							<div class="input-group-append" data-target="#datetimepicker1"
-								data-toggle="datetimepicker">
-								<div class="input-group-text">
-									<i class="fa fa-calendar"></i>
+				<div class="row">
+
+
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Schedule
+										Pick Up Address</h5>
+									<button type="button" style="height:20px;width:20px;outline:none;" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form>
+
+
+										<div class="form-group">
+											<label class="d-flex justify-content-center">Select
+												Pick Up Date and Time</label>
+											<div class="input-group date" id="datetimepicker1"
+												data-target-input="nearest">
+												<input type="text" class="form-control datetimepicker-input"
+													id="datetime" data-target="#datetimepicker1" />
+												<div class="input-group-append"
+													data-target="#datetimepicker1" data-toggle="datetimepicker">
+													<div class="input-group-text">
+														<i class="fa fa-calendar"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="inputRow">
+											<label class="d-flex justify-content-center">Select
+												Pick Up Address</label> <label for="address">Address </label> <input
+												type="text" name="address" placeholder="Enter Address "
+												id="address"> <small id='addresscheck'></small>
+										</div>
+										<div class="inputRow">
+											<div class="form-group">
+												<div class="dropdown">
+													<label for="country">Country </label> <select
+														class="combobox input-large form-control" name="country"
+														id="country">
+														<option value="0">Select Country</option>
+														<option value="India">India</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="inputRow">
+											<label for="state">State</label> <input type="text"
+												name="state" placeholder="Enter State" id="state"> <small
+												id='statecheck'></small>
+										</div>
+										<div class="inputRow">
+											<label for="city">City</label> <input type="text" name="city"
+												placeholder="Enter City" id="city"> <small
+												id='citycheck'></small>
+										</div>
+
+
+										<div class="inputRow">
+											<label for="zipcode">Zip Code </label> <input type="tel"
+												name="zipcode" placeholder="Enter Zip Code " id="zip">
+											<small id='zipcodecheck'></small>
+										</div>
+
+
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary" id="send_button">Add</button>
 								</div>
 							</div>
 						</div>
 					</div>
-          <div class="inputRow">
-          							<label class="d-flex justify-content-center">Select Pick
-							Up Address</label>
-						<label for="address">Address </label> <input type="text"
-							name="address" placeholder="Enter Address " id="address">
-						<small id='addresscheck'></small>
-					</div>
-								<div class="inputRow">
-						<div class="form-group">
-							<div class="dropdown">
-								<label for="country">Country </label> <select
-									class="combobox input-large form-control" name="country"
-									id="country">
-									<option value="0">Select Country</option>
-									<option value="India">India</option>
-								</select>
-							</div>
-						</div>
-						</div>
-						<div class="inputRow">
-						<label for="state">State</label> <input type="text"
-							name="state" placeholder="Enter State" id="state">
-						<small id='statecheck'></small>
-					</div>
-					<div class="inputRow">
-						<label for="city">City</label> <input type="text"
-							name="city" placeholder="Enter City" id="city">
-						<small id='citycheck'></small>
-					</div>
-					
-						
-						<div class="inputRow">
-						<label for="zipcode">Zip Code </label> <input type="tel"
-							name="zipcode" placeholder="Enter Zip Code " id="zip">
-						<small id='zipcodecheck'></small>
-					</div>
-           
-           
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="send_button">Add</button>
-      </div>
-    </div>
-  </div>
-</div>
-				
-					
-					</div>
 
-					
+
+				</div>
+
+
 			</div>
 
 			<div class="inputRow submit ">
 				<!-- <input type="button" value="Schedule" class="signIn" id="submit" style="background-color:#112549;">
- -->			   <input type="button" class="signIn" value="Schedule Address " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"  style="background-color:#112549;height: 50px;
-       font-size: 21px; padding: 10px;"> 
+ -->
+				<input type="button" class="signIn" value="Schedule Address "
+					data-toggle="modal" data-target="#exampleModal"
+					data-whatever="@mdo"
+					style="background-color: #112549; height: 50px; font-size: 21px; padding: 10px;">
 
 			</div>
 			<div class="inputRow submit ">
 				<input type="button" value="Cancel Schedule" class="signIn"
-					id="cancel" style="background-color:#112549;">
+					id="cancel" style="background-color: #112549;">
 
 
 			</div>

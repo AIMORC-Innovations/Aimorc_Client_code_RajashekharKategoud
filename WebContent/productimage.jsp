@@ -246,7 +246,11 @@ header {
                         
                         var jwt = localStorage.getItem('token');
                         var username = localStorage.getItem('username');
-   					    document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+   					    //document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
+   					    //code for closing dropdown after selecting an option
+   					    $(".dropdown-menu a").click(function() {
+                           $(this).closest(".dropdown-menu").prev().dropdown("toggle");
+                        });
 					   
 				   	   document.getElementById("page").addEventListener("click",function(e) {
 								
@@ -686,8 +690,8 @@ $.ajax({
 
 	    $('#SelectCategory').html($(this).html());
 	    var drop = $(this).attr("id");
-	   
 	    localStorage.setItem('category_Id',drop);
+		//document.getElementById('drop').style.display = "none";
 	   	 function dynamicPage() {
 			 var  getObj =localStorage.getItem('category_Id');
 
@@ -1188,9 +1192,13 @@ $.ajax({
 		<div class="container d-flex justify-content-center mt-50 mb-50" style="  margin:auto;  padding: 10px;">
       <div class="input-group-btn" style="  margin:auto;  padding: 10px;">
       
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" id="SelectCategory" aria-expanded="false" style="width:200px">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-auto-close="false" data-toggle="dropdown" aria-haspopup="true" id="SelectCategory" aria-expanded="false" style="width:200px">
          Select Category
         </button>
+         
+        <!-- <a class="btn btn-secondary dropdown-toggle" role="button" id="SelectCategory" data-bs-auto-close="outside" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Select Category
+        </a> -->
         <div class="dropdown-menu" id="drop" style="width:200px">
           <a class="dropdown-item" href="#" id="1">Indian Wear</a>
           <a class="dropdown-item" href="#"id="2">Western Wear</a>
