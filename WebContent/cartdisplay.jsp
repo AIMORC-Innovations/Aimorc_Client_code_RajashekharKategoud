@@ -874,10 +874,8 @@ $(".bd-example-modal-sm").click(function(){
 					<a href="#" class="btn btn-light" id="btn">Pay Now <span
 						class="totals-value cart-total"
 						style="font-size: 25px; margin-left: 17px;"></span></a>
-
-
 				</div>
-
+				<br>
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#exampleModal" data-whatever="@mdo"
 					style="padding: 10px auto">Add Delivery Address</button>

@@ -328,7 +328,6 @@ function displayProduct(page){
 										 $("#form").empty();
 									
 										var result=response;
-										
 										var obj1 = JSON.stringify(response.totalElements);
 							
 										var obj = JSON.stringify(result.content);

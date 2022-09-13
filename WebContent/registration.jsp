@@ -36,6 +36,19 @@
 #form {
 	margin: 2% auto;
 }
+.bgBox1 {
+	background-color: #f9f9f9;
+	padding: 50px;
+	border-radius: 5px;
+	border: 2px solid #dedede;
+	max-width: 700px; /*430*/
+	margin: 0 auto;
+	margin-bottom: 100px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+}
 
 .bgBox .inputRow select, dropdown {
 	width: 100%;
@@ -365,6 +378,11 @@ var firstname = $('#firstname')
 var lastname = $('#lastname').val();
 var phonenum = $('#phonenum').val();
 var address = $('#address').val();
+var address1 = $('#address1').val();
+var city = $('#city').val();
+var state = $('#state').val();
+var country = $('#country').val();
+var zip = $('#zip').val();
 var dob = $('#dob').val();
 //var gender = $('#gender').val();
 var security_id = $('#security_id').val();
@@ -376,6 +394,11 @@ if (username == ''
 || lastname == ''
 || phonenum == ''
 || address == ''
+|| address1 == ''
+|| city == ''
+|| state == ''
+|| country == ''
+|| zip == ''
 || security_id =='0'
 || security_answer =='') {
 document.getElementById('sign_in').disabled = true;
@@ -404,6 +427,11 @@ dob : $('#dob').val(),
 gender : $("input[type='radio'][name='customRadioInline']:checked").val(),
 phonenum : $('#phonenum').val(),
 address : $('#address').val(),
+address1 : $('#address1').val(),
+city : $('#city').val(),
+state : $('#state').val(),
+country : $('#country').val(),
+zip : $('#zip').val(),
 security_id : $('#security_id').val(),
 security_answer : $('#security_answer').val(),
 created_on : dateTime
@@ -495,18 +523,20 @@ console.log(error);
 							name="login" id="email" placeholder="Enter your email" value=""
 							autofocus> <small id="usercheck"></small>
 					</div>
+                    
 
 					<div class="inputRow">
 						<label for="password">Password :</label> <input type="password"
 							name="password" id="password" value=""
-							placeholder="Enter your password"> <small id="passcheck"></small>
+							placeholder="Enter your password"> <small id="passcheck"></small>					
 					</div>
 
-					<div class="inputRow">
+				 	<div class="inputRow">
 						<label for="ConfirmPassword">Confirm Password :</label> <input
 							type="password" name="password" id="ConfirmPassword" value=""
 							placeholder="ConfirmPassword"> <small id="conpasscheck"></small>
-					</div>
+					</div> 
+
 
 					<div class="inputRow">
 						<label for="firstname">First Name :</label> <input type="text"
@@ -549,10 +579,48 @@ console.log(error);
 					</div>
 
 					<div class="inputRow">
-						<label for="address">Address :</label>
-						<textarea name="address" placeholder="Enter Address" id="address"
-							style="height: 45px"></textarea>
+						<label for="address">Address Line 1:</label>
+						<!--<textarea name="address" placeholder="Enter Address" id="address"
+							style="height: 45px"></textarea>   -->
+							<input type="text" name="address" placeholder="Address Line 1"
+								id="address"> <!--id="address"  -->
 						<small id='addresscheck'><small>
+					</div>
+					<div class="inputRow">
+						<label for="address">Address Line 2:</label>
+							<input type="text" name="address" placeholder="Address Line 2"
+								id="address1"> 
+						<small id='addresscheck'><small>
+					</div>
+					
+					<div class="inputRow">
+							<label for="city">City</label> <input type="text" name="city"
+									placeholder="Enter City" id="city"> 
+							<small id='citycheck'></small>
+					</div>
+					<div class="inputRow">
+							<label for="state">State</label> <input type="text"
+									name="state" placeholder="Enter State" id="state">
+							 <small id='statecheck'></small>
+					</div>
+					<div class="inputRow">
+							<div class="form-group">
+									<div class="dropdown">
+										<label for="country">Country </label> <select
+										  class="combobox input-large form-control" name="country"
+										  id="country">
+										  <option value="0">Select Country</option>
+										  <option value="India">India</option>
+										  </select>
+									</div>
+							</div>
+					</div>
+
+
+					<div class="inputRow">
+							<label for="zipcode">Zip Code </label> <input type="tel"
+									name="zipcode" placeholder="Enter Zip Code " id="zip">
+									<small id='zipcodecheck'></small>
 					</div>
 
 					<div class="inputRow">

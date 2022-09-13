@@ -245,17 +245,18 @@ section {
 										data : JSON.stringify(data),
 										success : function(data) {
 											let responseData = JSON.stringify(data);
-											
+											//console.log(data);
 											let allProdsCount = 0;
 
 											Object.keys(data).forEach((eachCategoryId, index) => {
-											
+											//console.log(eachCategoryId);
+											//console.log(index);
 
 											let currCat = data[eachCategoryId].products.length;
 											allProdsCount = allProdsCount + currCat;
 											cartValue = allProdsCount;
-
 											document.getElementById('Value').innerHTML = "[" + cartValue + "]";
+											//console.log("cartvalue   " + cartValue);
 											}); 
 
 										}
@@ -720,6 +721,7 @@ section {
 													document
 															.getElementById("images"
 																	+ i).src = images[i];
+													//console.log("I"+i);
 												}
 											}
 											images.forEach(myImages)
@@ -738,7 +740,6 @@ $(document).on('click','button[id]',function(e) {
 												}
 					
 						    var category_id = $(this).val();
-						
 							var jwt = localStorage.getItem('token');
 							
 							localStorage.removeItem('product_Id');

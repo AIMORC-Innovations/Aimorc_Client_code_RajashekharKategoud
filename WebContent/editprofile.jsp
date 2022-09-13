@@ -14,6 +14,7 @@ bar and footer------------------------------ -->body {data-spy ="scroll";
 	height: 100%;
 }
 
+
 #content {
 	max-height: calc(110% - 120px);
 	overflow-y: scroll;
@@ -215,12 +216,23 @@ footer {
 						<td><input type="text" class="form-control" id="phonenum"
 							value=""></td>
 					</tr>
-
+					<!--  
 					<tr>
 						<th scope="row">Address</th>
-						<td><textarea type="textarea" class="form-control"
-								id="address" value=""></textarea></td>
-					</tr>
+						<td><input type="text" class="form-control"
+								id="address" value=""> <br>
+								<input type="text" class="form-control"
+								id="address1" value=""> <br>
+								<input type="text" class="form-control"
+								id="city" value=""><br>
+								<input type="text" class="form-control"
+								id="state" value=""> <br>
+								<input type="text" class="form-control"
+								id="country" value=""> <br>
+								<input type="text" class="form-control"
+								id="zip" value="">
+								</td>
+					</tr> -->
 					</div>
 				</table>
 				<hr>
@@ -259,8 +271,23 @@ footer {
 							document.getElementById("firstname").value = getObj.firstname;
 							document.getElementById("lastname").value = getObj.lastname;
 							document.getElementById("dob").value = getObj.dob;
-							document.getElementById("address").value = getObj.address;
+						/*	document.getElementById("address").value = getObj.address; 
+							document.getElementById("address1").value = getObj.address1;
+							document.getElementById("city").value = getObj.city;
+							document.getElementById("state").value = getObj.state;
+							document.getElementById("country").value = getObj.country;
+							document.getElementById("zip").value = getObj.zip; */
 							document.getElementById("phonenum").value = getObj.phonenum;
+							
+						/*	var getObj1 = JSON.parse(localStorage
+									.getItem('profileAddr1'));
+							document.getElementById("address").value = getObj1.address; 
+							document.getElementById("address1").value = getObj1.address1;
+							document.getElementById("city").value = getObj1.city;
+							document.getElementById("state").value = getObj1.state;
+							document.getElementById("country").value = getObj1.country;
+							document.getElementById("zip").value = getObj1.zip;  */
+							
 							$(function() {
 								{
 									$(
@@ -281,14 +308,39 @@ footer {
 													lastname : $('#lastname')
 															.val(),
 													dob : $('#dob').val(),
-													address : $('#address')
-															.val(),
+												//	address : $('#address')
+													//		.val(),
+												//	address1 : $('#address1')
+													//		.val(),
+												//	city : $('#city')
+													//		.val(),
+												//	state : $('#state')
+													//		.val(),
+												//	country : $('#country')
+													//		.val(),
+												//	zip : $('#zip')
+													//		.val(),
 													phonenum : $('#phonenum ')
 															.val(),
 													gender : $(
 															"input[type='radio'][name='customRadioInline']:checked")
 															.val()
 												};
+											/*	var data1 = {
+														token :jwt ,
+														address : $('#address')
+															.val(),
+														address1 : $('#address1')
+															.val(),
+														city : $('#city')
+															.val(),
+														state : $('#state')
+															.val(),
+														country : $('#country')
+															.val(),
+														zip : $('#zip')
+															.val(),	
+												};  */
 												$
 														.ajax({
 															type : "POST",
@@ -344,6 +396,60 @@ footer {
 																		.log(error);
 															}
 														});
+											/*	$.ajax({
+													type : "POST",
+													url : 'http://localhost:8081/updateUserAddressDetails',
+													contentType : "application/json",
+													data : JSON
+															.stringify(data1),
+													statusCode : {
+														304 : function() {
+														
+															$(
+																	'#editform')
+																	.hide();
+															$(
+																	'#usereditfail')
+																	.slideDown();
+															setTimeout(
+																	function() {
+																		window.location.href = "http://localhost:8080/AIMORCProject/profile.jsp";
+																	},
+																	3000);
+														},
+														200 : function() {
+														
+															localStorage
+																	.setItem(
+																			'data1',
+																			JSON
+																					.stringify(data1));
+
+														
+															$(
+																	'#editform')
+																	.hide();
+															$(
+																	'#useredited')
+																	.slideDown();
+
+															console
+																	.log("successfully User Address updated");
+															setTimeout(
+																	function() {
+																		window.location.href = "http://localhost:8080/AIMORCProject/profile.jsp";
+																	},
+																	3000);
+
+														}
+													},
+
+													error : function(
+															error) {
+														console
+																.log(error);
+													}
+												}); */
 
 											});
 						});
