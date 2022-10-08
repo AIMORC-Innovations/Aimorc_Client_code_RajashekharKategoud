@@ -10,7 +10,7 @@
  
 bar and footer------------------------------ -->body {data-spy ="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
 

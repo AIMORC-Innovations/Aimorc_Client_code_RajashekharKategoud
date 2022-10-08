@@ -61,6 +61,7 @@
   background-color: #efefef;
   text-align: center;
   height: 40px;
+  font-family: Roboto, Arial, sans-serif;/*"Brackley Demo Italic";*/
 }
 
 .group label {
@@ -71,7 +72,8 @@
 body {
 data-spy="scroll";
 overflow: hidden;
-font-family: "Brackley Demo Italic";height: 100%;
+font-family: Roboto, Arial, sans-serif; /* "Brackley Demo Italic";*/
+height: 100%;
 }
 
 #content {

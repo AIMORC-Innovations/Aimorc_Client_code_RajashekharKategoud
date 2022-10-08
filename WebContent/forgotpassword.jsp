@@ -12,9 +12,14 @@
  
 bar and footer------------------------------ -->body {data-spy ="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
+
+.font {
+font-family: Roboto, Arial, sans-serif;
+}
+
 
 #content {
 	max-height: calc(100% - 120px);
@@ -30,14 +35,14 @@ html, body {
 	padding: 0;
 }
 .footer {
-  position: absolute;
+  position: relative; /*absolute */
   right: 0;
   bottom: 0;
   left: 0;
   padding: 1rem;
   background-color: #efefef;
   text-align: center;
-  height: 40px;
+  height: 60px;
 }
 
 footer {
@@ -180,6 +185,7 @@ footer {
 </head>
 <body data-spy="scroll">
 	<!--------------------- ----------------header------------------------------ -->
+	<!--
 	<nav class="navbar navbar-dark navbar-expand-md mb-3"
 		style="background-color:#112549;">
 	<div class="container-fluid">
@@ -205,19 +211,23 @@ footer {
 		</div>
 	</div>
 	</nav>
-
+	-->
 	<!--------------------- ----------------form------------------------------ -->
 
 	<form>
-		<div class="bgBox  ">
-			<h2>Forgot Password</h2>
-			<div class="inputRow">
+	<div style="text-align: center; height:80px;"> <!-- class="navbar-header text-center" -->
+			 <!--  <a class="navbar-brand" href="#">AIMORC Innovations</a> -->
+			<img height="100px" width=125px" src="https://media-exp1.licdn.com/dms/image/C4E0BAQE-SkEaq5vRnA/company-logo_200_200/0/1595501923133?e=2147483647&v=beta&t=-ZHFBvv2m1EWw4KBBepTPIZHfzf3rjc8_hInFQYJYo4">
+			 </div>
+		<div class="bgBox">
+			<h2 class="font">Forgot Password</h2>
+			<div class="inputRow font">
 				<label for="email">Enter Username:</label> <input type="email"
 					name="login" id="email" placeholder="Enter your email" value=""
 					autofocus> <small id="usercheck"></small>
 			</div>
 
-			<div class="inputRow">
+			<div class="inputRow font">
 				<label for="security_id">Enter Security Question :</label> <select
 					name="security_id" id="security_id">
 					<option value="0">Select Security Question?</option>
@@ -229,7 +239,7 @@ footer {
 				</select>
 			</div>
 
-			<div class="inputRow">
+			<div class="inputRow font">
 				<label for="security_answer">Enter Security Answer :</label> <input
 					type="text" name="security_answer"
 					placeholder="Enter Your Security Answer" id="security_answer">
@@ -237,9 +247,25 @@ footer {
 
 
 
-			<div class="inputRow submit">
+			<div class="inputRow submit font">
 				<input type="button" value="Submit" class="signIn" id="sign_in">
 			</div>
+			
+			<div class="text-center font" >
+			<ul class="nav navbar-nav mr-auto">
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item active"><a class="nav-link"
+					href="registration.jsp" style="font-size:20px"><i class="fa fa-user"
+						aria-hidden="true"></i> Register</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				                <li class="nav-item active"><h6><a class="nav-link"
+					           href="login.jsp" style="height:50px; font-size:20px"><i class="fa fa-sign-in" aria-hidden="true"></i>
+						       Login</a></h6></li>
+			              </ul>
+		    </div>
+		    
 
 			<div class="alert alert-danger alert-dismissible"
 				id="securitynomatch" role="alert" style="display: none;">
@@ -248,9 +274,10 @@ footer {
 
 		</div>
 		</div>
-		<div class="footer">This will always appear at the bottom of the page, but <strong>not fixed</strong>.</div>
-		
+			<div class="footer font">Email : <strong>aimorc.ecomm@gmail.com</strong></div>
 	</form>
+
+	
 
 
 

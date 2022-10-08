@@ -10,7 +10,7 @@
  
 and footer------------------------------ -->body {data-spy ="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
 
@@ -78,7 +78,7 @@ header {
  
 for cart display button------------------------------ -->body {
 	margin: 0;
-	font-family: Brackley Demo Italic;
+	font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
 	font-size: .8125rem;
 	font-weight: 400;
 	line-height: 1.5385;
@@ -433,8 +433,8 @@ function displayProductInfo(){
 											imageDiv.appendChild(img);
 
 																	
-												document.getElementById("images").src = "images/" + result.product_name + ".jpg";
-											
+												document.getElementById("images").src = "images/" + result.product_id + ".jpg";
+											/*  document.getElementById("images").src = "images/" + result.product_name + ".jpg"; */
 
 	                                     
 
@@ -652,9 +652,9 @@ displayProductInfo();
 						style="margin-top: 0 !important;">
 						<i class="fa fa-shopping-cart pr-2"></i>Add to cart
 					</button>
-					<button type="button" class="btn btn-default" id="product_id"
+				<!-- <button type="button" class="btn btn-default" id="product_id"
 						style="margin-top: 0 !important;">Buy Now
-					</button>
+					</button>  -->	
 
 					
 				</div>

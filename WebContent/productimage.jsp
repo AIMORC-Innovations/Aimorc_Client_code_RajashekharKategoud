@@ -8,7 +8,8 @@
 <!-------------------------------------scroolbar and footer------------------------------ -->
 body {data-spy ="scroll";
 	overflow: hidden;
-font-family: "Brackley Demo Italic";	height: 100%;
+font-family:Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
+height: 100%;
 }
 
 #content {
@@ -43,9 +44,14 @@ header {
 #product_name {
 	font-size: 30px;
 }
+#product_id{
+	font-family:  Roboto, Arial, sans-serif; 
+	color:white;
+}
 
 #product_description {
-	font-size: 12px;
+	font-size: 15px; /* 12px */
+	font-family:  Roboto, Arial, sans-serif; /*"Amazon Ember", Arial, sans-serif;*/
 }
 
 #category_id {
@@ -75,7 +81,7 @@ header {
 <!------------------------------------css for cart display button------------------------------ --> 
  body {
 	margin: 0;
-	font-family: Roboto,sans-serif;
+	font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
 	font-size: .8125rem;
 	font-weight: 400;
 	line-height: 1.5385;
@@ -123,7 +129,8 @@ header {
 #product_id {
 	background-color: #004d80;
 	font-color: #fff; 
-	margin-top: 10px;
+/*	margin-top: 10px; */
+	margin-top: -3px
 }
 
 /* #product_id:hover {
@@ -198,6 +205,16 @@ header {
 	border-color: #004d80;
 	color: white;
 	font-color: white;
+}
+
+.fa-addtocart {
+    display: inline-block;
+    font: normal normal normal 14px/1 Roboto, Arial, sans-serif; /*normal normal normal 14px/1 FontAwesome;*/
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    color: white;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -382,7 +399,7 @@ function displayProduct(page){
 												.createElement('h1');
 										category_name.className = 'font-weight-semibold mb-2';
 										category_name.id = "category_name";
-										category_name.innerHTML ="Cascual wear";
+										category_name.innerHTML ="Casual wear";
 										parentDiv
 												.appendChild(category_name);
 										break;
@@ -398,7 +415,7 @@ function displayProduct(page){
   
 										for (var i = 0; i < result.content.length; i++) {
 											 dataLength++;
-										
+											 console.log(result.content[i].max_quantity);
 											var parentDiv = document
 													.createElement('div');
 											parentDiv.className = 'col-md-4 mt-2';
@@ -512,8 +529,36 @@ function displayProduct(page){
 											view_detail.id = result.content[i].product_id;
 											view_detail.innerHTML = " view more";
 											childDiv.appendChild(view_detail);
-								 			
-									
+											
+											var label = document
+											.createElement('label');
+											label.ClassName = "form-check-label";
+											var quantity=result.content[i].max_quantity;
+											if(result.content[i].status!="Available" && quantity<5){
+												label.innerHTML="Out of Stock";
+												label.style.color='red';
+											}else if(quantity<5){
+												console.log(result.content[i].max_quantity);
+												label.innerHTML = "Hurry up! Only "+result.content[i].max_quantity+" items left";
+												label.style.color="red";
+											}else if(result.content[i].status!="Available"){
+												label.innerHTML="Out of Stock";
+												label.style.color='red';
+											}
+											addDiv.appendChild(label);
+											
+										/*	var label = document
+											.createElement('label');
+											label.ClassName = "form-check-label";
+											var quantity=result.content[i].max_quantity;
+											console.log("-->"+quantity);
+											if(quantity<5){
+												console.log(result.content[i].max_quantity);
+												label.innerHTML = "Hurry up only "+result.content[i].max_quantity+" items left";
+												label.style.color="red";
+											}
+											addDiv.appendChild(label);  */
+									 
 
 										}
 									
@@ -522,10 +567,19 @@ function displayProduct(page){
 											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
 										function myImages() {
 											for (var i = 0; i < result.content.length; i++) {
-												document.getElementById("images"+ i).src = "images/" + result.content[i].product_name + ".jpg";
+												document.getElementById("images"+ i).src = "images/" + result.content[i].product_id + ".jpg";
 											}
 										}
 										images.forEach(myImages)
+										
+										/* var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
+											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
+										function myImages() {
+											for (var i = 0; i < result.content.length; i++) {
+												document.getElementById("images"+ i).src = "images/" + result.content[i].product_name + ".jpg";
+											}
+										}
+										images.forEach(myImages) */
 
 					
 
@@ -551,7 +605,7 @@ function displayProduct(page){
 														'click',
 														'button[id]',
 														function(e) {
-															if (this.id == 'dropdownMenuButton') {
+															if (this.id == 'dropdownMenuButton1') {
 																return false;
 															}
 															onClick(this);
@@ -578,10 +632,20 @@ $.ajax({
 																						.slideDown();
 																				setTimeout(
 																						function() {
-																							window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
-																							
+																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
+																							$("html").scrollTop(0);
+																						/*	$(
+																							'#notadded')
+																							.hide();	*/
 																						},
-																						2000);
+																						500); //2000
+																						setTimeout(
+																								function() {
+																									$(
+																									'#notadded')
+																									.hide();	
+																								},
+																								2000);		
 																				cart();
 																			},
 																			200 : function() {
@@ -595,7 +659,17 @@ $.ajax({
 																						.log("Added To Cart Successfully");
 																				setTimeout(
 																						function() {
-																							window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
+																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
+																						$("html").scrollTop(0);
+																					/*	$(
+																						'#added').hide(); */
+																						},
+																						500);
+																				setTimeout(
+																						function() {
+																							$(
+																							'#added')
+																							.hide();	
 																						},
 																						2000);
 																				
@@ -820,7 +894,7 @@ $.ajax({
 	    												.createElement('h1');
 	    										category_name.className = 'font-weight-semibold mb-2';
 	    										category_name.id = "category_name";
-	    										category_name.innerHTML ="Cascual wear";
+	    										category_name.innerHTML ="Casual wear";
 	    										parentDiv
 	    												.appendChild(category_name);
 	    										break;
@@ -836,7 +910,7 @@ $.ajax({
 	      
 	    										for (var i = 0; i < result.content.length; i++) {
 	    											 dataLength++;
-	    						
+	    												console.log(result.content[i].max_quantity);
 	    											var parentDiv = document
 	    													.createElement('div');
 	    											parentDiv.className = 'col-md-4 mt-2';
@@ -935,7 +1009,7 @@ $.ajax({
 	    											btn.className = 'btn btn-default';
 	    											btn.id = "product_id";
 	    											btn.value = result.content[i].product_id;
-	    											childDiv.appendChild(btn);
+	    											childDiv.appendChild(btn); //childDiv.appendChild(btn);
 
 	    											var fontawsome = document
 	    													.createElement('i');
@@ -951,7 +1025,34 @@ $.ajax({
 	    											view_detail.innerHTML = " view more";
 	    											childDiv.appendChild(view_detail);
 	    								 			
+	    											var label = document
+	    											.createElement('label');
+	    											label.ClassName = "form-check-label";
+	    											var quantity=result.content[i].max_quantity;
+	    											if(result.content[i].status!="Available" && quantity<5){
+	    												label.innerHTML="Out of Stock";
+	    												label.style.color='red';
+	    											}else if(quantity<5){
+	    												console.log(result.content[i].max_quantity);
+	    												label.innerHTML = "Hurry up! Only "+result.content[i].max_quantity+" items left";
+	    												label.style.color="red";
+	    											}else if(result.content[i].status!="Available"){
+	    												label.innerHTML="Out of Stock";
+	    												label.style.color='red';
+	    											}
+	    											addDiv.appendChild(label); 
 	    									
+	    										/*	var label = document
+	    											.createElement('label');
+	    											label.ClassName = "form-check-label";
+	    											var quantity=result.content[i].max_qunatity;
+	    											console.log("-->"+quantity);
+	    											if(quantity<5){
+	    												console.log(result.content[i].max_quantity);
+	    												label.innerHTML = "Hurry up only "+result.content[i].max_quantity+" items left";
+	    												label.style.color="red";
+	    											}
+	    											addDiv.appendChild(label);  */
 
 	    										}
 	    									
@@ -960,10 +1061,18 @@ $.ajax({
 	    											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg","images/Skater Dress.jpg"];
 	    										function myImages() {
 	    											for (var i = 0; i < result.content.length; i++) {
-	    												document.getElementById("images"+ i).src = "images/" + result.content[i].product_name + ".jpg";
+	    												document.getElementById("images"+ i).src = "images/" + result.content[i].product_id + ".jpg";
 	    											}
 	    										}
 	    										images.forEach(myImages)
+	    										/*var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
+	    											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg","images/Skater Dress.jpg"];
+	    										function myImages() {
+	    											for (var i = 0; i < result.content.length; i++) {
+	    												document.getElementById("images"+ i).src = "images/" + result.content[i].product_name + ".jpg";
+	    											}
+	    										}
+	    										images.forEach(myImages)*/
 
 	    					
 
@@ -989,7 +1098,7 @@ $.ajax({
 	    														'click',
 	    														'button[id]',
 	    														function(e) {
-	    															if (this.id == 'dropdownMenuButton') {
+	    															if (this.id == 'dropdownMenuButton1') {
 	    																return false;
 	    															}
 	    															onClick(this);
@@ -1017,8 +1126,18 @@ $.ajax({
 	    																						.slideDown();
 	    																				setTimeout(
 	    																						function() {
-	    																							window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
-	    																							
+	    																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
+	    																							$("html").scrollTop(0);
+	    																						/*	$(
+		    																						'#notadded')
+		    																						.hide(); */
+	    																						},
+	    																						500);
+	    																				setTimeout(
+	    																						function(){
+	    																							$(
+		    																						'#notadded')
+		    																						.hide();
 	    																						},
 	    																						2000);
 	    																				cart();
@@ -1034,10 +1153,20 @@ $.ajax({
 	    																						.log("Added To Cart Successfully");
 	    																				setTimeout(
 	    																						function() {
-	    																							window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
+	    																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
+	    																							$("html").scrollTop(0);
+	    																						/*	$(
+		    																						'#added')
+		    																						.hide(); */
+	    																						},
+	    																						500);
+	    																				setTimeout(
+	    																						function(){
+	    																							$(
+		    																						'#added')
+		    																						.hide();
 	    																						},
 	    																						2000);
-	    																				
 	    																			
 	    																				cart();
 	    																			}
@@ -1095,7 +1224,7 @@ $.ajax({
 															
 																setTimeout(
 																		function() {
-																			window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																			window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 																		}, 0000);
 																
 															},
@@ -1106,7 +1235,7 @@ $.ajax({
 																		.log("Added To Cart Successfully");
 																setTimeout(
 																		function() {
-																			window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																			window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 																		}, 0000);
 																
 															}
@@ -1149,16 +1278,18 @@ $.ajax({
 						<i class="fa fa-user" aria-hidden="true"
 							style="padding: 5px; margin-top: 5px;"></i> Account
 					</button>
-					<div class="dropdown-menu dropdown-menu-right" id="dropdown-item">
-						<a class="dropdown-item " id="text" href="profile.jsp"><i
+			       <div class="dropdown-menu dropdown-menu-right" id="dropdown-item">
+		   	     			<a class="dropdown-item " id="text" href="profile.jsp" onclick="window.location = 'http://localhost:8080/AIMORCProject/profile.jsp';" ><i
 							class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
-							Profile</a> <a class="dropdown-item " id="text"
-							href="loginsecurityquestion.jsp"><i class="fa fa-edit"
+							Profile</a>
+							<a class="dropdown-item " id="text"
+							href="loginsecurityquestion.jsp" onclick="window.location = 'http://localhost:8080/AIMORCProject/loginsecurityquestion.jsp';" ><i class="fa fa-edit"
 							aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a
-							class="dropdown-item " id="text" href="login.jsp"><i
+							class="dropdown-item " id="text" href="login.jsp" onclick="window.location = 'http://localhost:8080/AIMORCProject/login.jsp';" ><i
 							class="fa fa-sign-out" aria-hidden="true" style="padding: 5px;"></i>
-							Logout</a>
-					</div>
+							Logout</a>  	   
+						
+					</div>  		
 				</div>
 
 				<div class="nav-item active">

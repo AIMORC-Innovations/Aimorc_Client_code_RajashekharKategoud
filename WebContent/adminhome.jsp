@@ -8,7 +8,7 @@
 <!-------------------------------------scroolbar and footer------------------------------ -->
 body {data-spy ="scroll";
 	overflow: hidden;
-font-family: Roboto, Arial, sans-serif; /* "Brackley Demo Italic";*/	
+font-family:Roboto, Arial, sans-serif;
 height: 100%;
 }
 
@@ -43,10 +43,65 @@ header {
 
 #product_name {
 	font-size: 30px;
+	width : 500px;
+text-align: left;
+position: absolute;
+  left: 150px;
+}
+
+#product_id{
+	font-family:  Roboto, Arial, sans-serif;
+	color:white;
+	padding-left:1000px;
+} 
+#edit_id {
+padding-left:1000px;
+}
+
+#edit_id:focus { /* btn btn-number*/
+    outline:0;
+	outline: 0 !important;
+	box-shadow: none;
+	border:0;
+	border: none !important;
+    background-color: Transparent;
+    background-repeat:no-repeat;  
 }
 
 #product_description {
-	font-size: 12px;
+	font-size: 15px; /* 12px */
+	font-family:  Roboto, Arial, sans-serif;
+	width : 500px; /* 700px */
+text-align: left;
+position: absolute;
+  left: 150px;
+  height : 70px;
+  top:60px;
+}
+
+#status{
+text-align: left;
+padding-left:150px;
+}
+
+#quantitylabel {
+position: absolute;
+    left: 850px; /* 900px; */
+    top:30px;
+    font-size : 18px;
+}
+#quantitylabelvalue{
+position: absolute;
+    left: 925px; /* 900px; */
+    top:30px;
+    font-size : 18px;
+}
+
+#product_price {
+	margin-top: 10px;
+	width : 150px; /*365px */
+	position: absolute;
+    left: 650px; /* 900px; */
 }
 
 #category_id {
@@ -71,12 +126,49 @@ header {
 	margin-bottom: 20px;
 }
 
+.close {
+    vertical-align: middle;
+    border: none;
+    color: inherit;
+    border-radius: 50%;
+    background: transparent;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    opacity: 0.6;
+}
+.close:focus,
+.close:hover {
+    opacity: 1;
+    background: none; /*rgba(128, 128, 128, 0.5)*/
+}
+.close:active {
+    background: none; /*rgba(128, 128, 128, 0.9)*/
+}
+/* tines of the X */
+.close::before,
+.close::after {
+    content: " ";
+    position: absolute;
+    top: 62%;
+    left: 55%;
+    height: 20px;
+    width: 4px;
+    background-color: currentColor; /*currentColor*/
+}
+.close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
 
 
 <!------------------------------------css for cart display button------------------------------ --> 
  body {
 	margin: 0;
-	font-family: Roboto, Arial, sans-serif;  /*Roboto,sans-serif;*/
+	font-family: Roboto, Arial, sans-serif;
 	font-size: .8125rem;
 	font-weight: 400;
 	line-height: 1.5385;
@@ -104,10 +196,14 @@ header {
 	background-color: #fff;
 	background-clip: border-box;
 	border-radius: .1875rem;
+	height : 135px; /*height : 250px; */
+	width:1092px; /*width:500px; */
 }
 
 .card-img-actions {
-	position: relative;
+	position: absolute; /* relative*/
+	height:75px;
+	width : 75px; /* 75px*/
 }
 
 .card-body {
@@ -122,9 +218,10 @@ header {
 }
 
 #product_id {
-	background-color: #004d80;
+	
 	font-color: #fff; 
-	margin-top: 10px;
+/*	margin-top: 10px; */
+	margin-top: -3px
 }
 
 /* #product_id:hover {
@@ -201,6 +298,32 @@ header {
 	font-color: white;
 }
 
+.fa-addtocart {
+    display: inline-block;
+    font: normal normal normal 14px/1 Roboto, Arial, sans-serif; /*normal normal normal 14px/1 FontAwesome;*/
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    color: white;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#edit, #delete{
+      display:block;
+      width:25px;
+      height:25px;
+    }
+    #edit{
+      background:url('https://cdn.iconscout.com/icon/free/png-256/edit-1215-1163030.png') center no-repeat;
+      background-size:contain;
+    }
+    #delete{
+      border:none;
+      cursor: pointer;
+      background:url('https://i.ya-webdesign.com/images/edit-delete-icon-png.png') center no-repeat;
+      background-size:contain;
+    }
+
 
 
 </style>
@@ -211,7 +334,7 @@ header {
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="description" content="$1">
 
-<title>ProductImage Page</title>
+<title>Admin Home Page</title>
 
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -290,7 +413,7 @@ header {
     										data : JSON.stringify(data),
     										success : function(data) {
     											let responseData = JSON.stringify(data);
-    											
+    											//console.log("--"+data);
     											let allProdsCount = 0;
 
     											Object.keys(data).forEach((eachCategoryId, index) => {
@@ -321,15 +444,15 @@ function displayProduct(page){
 		};
 	$.ajax({
 
-																type : "POST",
-																url : "http://localhost:8082/viewCategory",
+									type : "POST",
+									url : "http://localhost:8082/viewCategory",
 									contentType : "application/json", // NOT dataType!
 									data : JSON.stringify(data),
 									success : function(response) {
 										 $("#form").empty();
-									
+									//console.log(response+"-->");
 										var result=response;
-										
+										//console.log("-->"+result.content.length);
 										var obj1 = JSON.stringify(response.totalElements);
 							
 										var obj = JSON.stringify(result.content);
@@ -384,7 +507,7 @@ function displayProduct(page){
 												.createElement('h1');
 										category_name.className = 'font-weight-semibold mb-2';
 										category_name.id = "category_name";
-										category_name.innerHTML ="Cascual wear";
+										category_name.innerHTML ="Casual wear";
 										parentDiv
 												.appendChild(category_name);
 										break;
@@ -403,7 +526,7 @@ function displayProduct(page){
 										
 											var parentDiv = document
 													.createElement('div');
-											parentDiv.className = 'col-md-4 mt-2';
+											parentDiv.className = 'col-md-8 mt-2'; //col-md-4 mt-2
 											parentDiv.id = 'block';
 											document
 													.getElementsByClassName('row')[0]
@@ -422,7 +545,7 @@ function displayProduct(page){
 
 											var childDiv = document
 													.createElement('div');
-											childDiv.className = 'card-body bg-light text-center';
+											childDiv.className = 'card-body bg-light text-right'; //text-center
 											innerDiv.appendChild(childDiv);
 
 											var imageDiv = document
@@ -450,7 +573,7 @@ function displayProduct(page){
 											product_name.className = 'font-weight-semibold mb-2';
 											product_name.id = "product_name";
 											product_name.innerHTML = result.content[i].product_name;
-											addDiv.appendChild(product_name);
+											bodyDiv.appendChild(product_name); //addDiv.appendChild(product_name);
 
 											var product_desc = document
 													.createElement('p');
@@ -458,14 +581,31 @@ function displayProduct(page){
 											product_desc.id = "product_description";
 											product_desc.innerHTML = result.content[i].product_description;
 											product_desc.href = "#";
-											addDiv.appendChild(product_desc);
+											bodyDiv.appendChild(product_desc); //addDiv.appendChild(product_desc);
+
+											var label = document.createElement('label');
+											label.className = "labelStatus"; //label.ClassName = form-check-label //labelQuantity
+											label.id="status";
+											//label.innerHTML = result.content[i].status;//" available ";
+											if(result.content[i].status=="Available"){
+												label.innerHTML="Available";
+												label.style.color='green';
+												label.style.fontSize='20px';
+											}else{
+												label.innerHTML="Out of Stock";
+												label.style.color='red';
+												label.style.fontSize='20px';
+											}
+											childDiv.appendChild(label);
 
 											var product_price = document
 													.createElement('h3');
 											product_price.className = 'mb-0 font-weight-semibold';
 											product_price.id = "product_price";
 											product_price.innerHTML = result.content[i].product_price;
-											childDiv.appendChild(product_price);
+											//console.log(result.content[i].product_price);
+											//console.log(result.content);
+											bodyDiv.appendChild(product_price); //childDiv.appendChild(product_price);
 										
 
 											var Rupees = document
@@ -474,65 +614,180 @@ function displayProduct(page){
 											Rupees.id = "rupees";
 											product_price.prepend(Rupees);
 
-											var label = document
-													.createElement('label');
-											label.ClassName = "form-check-label";
-											label.innerHTML = "Quantity";
-											childDiv.appendChild(label);
-
-											var quaNumber = document
-													.createElement('input');
-											quaNumber.type = "number";
-											quaNumber.className = 'form-control form-control-sm';
-											quaNumber.className = 'quantity';
-											quaNumber.maxlength = "2";
-											quaNumber.size = "1";
-											quaNumber.min = "1";
-											quaNumber.id = "input"
-													+ result.content[i].product_id;
-											quaNumber.value = "1";
-											childDiv.appendChild(quaNumber);
+											var label = document.createElement('label');
+											label.className = "labelQuantity"; //label.ClassName = form-check-label //labelQuantity
+											label.id="quantitylabel";
+											label.innerHTML = "Quantity : ";
+											bodyDiv.appendChild(label);
+											
+											var label = document.createElement('label');
+											label.className = "labelQuantity"; //label.ClassName = form-check-label //labelQuantity
+											label.id="quantitylabelvalue";
+											label.innerHTML = result.content[i].max_quantity;
+											bodyDiv.appendChild(label);
+											
+											
 
 											var btn = document
-													.createElement('button');
+											.createElement('button');
 											btn.type = "button"
 											btn.className = 'btn btn-default';
-											btn.id = "product_id";
+											btn.id = "edit_id"; /*edit_id */
 											btn.value = result.content[i].product_id;
-											childDiv.appendChild(btn);
+											bodyDiv.appendChild(btn);
 
 											var fontawsome = document
-													.createElement('i');
-											fontawsome.className = "fa fa-cart-plus mr-2";
-											fontawsome.innerHTML = " Add to cart ";
+											.createElement('i');
+											//fontawsome.className = "fa fa-cart-plus mr-2";
+											//fontawsome.innerHTML = "Edit";
+											fontawsome.id="edit";
 											btn.appendChild(fontawsome);
-											
-											var view_detail = document
-											.createElement('a');
-											view_detail.className="ahref"
-											view_detail.setAttribute('href',"#");
-											view_detail.id = result.content[i].product_id;
-											view_detail.innerHTML = " view more";
-											childDiv.appendChild(view_detail);
+									
 								 			
 									
 
 										}
 									
-
-										var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
+									/*	var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
 											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
 										function myImages() {
 											for (var i = 0; i < result.content.length; i++) {
 												document.getElementById("images"+ i).src = "images/" + result.content[i].product_name + ".jpg";
 											}
 										}
+										images.forEach(myImages) */
+
+										var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
+											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
+										function myImages() {
+											for (var i = 0; i < result.content.length; i++) {
+												document.getElementById("images"+ i).src = "images/" + result.content[i].product_id + ".jpg";
+											}
+										}
 										images.forEach(myImages)
 
-					
+										var counts = 0;
+												$(document)
+												.on(
+												'click',
+												'button[id]',
+												function(e) {
+													if (this.id == 'SelectCategory') {
+														return false;
+													}
+													if (this.id == 'edit_button') {
+														return false;
+													}
+													$('#editModal').modal('show');
+													var product_id = $(this).val();
+													console.log(product_id);
+													  var jwt = localStorage.getItem('token');
+														var data = {
+															product_id : $(this).val(),
+															token:jwt
+														};
+														$.ajax({
+															type : "Post",
+															url : 'http://localhost:8082/getProductDetailsBasedOnProductId',
+															contentType : "application/json",
+															data : JSON.stringify(data),
+															success : function(response) {
+																var product_id=response.product_id;
+																localStorage.setItem('product_id' , product_id);
+																console.log(response);
+																console.log(response.product_name);
+																console.log(response.status);
+																document.getElementById('editProductName').value = response.product_name;
+																document.getElementById('editProductDescription').value = response.product_description;
+																document.getElementById('editProductPrice').value = response.product_price;
+																document.getElementById('editProductQuantity').value = response.max_quantity;
+																var x= response.status;
+																console.log(x);
+																$(function() {
+																	{
+																		$(
+																				"input[name=customRadioInline][value=" + x + "]").prop('checked', true); 
+																	/*	$('input:radio[name="customRadioInline"][value=x]').attr('checked',true); */
+																	}
+																});
+															}
+														});
+														$('#edit_button').click(function (event) {
+															var jwt = localStorage.getItem('token');
+															var product_id = localStorage.getItem('product_id');
+															var  data={
+																	  
+																	  product_id : product_id,
+																	  product_name : $('#editProductName').val(),
+																	  product_description : $('#editProductDescription').val(),
+																	  product_price : $('#editProductPrice').val(),
+																	  max_quantity : $('#editProductQuantity').val(),
+																	  status : $(
+																		"input[type='radio'][name='customRadioInline']:checked")
+																		.val()
+															     };
+															$.ajax({
+																  url:'http://localhost:8082/editProductDetails' ,
+																  method:'POST',
+																  contentType:'application/json',
+																  data:JSON.stringify(data),
+																
+															      statusCode : {
+																		304 : function() {
+																			$('#editModal').modal('hide');
+																		/*	$(
+																					'#editform')
+																					.hide(); */
+																			$(
+																					'#failure')
+																					.slideDown();
+																				//document.getElementById('failure').innerHTML = "Address update failed, Please try again.";
+																				
+																			setTimeout(
+																					function() {
+																						window.location.href = "http://localhost:8080/AIMORCProject/adminhome.jsp";
+																					},
+																					3000);
+																		},
+																		200 : function() {
+																		
+																			localStorage
+																					.setItem(
+																							'data',
+																							JSON
+																									.stringify(data));
+
+																			$('#editModal').modal('hide');
+																		/*	$(
+																					'#editform')
+																					.hide(); */
+																			$(
+																					'#success')
+																					.slideDown();
+																					//document.getElementById('success').innerHTML = "Address updated successfully!";
+																					
+
+																			console
+																					.log("successfully profile updated");
+																			setTimeout(
+																					function() {
+																						window.location.href = "http://localhost:8080/AIMORCProject/adminhome.jsp";
+																					},
+																					3000);
+
+																		}
+																	},
+															      
+															  }); 
+															
+														});
+												
+													
+													
+												});
 
 										// --------------------------------onclick of quantity------------------------------------------------------- /
-
+/*
 										function onClick(elem) {
 											var $this = $(elem);
 											val1 = $this.siblings(
@@ -543,7 +798,7 @@ function displayProduct(page){
 											} else {
 												// alert(val1);
 											}
-										}
+										} */
 
 										/* --------------------------------onclick of add to cart button-------------------------------------------------------*/
 
@@ -553,7 +808,7 @@ function displayProduct(page){
 														'click',
 														'button[id]',
 														function(e) {
-															if (this.id == 'dropdownMenuButton') {
+															if (this.id == 'dropdownMenuButton1') {
 																return false;
 															}
 															onClick(this);
@@ -580,10 +835,20 @@ $.ajax({
 																						.slideDown();
 																				setTimeout(
 																						function() {
-																							window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
-																							
+																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
+																							$("html").scrollTop(0);
+																						/*	$(
+																							'#notadded')
+																							.hide();	*/
 																						},
-																						2000);
+																						500); //2000
+																						setTimeout(
+																								function() {
+																									$(
+																									'#notadded')
+																									.hide();	
+																								},
+																								2000);		
 																				cart();
 																			},
 																			200 : function() {
@@ -597,7 +862,17 @@ $.ajax({
 																						.log("Added To Cart Successfully");
 																				setTimeout(
 																						function() {
-																							window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
+																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
+																						$("html").scrollTop(0);
+																					/*	$(
+																						'#added').hide(); */
+																						},
+																						500);
+																				setTimeout(
+																						function() {
+																							$(
+																							'#added')
+																							.hide();	
 																						},
 																						2000);
 																				
@@ -756,14 +1031,15 @@ $.ajax({
 	    		};
 	    	$.ajax({
 
-	    																type : "POST",
-	    																url : "http://localhost:8082/viewCategory",
+	    									type : "POST",
+	    									url : "http://localhost:8082/viewCategory",
 	    									contentType : "application/json", // NOT dataType!
 	    									data : JSON.stringify(data),
 	    									success : function(response) {
 	    										 $("#form").empty();
 	    									
 	    										var result=response;
+	    										console.log("-->"+result.content.length);
 	    									
 	    										var obj1 = JSON.stringify(response.totalElements);
 	    									
@@ -822,7 +1098,7 @@ $.ajax({
 	    												.createElement('h1');
 	    										category_name.className = 'font-weight-semibold mb-2';
 	    										category_name.id = "category_name";
-	    										category_name.innerHTML ="Cascual wear";
+	    										category_name.innerHTML ="Casual wear";
 	    										parentDiv
 	    												.appendChild(category_name);
 	    										break;
@@ -838,10 +1114,11 @@ $.ajax({
 	      
 	    										for (var i = 0; i < result.content.length; i++) {
 	    											 dataLength++;
+	    											 
 	    						
 	    											var parentDiv = document
 	    													.createElement('div');
-	    											parentDiv.className = 'col-md-4 mt-2';
+	    											parentDiv.className = 'col-md-8 mt-2'; //col-md-4 mt-2
 	    											parentDiv.id = 'block';
 	    											document
 	    													.getElementsByClassName('row')[0]
@@ -860,7 +1137,7 @@ $.ajax({
 
 	    											var childDiv = document
 	    													.createElement('div');
-	    											childDiv.className = 'card-body bg-light text-center';
+	    											childDiv.className = 'card-body bg-light text-right'; //text-center
 	    											innerDiv.appendChild(childDiv);
 
 	    											var imageDiv = document
@@ -888,7 +1165,7 @@ $.ajax({
 	    											product_name.className = 'font-weight-semibold mb-2';
 	    											product_name.id = "product_name";
 	    											product_name.innerHTML = result.content[i].product_name;
-	    											addDiv.appendChild(product_name);
+	    											bodyDiv.appendChild(product_name); //addDiv.appendChild(product_name);
 
 	    											var product_desc = document
 	    													.createElement('p');
@@ -896,14 +1173,29 @@ $.ajax({
 	    											product_desc.id = "product_description";
 	    											product_desc.innerHTML = result.content[i].product_description;
 	    											product_desc.href = "#";
-	    											addDiv.appendChild(product_desc);
+	    											bodyDiv.appendChild(product_desc); //addDiv.appendChild(product_desc);
+	    											
+	    											var label = document.createElement('label');
+	    											label.className = "labelStatus"; //label.ClassName = form-check-label //labelQuantity
+	    											label.id="status";
+	    											//label.innerHTML = result.content[i].status;//" available ";
+	    											if(result.content[i].status=="Available"){
+	    												label.innerHTML="Available";
+	    												label.style.color='green';
+	    												label.style.fontSize='20px';
+	    											}else{
+	    												label.innerHTML="Out of Stock";
+	    												label.style.color='red';
+	    												label.style.fontSize='20px';
+	    											}
+	    											childDiv.appendChild(label);
 
 	    											var product_price = document
 	    													.createElement('h3');
 	    											product_price.className = 'mb-0 font-weight-semibold';
 	    											product_price.id = "product_price";
 	    											product_price.innerHTML = result.content[i].product_price;
-	    											childDiv.appendChild(product_price);
+	    											bodyDiv.appendChild(product_price); //childDiv.appendChild(product_price);
 	    										
 
 	    											var Rupees = document
@@ -911,66 +1203,182 @@ $.ajax({
 	    											Rupees.className = "fa fa-rupee";
 	    											Rupees.id = "rupees";
 	    											product_price.prepend(Rupees);
-
-	    											var label = document
-	    													.createElement('label');
-	    											label.ClassName = "form-check-label";
-	    											label.innerHTML = "Quantity";
-	    											childDiv.appendChild(label);
-
-	    											var quaNumber = document
-	    													.createElement('input');
-	    											quaNumber.type = "number";
-	    											quaNumber.className = 'form-control form-control-sm';
-	    											quaNumber.className = 'quantity';
-	    											quaNumber.maxlength = "2";
-	    											quaNumber.size = "1";
-	    											quaNumber.min = "1";
-	    											quaNumber.id = "input"
-	    													+ result.content[i].product_id;
-	    											quaNumber.value = "1";
-	    											childDiv.appendChild(quaNumber);
+	    											
+	    											var label = document.createElement('label');
+	    											label.className = "labelQuantity"; //label.ClassName = form-check-label //labelQuantity
+	    											label.id="quantitylabel";
+	    											label.innerHTML = "Quantity : ";
+	    											bodyDiv.appendChild(label);
+	    											
+	    											var label = document.createElement('label');
+	    											label.className = "labelQuantity"; //label.ClassName = form-check-label //labelQuantity
+	    											label.id="quantitylabelvalue";
+	    											label.innerHTML = result.content[i].max_quantity;
+	    											bodyDiv.appendChild(label);
+	    											
+	    										
 
 	    											var btn = document
-	    													.createElement('button');
+	    											.createElement('button');
 	    											btn.type = "button"
 	    											btn.className = 'btn btn-default';
-	    											btn.id = "product_id";
+	    											btn.id = "edit_id"; /*product_id */
 	    											btn.value = result.content[i].product_id;
-	    											childDiv.appendChild(btn);
+	    											bodyDiv.appendChild(btn);
 
 	    											var fontawsome = document
-	    													.createElement('i');
-	    											fontawsome.className = "fa fa-cart-plus mr-2";
-	    											fontawsome.innerHTML = " Add to cart ";
+	    											.createElement('i');
+	    											//fontawsome.className = "fa fa-cart-plus mr-2";
+	    											//fontawsome.innerHTML = "Edit";
+	    											fontawsome.id="edit";
 	    											btn.appendChild(fontawsome);
-	    											
-	    											var view_detail = document
-	    											.createElement('a');
-	    											view_detail.className="ahref"
-	    											view_detail.setAttribute('href',"#")
-	    											view_detail.id = result.content[i].product_id;
-	    											view_detail.innerHTML = " view more";
-	    											childDiv.appendChild(view_detail);
+	    									
 	    								 			
 	    									
 
 	    										}
 	    									
 
-	    										var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
+	    									/*	var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
 	    											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg","images/Skater Dress.jpg"];
 	    										function myImages() {
 	    											for (var i = 0; i < result.content.length; i++) {
 	    												document.getElementById("images"+ i).src = "images/" + result.content[i].product_name + ".jpg";
 	    											}
 	    										}
+	    										images.forEach(myImages) */
+	    										
+	    										var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
+	    											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg","images/Skater Dress.jpg"];
+	    										function myImages() {
+	    											for (var i = 0; i < result.content.length; i++) {
+	    												document.getElementById("images"+ i).src = "images/" + result.content[i].product_id + ".jpg";
+	    											}
+	    										}
 	    										images.forEach(myImages)
 
-	    					
+	    										
+	    											var counts = 0;
+												$(document)
+												.on(
+												'click',
+												'button[id]',
+												function(e) {
+													if (this.id == 'SelectCategory') {
+														return false;
+													}
+													if (this.id == 'edit_button') {
+														return false;
+													}
+													$('#editModal').modal('show');
+													var product_id = $(this).val();
+													console.log(product_id);
+													
+													  var jwt = localStorage.getItem('token');
+														var data = {
+															product_id : $(this).val(),
+															token:jwt
+														};
+														$.ajax({
+															type : "Post",
+															url : 'http://localhost:8082/getProductDetailsBasedOnProductId',
+															contentType : "application/json",
+															data : JSON.stringify(data),
+															success : function(response) {
+																var product_id=response.product_id;
+																localStorage.setItem('product_id' , product_id);
+																console.log(response);
+																console.log(response.product_name);
+																console.log(response.status);
+																document.getElementById('editProductName').value = response.product_name;
+																document.getElementById('editProductDescription').value = response.product_description;
+																document.getElementById('editProductPrice').value = response.product_price;
+																document.getElementById('editProductQuantity').value = response.max_quantity;
+																var x= response.status;
+																console.log(x);
+																$(function() {
+																	{
+																		$(
+																				"input[name=customRadioInline][value=" + x + "]").prop('checked', true);
+																				/*	$('input:radio[name="customRadioInline"][value=x]').attr('checked',true);*/
+																	}
+																});
+															}
+														});
+														$('#edit_button').click(function (event) {
+															var jwt = localStorage.getItem('token');
+															var product_id = localStorage.getItem('product_id');
+															var  data={
+																	  
+																	  product_id : product_id,
+																	  product_name : $('#editProductName').val(),
+																	  product_description : $('#editProductDescription').val(),
+																	  product_price : $('#editProductPrice').val(),
+																	  max_quantity : $('#editProductQuantity').val(),
+																	  status : $(
+																		"input[type='radio'][name='customRadioInline']:checked")
+																		.val()
+															     };
+															$.ajax({
+																  url:'http://localhost:8082/editProductDetails' ,
+																  method:'POST',
+																  contentType:'application/json',
+																  data:JSON.stringify(data),
+																
+															      statusCode : {
+																		304 : function() {
+																			$('#editModal').modal('hide');
+																		/*	$(
+																					'#editform')
+																					.hide(); */
+																			$(
+																					'#failure')
+																					.slideDown();
+																				//document.getElementById('failure').innerHTML = "Address update failed, Please try again.";
+																				
+																			setTimeout(
+																					function() {
+																						window.location.href = "http://localhost:8080/AIMORCProject/adminhome.jsp";
+																					},
+																					3000);
+																		},
+																		200 : function() {
+																		
+																			localStorage
+																					.setItem(
+																							'data',
+																							JSON
+																									.stringify(data));
+
+																			$('#editModal').modal('hide');
+																		/*	$(
+																					'#editform')
+																					.hide(); */
+																			$(
+																					'#success')
+																					.slideDown();
+																					//document.getElementById('success').innerHTML = "Address updated successfully!";
+																					
+
+																			console
+																					.log("successfully profile updated");
+																			setTimeout(
+																					function() {
+																						window.location.href = "http://localhost:8080/AIMORCProject/adminhome.jsp";
+																					},
+																					3000);
+
+																		}
+																	},
+															      
+															  });
+															
+														});
+														
+												});
 
 	    										// --------------------------------onclick of quantity------------------------------------------------------- /
-
+/*
 	    										function onClick(elem) {
 	    											var $this = $(elem);
 	    											val1 = $this.siblings(
@@ -981,7 +1389,7 @@ $.ajax({
 	    											} else {
 	    												// alert(val1);
 	    											}
-	    										}
+	    										} */
 
 	    										/* --------------------------------onclick of add to cart button-------------------------------------------------------*/
 
@@ -991,7 +1399,7 @@ $.ajax({
 	    														'click',
 	    														'button[id]',
 	    														function(e) {
-	    															if (this.id == 'dropdownMenuButton') {
+	    															if (this.id == 'dropdownMenuButton1') {
 	    																return false;
 	    															}
 	    															onClick(this);
@@ -1019,8 +1427,18 @@ $.ajax({
 	    																						.slideDown();
 	    																				setTimeout(
 	    																						function() {
-	    																							window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
-	    																							
+	    																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
+	    																							$("html").scrollTop(0);
+	    																						/*	$(
+		    																						'#notadded')
+		    																						.hide(); */
+	    																						},
+	    																						500);
+	    																				setTimeout(
+	    																						function(){
+	    																							$(
+		    																						'#notadded')
+		    																						.hide();
 	    																						},
 	    																						2000);
 	    																				cart();
@@ -1036,10 +1454,20 @@ $.ajax({
 	    																						.log("Added To Cart Successfully");
 	    																				setTimeout(
 	    																						function() {
-	    																							window.location.href = "http://localhost:8080/AIMORC_Client/productimage.jsp";
+	    																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
+	    																							$("html").scrollTop(0);
+	    																						/*	$(
+		    																						'#added')
+		    																						.hide(); */
+	    																						},
+	    																						500);
+	    																				setTimeout(
+	    																						function(){
+	    																							$(
+		    																						'#added')
+		    																						.hide();
 	    																						},
 	    																						2000);
-	    																				
 	    																			
 	    																				cart();
 	    																			}
@@ -1067,6 +1495,7 @@ $.ajax({
 	 
 	});
 	
+	/*
 					 $(document).on("click", "a[href^=\'#\']",function (e) {
 									
 									   if (this.className == 'page-link') {
@@ -1097,7 +1526,7 @@ $.ajax({
 															
 																setTimeout(
 																		function() {
-																			window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																			window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 																		}, 0000);
 																
 															},
@@ -1108,14 +1537,14 @@ $.ajax({
 																		.log("Added To Cart Successfully");
 																setTimeout(
 																		function() {
-																			window.location.href = "http://localhost:8080/AIMORC_Client/product.jsp";
+																			window.location.href = "http://localhost:8080/AIMORCProject/product.jsp";
 																		}, 0000);
 																
 															}
 														},
 
 													});
-										 }); 
+										 });  */
 			                       
 					 });
 
@@ -1137,36 +1566,18 @@ $.ajax({
 		</button>
 		<div class="collapse navbar-collapse" id="navbarToggler">
 			<ul class="nav navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="home.jsp">
-						Home</a></li>
+				
 					</ul>	
 
 
 		 <a class="navbar-brand" href="#" id ="username" ></a> 
 			<ul class="nav navbar-nav navbar-right">
-				<div class="dropdown ">
-					<button class="btn btn-secondary dropdown-toggle" type="button"
-						id="dropdownMenuButton1" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false ">
-						<i class="fa fa-user" aria-hidden="true"
-							style="padding: 5px; margin-top: 5px;"></i> Account
-					</button>
-					<div class="dropdown-menu dropdown-menu-right" id="dropdown-item">
-						<a class="dropdown-item " id="text" href="profile.jsp"><i
-							class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
-							Profile</a> <a class="dropdown-item " id="text"
-							href="loginsecurityquestion.jsp"><i class="fa fa-edit"
-							aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a
-							class="dropdown-item " id="text" href="login.jsp"><i
-							class="fa fa-sign-out" aria-hidden="true" style="padding: 5px;"></i>
-							Logout</a>
-					</div>
-				</div>
+				
 
 				<div class="nav-item active">
-					<a class="nav-link" href="cartdisplay.jsp"><i
-						class="fa fa-shopping-cart fa_custom fa-2x"></i> <i id="Value">
-					</i> </a>
+					<a class="nav-link" href="login.jsp"><i
+						class="fa fa-sign-out"></i>
+					</a>
 				</div>
 
 			</ul>
@@ -1175,14 +1586,14 @@ $.ajax({
 	</nav>
 
 	<div class="container" id="statusDiv">
-		<div class="alert alert-success " id="added" role="alert"
+		<div class="alert alert-success " id="success" role="alert"
 			style="display: none; text-align: center; margin-top: 10px;">
-			<strong>Added To Cart Successfully!</strong>
+			<strong>Product Details Updated Successfully</strong>
 		</div>
-		<div class="alert alert-danger alert-dismissible" id="notadded"
+		<div class="alert alert-danger alert-dismissible" id="failure"
 			role="alert"
 			style="display: none; text-align: center; margin-top: 10px;">
-			<strong>Add To Cart Failed!</strong>
+			<strong>Product Details Updated Failed!</strong>
 		</div>
 	</div>
 	</div>
@@ -1211,6 +1622,96 @@ $.ajax({
 		<div class="container d-flex justify-content-center mt-50 mb-50">
 			<div class="row" id="form"></div>
 		</div>
+		<div class="modal fade" id="editModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Edit Product Details</h5>
+									<button type="button" style="height:20px;width:20px;outline:none;" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form>
+										<div class="inputRow">
+											<label for="address"> Product name : </label> 
+											<br>
+											
+												  <input style="width:100%"
+												type="text" name="address" placeholder="Product name"
+												id="editProductName"> 
+											<br>
+											<br>
+												 
+										</div>
+									 
+									 	<div class="inputRow">
+											<label for="state">Product Description :</label> 
+											<br>
+											
+											<textarea id="editProductDescription" name="freeform" rows="4" cols="55" 
+											placeholder="Product Description"></textarea>
+											<small
+												id='statecheck'></small>
+											<br>
+											<br>
+										</div>
+										<div class="inputRow">
+											<label for="city">Product Price :</label> 
+											<br>
+											
+											<input type="text" name="city" style="width:100%"
+												placeholder="Product Price" id="editProductPrice"> <small
+												id='citycheck'></small>
+											<br>
+											<br>
+										</div>
+
+
+										<div class="inputRow">
+											<label for="zipcode">Product Quantity :</label> 
+											<br>
+											
+											<input type="text" style="width:100%"
+												name="zipcode" placeholder="Product Quantity" id="editProductQuantity">
+											<small id='zipcodecheck'></small>
+											<br>
+											<br>
+										</div>
+										
+										<div class="radiobutton">
+										<label for="zipcode">Product Status :</label> <br>
+											<div class="custom-control custom-radio custom-control-inline">
+											<input type="radio" id="customRadioInline1"
+												name="customRadioInline" class="custom-control-input"
+												value="Available"> <label class="custom-control-label"
+												for="customRadioInline1"> Available </label>
+											</div>
+											<div
+											class="custom-control custom-radio custom-control-inline mt-2">
+											<input type="radio" id="customRadioInline2"
+												name="customRadioInline" class="custom-control-input"
+												value="OutofStock"> <label class="custom-control-label"
+												for="customRadioInline2"> Out of Stock </label>
+											</div>
+										</div>
+										
+
+
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal" id="close">Cancel</button>
+							<!--  		<button type="button" class="btn btn-primary" id="send_button">Add</button>-->
+								 	<button type="button" class="btn btn-primary" id="edit_button">Save</button> 
+								</div>
+							</div>
+						</div>
+					</div>
 	<nav aria-label="Page navigation example">
   <ul class="pagination justify-content-end" id="page" >
   </ul>

@@ -73,7 +73,8 @@
   padding: 1rem;
   background-color: #efefef;
   text-align: center;
-  height: 40px;
+  height: 60px;
+  font-size: 16px;
 }
 
 .group label {
@@ -84,11 +85,12 @@
 body {
 data-spy="scroll";
 overflow: hidden;
-font-family: "Brackley Demo Italic";height: 100%;
+font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
+height: 100%;
 }
 
 #content {
-	max-height: calc(110% - 120px);
+	max-height: calc(110% - 136px); /* calc(110% - 120px)*/
 	overflow-y: scroll;
 	padding: 0px 10% !important;
 	margin-top: 0px !important;
@@ -587,26 +589,26 @@ console.log(error);
 						<small id='addresscheck'><small>
 					</div>
 					<div class="inputRow">
-						<label for="address">Address Line 2:</label>
+						<label for="address" style="font-size:1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left;">Address Line 2:</label>
 							<input type="text" name="address" placeholder="Address Line 2"
 								id="address1"> 
 						<small id='addresscheck'><small>
 					</div>
 					
 					<div class="inputRow">
-							<label for="city">City</label> <input type="text" name="city"
+							<label for="city" style="font-size:1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left;">City</label> <input type="text" name="city"
 									placeholder="Enter City" id="city"> 
 							<small id='citycheck'></small>
 					</div>
 					<div class="inputRow">
-							<label for="state">State</label> <input type="text"
+							<label for="state" style="font-size:1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left;">State</label> <input type="text"
 									name="state" placeholder="Enter State" id="state">
 							 <small id='statecheck'></small>
 					</div>
 					<div class="inputRow">
 							<div class="form-group">
 									<div class="dropdown">
-										<label for="country">Country </label> <select
+										<label for="country" style="font-size:1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left;">Country </label> <select
 										  class="combobox input-large form-control" name="country"
 										  id="country">
 										  <option value="0">Select Country</option>
@@ -618,7 +620,7 @@ console.log(error);
 
 
 					<div class="inputRow">
-							<label for="zipcode">Zip Code </label> <input type="tel"
+							<label for="zipcode" style="font-size:1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left;">Zip Code </label> <input type="tel"
 									name="zipcode" placeholder="Enter Zip Code " id="zip">
 									<small id='zipcodecheck'></small>
 					</div>
@@ -626,7 +628,7 @@ console.log(error);
 					<div class="inputRow">
 						<div class="group ">
 							<div class="dropdown">
-								<label for="security_id">Security Question :</label> <select
+								<label for="security_id" style="font-size:1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left;">Security Question :</label> <select
 									class="combobox input-large form-control" name="security_id"
 									id="security_id">
 									<option value="0" hidden>Select security question?</option>
@@ -641,7 +643,7 @@ console.log(error);
 					</div>
 
 				<div class="inputRow">
-						<label for="security_answer" style=" font-weight: normal !important; font-size:15px">Security Answer :</label>
+						<label for="security_answer" style="font-size:1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left;">Security Answer :</label>
 						<textarea name="security_answer" placeholder="Enter Security Answer" id="security_answer"
 							style=" font-weight: normal !important; font-size:15px ;height: 45px;"></textarea>
 						<small id='addresscheck'><small>
@@ -658,16 +660,21 @@ console.log(error);
 			               <br><br>
 			              <ul class="nav navbar-nav navbar-right">
 				                <li class="nav-item active"><h6>Already have an account?<a class="nav-link"
-					           href="login.jsp" style="height:50px;"><i class="fa fa-sign-in" aria-hidden="true"></i>
+					           href="login.jsp" style="height:50px; font-size:20px;"><i class="fa fa-sign-in" aria-hidden="true"></i>
 						       Login</a></h6></li>
 			              </ul>
 			              
 		           </div>
 				</div>
-				<div class="footer">This will always appear at the bottom of the page, but <strong>not fixed</strong>.</div>
+				<div>
+				<div class="footer">Email : <strong>aimorc.ecomm@gmail.com</strong></div>
+				</div>
 			</form>
+			
 		</div>
+		
 	</div>
+	
 	<div class="container" id="statusDiv">
 		<div class="alert alert-success " id="userregister" role="alert"
 			style="display: none;">
@@ -678,6 +685,7 @@ console.log(error);
 			<strong>Registration Failed!</strong>
 		</div>
 	</div>
+	
 
 
 </body>

@@ -12,7 +12,7 @@
  
 bar and footer------------------------------ -->body {data-spy ="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif; /* "Brackley Demo Italic";*/
 	height: 100%;
 }
 
@@ -38,7 +38,13 @@ html, body {
   background-color: #efefef;
   text-align: center;
   height: 40px;
+  font-family: Roboto, Arial, sans-serif;/*"Brackley Demo Italic";*/
 }
+
+.font {
+font-family: Roboto, Arial, sans-serif;/*"Brackley Demo Italic";*/
+}
+
 
 footer {
 	width: 100%;
@@ -210,7 +216,7 @@ footer {
 
 	<form>
 		<div class="bgBox  ">
-			<h2>Forgot Password</h2>
+			<h2 class="font">Forgot Password</h2>
 			<div class="inputRow">
 				<label for="email">Enter Username:</label> <input type="email"
 					name="login" id="email" placeholder="Enter your email" value=""

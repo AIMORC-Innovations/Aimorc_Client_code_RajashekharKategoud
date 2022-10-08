@@ -12,8 +12,12 @@
  
 bar and footer------------------------------ -->body {data-spy ="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family:Roboto, Arial, sans-serif; /*Roboto, Arial, sans-serif;*/
 	height: 100%;
+}
+
+.font {
+font-family: Roboto, Arial, sans-serif;
 }
 
 #content {
@@ -288,7 +292,7 @@ function password_check() {
 </head>
 <body data-spy="scroll">
 	<!--------------------- ----------------header------------------------------ -->
-	<nav class="navbar navbar-dark navbar-expand-md mb-3"
+	<nav class="navbar navbar-dark navbar-expand-md mb-3 font"
 		style="background-color:#112549;">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -327,7 +331,7 @@ function password_check() {
 
 	<!--------------------- ----------------form------------------------------ -->
 
-	<form>
+	<form class="font">
 		<div class="bgBox  ">
 			<h2>Change Password</h2>
 			<div class="inputRow">

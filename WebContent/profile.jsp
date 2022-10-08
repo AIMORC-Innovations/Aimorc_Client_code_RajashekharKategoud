@@ -27,13 +27,12 @@
 	rel='stylesheet'>
 
 <link rel="stylesheet" type="text/css" href="style.css">
-
 <!-- -------------------------------------css---------------------------------------------------- -->
 
 <style type="text/css">
 body {data-spy ="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif; serif /*Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
 
@@ -134,6 +133,24 @@ bgBox1{
 width : 50px;
 }
 
+#address{
+border : none;
+}
+.secondaryButton {
+  background-color : white;
+  border-color: #4CAF50;
+  color: #4CAF50;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  height:10px;
+  width:2.5px;
+  cursor: pointer;
+  border-radius:10px;
+}
+
 /* 	#dropdownMenuButton{
 			background:#ffa500;
 			border-color:#ffa500;
@@ -194,8 +211,8 @@ width : 50px;
 								Product</a> <a class="dropdown-item " id="text"
 								href="loginsecurityquestion.jsp"><i class="fa fa-edit"
 								aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a
-								class="dropdown-item " id="text" href="logoutServlet"><i
-								class="fa fa-sign-out" aria-hidden="true" style="padding: 5px;"></i>
+								class="dropdown-item " id="text" href="login.jsp"> <!-- href="logoutServlet" -->
+								<i  class="fa fa-sign-out" aria-hidden="true" style="padding: 5px;"></i>
 								Logout</a>
 
 						</div>
@@ -215,7 +232,7 @@ width : 50px;
 
 	<!--------------------- ----------------form------------------------------ -->
 
-	<p id="demo" align="center"></p>
+	<!--<p id="demo" align="center"></p>-->
 	<form class="divScroll">
 		<div class="container" id="form">
 
@@ -264,7 +281,7 @@ width : 50px;
 			<br>
 			
 			<div class="table-responsive-sm table-responsive-md container">
-					<table class="table table-bordered table-striped mb-0">
+					<table class="table table-bordered table-striped mb-0" id="address">
 						
 						<h2>Address Details</h2>
 						<hr>
@@ -275,9 +292,10 @@ width : 50px;
 						</tbody>
 
 					</table>
-
+					<hr>
 				</div>
 				<br>
+				
 				<div class="container"><input type="button" class="btn btn-primary" value="Add New Address "
 					         data-toggle="modal" data-target="#exampleModal"
 					         data-whatever="@mdo"
@@ -291,21 +309,21 @@ width : 50px;
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Are you sure want to delete this address?</h5>
+									<h5 class="modal-title" id="exampleModalLabelDelete">Are you sure want to delete this address?</h5>
 									<button type="button" style="height:20px;width:20px;outline:none;" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel_button">No</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel_button">No</button> <!-- class="btn btn-secondary" -->
 									<button type="button" class="btn btn-primary" id="delete_button">Yes</button>
 								</div>
 							</div>
 						</div>
 			</div>
 			</div>
-			<div class="bgBox">
+			<div class="bgBox" style="border:none; background-color:white; "> <!-- bgBox -->
              	<div class="modal fade" id="exampleModal" tabindex="-1"
 						role="dialog" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
@@ -320,6 +338,7 @@ width : 50px;
 								</div>
 								<div class="modal-body">
 									<form>
+									<label id="moreAddress" style="color:red;"></label>
 										<div class="inputRow">
 											<label for="address"> Address </label> 
 												  <input
@@ -560,6 +579,7 @@ width : 50px;
 											document.getElementById("editdob").value = response.dob;
 											document.getElementById("editphonenum").value = response.phonenum;
 											var x= response.gender;
+											console.log("-->"+x);
 											$(function() {
 												{
 													$(
@@ -589,6 +609,10 @@ width : 50px;
 							//console.log(response);
 							Object.keys(response).forEach((eachAddressId, index) => {
 								
+								var count=0;
+								count = count+index;
+								console.log(count+"--------count-------");
+								var countValue = localStorage.setItem('count', count);
 								address_id = eachAddressId;	
 								//console.log(response[eachAddressId].addressId);
 								address1 = response[eachAddressId].address;
@@ -602,6 +626,7 @@ width : 50px;
 								.createElement('tr');
 								address.className = 'text-center';
 								address.id = "addresses";
+								address.style.borderColor = 'white';
 
 								document.getElementsByClassName('table')[1].appendChild(address); 
 								
@@ -612,6 +637,7 @@ width : 50px;
 								addresses.innerHTML = address1+", " + address2+", " + city+", " + state+", " + country +" - "+ zip;
 								address.appendChild(addresses);  
 								addresses.style.borderColor = 'white';
+								addresses.style.width="1000px";
 								
 								var btn = document.createElement('button');
 								btn.type = "button"
@@ -619,7 +645,7 @@ width : 50px;
 								btn.id = "editAddress";
 								btn.value = eachAddressId;//eachAddressId;
 								//btn.onClick = editAddress;
-								addresses.appendChild(btn);
+								address.appendChild(btn); //addresses
 								
 								var fontawsome = document.createElement('i');
 								fontawsome.id="edit";
@@ -631,7 +657,7 @@ width : 50px;
 								btn1.id = "deleteAddress";
 								btn1.value = eachAddressId;
 								btn1.onClick = deleteAddress;
-								addresses.appendChild(btn1);
+								address.appendChild(btn1);
 								
 								var fontawsome1 = document.createElement('i');
 								fontawsome1.id="delete";
@@ -649,6 +675,13 @@ width : 50px;
 					
 							});
 							
+							var count = localStorage.getItem('count');
+							console.log("------count-----"+count);
+							if(count==4){
+								document.getElementById("moreAddress").innerHTML = "*You can't add more than 5 addresses";
+							}else{
+								document.getElementById("moreAddress").innerHTML = " ";
+							}
 							/* --------------------------------onclick of edit button-------------------------------------------------------*/
 
 							var counts = 0;
@@ -686,6 +719,9 @@ width : 50px;
 													return false;
 												}
 												if(this.id == 'save_button1'){
+													return false;
+												}
+												if(this.id == 'dropdownMenuButton'){
 													return false;
 												}
 												$('#editModal').modal('show');
@@ -827,6 +863,15 @@ width : 50px;
 												if(this.id == 'save_button1'){
 													return false;
 												}
+												if(this.id == 'dropdownMenuButton'){
+													return false;
+												}
+												var jwt = localStorage.getItem('token');
+												var data = {
+													address_id : $(this).val(),
+													token:jwt
+												};
+												
 												
 												$('#deleteModal').modal('show');
 												var deleteAddress = $(this).val();
@@ -835,67 +880,148 @@ width : 50px;
 														address_id : $(this).val(),
 														token:jwt
 													};
+													/* --------- checking if this address has been scheduled ----------*/
+													$.ajax({
+														url:'http://localhost:8083/checkAddressId',
+														  method:'POST',
+														  contentType:'application/json',
+														  data:JSON.stringify(data),
+														  statusCode : {
+																401 : function() {
+																	
+																}
+															},
+														  success : function(response){
+															  console.log(response+"----->");
+															  document.getElementById('exampleModalLabelDelete').innerHTML = "This Address has been scheduled for a pickup, do you still want to delete this address";	
+														  },
+														  error : function(error) {
+															  document.getElementById('exampleModalLabelDelete').innerHTML = "Are you sure want to delete this address?";
+															}
+													});
 													Object.keys(data).forEach((eachAddress, index) => {
 														var address_id = data.address_id;
 														console.log("delete address Id "+ address_id);
 														localStorage.setItem('address_id' , address_id);
 													});
 													$('#delete_button').click(function (event) {
+														
 														var jwt = localStorage.getItem('token');
 														var address_id = localStorage.getItem('address_id');
 														  var  data={
 																  token:jwt,
 																  address_id : address_id,
 														     };
+														  /* --------- deleting if this address has been scheduled ----------*/
 														  $.ajax({
-															  url:'http://localhost:8081/deleteAddress' ,
+															  url:'http://localhost:8083/deleteAddressId',
 															  method:'POST',
 															  contentType:'application/json',
 															  data:JSON.stringify(data),
-															  statusCode : {
-																	304 : function() {
-																		$('#deleteModal').modal('hide');
-																		$(
-																				'#usereditfail')
-																				.slideDown();
-																			document.getElementById('failure').innerHTML = "Couldn't delete address, Please try again.";
+															  success : function(response){
+																  $.ajax({
+																	  url:'http://localhost:8081/deleteAddress' ,
+																	  method:'POST',
+																	  contentType:'application/json',
+																	  data:JSON.stringify(data),
+																	  statusCode : {
+																			304 : function() {
+																				$('#deleteModal').modal('hide');
+																				$(
+																						'#usereditfail')
+																						.slideDown();
+																					document.getElementById('failure').innerHTML = "Couldn't delete address, Please try again.";
+																					
+																				setTimeout(
+																						function() {
+																							window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
+																						},
+																						3000);
+																			},
+																			200 : function() {
 																			
-																		setTimeout(
-																				function() {
-																					window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
-																				},
-																				3000);
-																	},
-																	200 : function() {
-																	
-																		localStorage
-																				.setItem(
-																						'data',
-																						JSON
-																								.stringify(data));
+																				localStorage
+																						.setItem(
+																								'data',
+																								JSON
+																										.stringify(data));
 
-																		$('#deleteModal').modal('hide');
-																	/*	$(
-																				'#editform')
-																				.hide(); */
-																		$(
-																				'#useredited')
-																				.slideDown();
-																				document.getElementById('success').innerHTML = "Address has been deleted successfully!";
-																				
+																				$('#deleteModal').modal('hide');
+																			/*	$(
+																						'#editform')
+																						.hide(); */
+																				$(
+																						'#useredited')
+																						.slideDown();
+																						document.getElementById('success').innerHTML = "Address has been deleted successfully!";
+																						
 
-																		console
-																				.log("successfully profile updated");
-																		setTimeout(
-																				function() {
-																					window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
-																				},
-																				3000);
+																				console
+																						.log("successfully profile updated");
+																				setTimeout(
+																						function() {
+																							window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
+																						},
+																						3000);
 
-																	}
-																},
-														      
+																			}
+																		},
+																      
+																  });
+															  },
+															  error : function(error) {
+																  $.ajax({
+																	  url:'http://localhost:8081/deleteAddress' ,
+																	  method:'POST',
+																	  contentType:'application/json',
+																	  data:JSON.stringify(data),
+																	  statusCode : {
+																			304 : function() {
+																				$('#deleteModal').modal('hide');
+																				$(
+																						'#usereditfail')
+																						.slideDown();
+																					document.getElementById('failure').innerHTML = "Couldn't delete address, Please try again.";
+																					
+																				setTimeout(
+																						function() {
+																							window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
+																						},
+																						3000);
+																			},
+																			200 : function() {
+																			
+																				localStorage
+																						.setItem(
+																								'data',
+																								JSON
+																										.stringify(data));
+
+																				$('#deleteModal').modal('hide');
+																			/*	$(
+																						'#editform')
+																						.hide(); */
+																				$(
+																						'#useredited')
+																						.slideDown();
+																						document.getElementById('success').innerHTML = "Address has been deleted successfully!";
+																						
+
+																				console
+																						.log("successfully profile updated");
+																				setTimeout(
+																						function() {
+																							window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
+																						},
+																						3000);
+
+																			}
+																		},
+																      
+																  });
+															  }
 														  });
+														  
 													});
 											});
 													

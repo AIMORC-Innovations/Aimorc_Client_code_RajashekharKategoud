@@ -11,7 +11,7 @@
 bar and footer----------------------------------->body {data-spy
 	="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif; /* "Brackley Demo Italic";*/
 	height: 100%;
 }
 
@@ -42,7 +42,7 @@ footer {
  
 for cart display button------------------------------ -->body {
 	margin: 0;
-	font-family: font-weight-semibold; /*Brackley Demo Italic*/
+	font-family: Roboto, Arial, sans-serif; /* "Brackley Demo Italic";*/ /*font-weight-semibold; /* Brackley Demo Italic*/
 	font-size: .8125rem;
 	font-weight: 400;
 	line-height: 1.5385;

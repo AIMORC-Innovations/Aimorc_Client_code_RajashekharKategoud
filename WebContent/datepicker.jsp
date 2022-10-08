@@ -90,7 +90,7 @@ position: relative;
 
 body {data-spy ="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
 
@@ -633,7 +633,7 @@ $(document).ready(function() {
 
 			success : function(response) {
 				
-				if(response!=null)
+				if(response.length!=0)//(response!=null)
 				{
 					Object.keys(response).forEach((eachScheduledId, index) => {
 						
@@ -733,6 +733,7 @@ $(document).ready(function() {
 						btn2.appendChild(fontawsome);  */
 
 					});
+				
 					
 					
 					/* ----------------------------- edit scheduled address -----------------*/
@@ -1057,10 +1058,24 @@ $(document).ready(function() {
 									});
 
 				}
-				else
+				else if(response.length==0)
 				{
-				//formatAMPM(new Date);
-				//document.getElementById('cancel').style.display="none";
+					var scheduledAddress = document
+					.createElement('tr');
+					scheduledAddress.className = 'text-center';
+					scheduledAddress.id = "scheduledAddresses";
+
+					document.getElementsByClassName('table')[0].appendChild(scheduledAddress); 
+					
+					var addresses = document
+					.createElement('td'); //td
+					addresses.className = 'text-left';
+					addresses.id = "dateandtime";
+					addresses.innerHTML = "No Address has been Scheduled"; 
+					addresses.style.width='190px';
+					addresses.style.fontSize='28px';
+					scheduledAddress.appendChild(addresses);  
+					addresses.style.borderColor = 'white';
 				}
 
 
@@ -1142,7 +1157,8 @@ $(document).ready(function() {
 							class="dropdown-item " id="text" href="loginsecurityquestion.jsp"><i
 							class="fa fa-edit" aria-hidden="true" style="font-size: 1em;"></i>
 							Change Password</a> <a class="dropdown-item " id="text"
-							href="logoutServlet"><i class="fas fa-sign-out-alt"
+							href="login.jsp"> <!-- href="logoutServlet" -->
+							<i class="fas fa-sign-out-alt"
 							style="padding: 1px;"></i> Logout</a>
 					</div>
 				</div>
@@ -1232,8 +1248,8 @@ $(document).ready(function() {
 									<form>
 										<div class="form-group">
 										<br>
-										<!--<label class="d-flex justify-content-center">Select
-												Pick Up Date and Time</label>   -->	
+										<label class="d-flex ">Select
+												Pick Up Date and Time</label>   	
 											<div class="input-group date" id="datetimepicker1"
 												data-target-input="nearest">
 												<input type="text" class="form-control datetimepicker-input"
@@ -1246,8 +1262,10 @@ $(document).ready(function() {
 												</div>
 											</div>
 										</div>
+										<label class="d-flex ">Select Address</label> 
 										<span id="addresses"></span>
 										<br>
+										<a href="profile.jsp">Add New Address</a>
 									</form>
 								</div>
 								<div class="modal-footer">
@@ -1275,9 +1293,10 @@ $(document).ready(function() {
 								<div class="modal-body">
 									<form>
 										<div class="form-group">
-									<!-- 		<label class="d-flex justify-content-center">Edit
-												Pick Up Date and Time</label>  -->
-												<br>
+										<br>
+									<label class="d-flex">Edit
+												Pick Up Date and Time</label>  
+												
 											<div class="input-group date" id="datetimepicker2"
 												data-target-input="nearest">
 												<input type="text" class="form-control datetimepicker-input"
@@ -1290,6 +1309,7 @@ $(document).ready(function() {
 												</div>
 											</div>
 										</div>
+										<label class="d-flex">Edit Address</label>  
 										<span id="addresses1"></span>
 										<br>
 									</form>

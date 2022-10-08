@@ -13,7 +13,7 @@ html {
 
 /* Font style  */
 body {
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif; /*Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
 
@@ -61,6 +61,7 @@ body {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	font-family: Roboto, Arial, sans-serif;
 }
 
 /* styles for button  */
@@ -119,15 +120,16 @@ span {
 
 .bgBox .inputRow .signIn {
 	color: #fff;
-	background: #5795d2;
-	border-color: #5795d2;
+	background:   #5795d2;  
+	border-color: #5795d2; 
 	font-weight: bold;
-	cursor: pointer;
+	cursor: pointer; 
+	border-radius : 10px;
 }
 
 /* styles for mouse over on login and register button */
 .bgBox .inputRow .signIn:hover {
-	background: #3c78b3;
+	background:  #3c78b3;  
 }
 
 /* styles for image , if any inserted in future */

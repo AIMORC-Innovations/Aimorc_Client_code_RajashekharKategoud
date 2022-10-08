@@ -11,9 +11,10 @@
 bar and footer----------------------------------->body {data-spy
 	="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
+
 
 #content {
 	max-height: calc(108.6% - 120px);
@@ -40,9 +41,10 @@ footer {
 <!--
 ----------------------------------css
  
-for cart display button------------------------------ -->body {
+for cart display button------------------------------ -->
+body {
 	margin: 0;
-	font-family: font-weight-semibold; /*Brackley Demo Italic*/
+	font-family: Roboto, Arial, sans-serif;/*"Amazon Ember", Arial, sans-serif;*/ /*font-weight-semibold;*/ 
 	font-size: .8125rem;
 	font-weight: 400;
 	line-height: 1.5385;
@@ -61,7 +63,9 @@ for cart display button------------------------------ -->body {
 
 #category_id {
 	background-color: #004d80;
-	color: #fff
+	color: #fff;
+	font-family: Roboto, Arial, sans-serif; /*"Brackley Demo Bold"; serif*/
+	
 }
 
 .input-group.md-form.form-sm.form-2 input.red-border {
@@ -82,7 +86,8 @@ for cart display button------------------------------ -->body {
 }
 
 #product_description {
-	font-size: 12px;
+	font-size: 15px; /* 12px */
+	font-family: Roboto, Arial, sans-serif; serif/*"Amazon Ember", Arial, sans-serif;*/
 }
 
 .card-img-actions {
@@ -377,10 +382,19 @@ section {
 												"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
 											function nextReleaseImages() {
 												for (var i = 0; i < response.length; i++) {
-													document.getElementById("nextReleaseimages"+ i).src = "images/" + response[i].product_name + ".jpg";
+													document.getElementById("nextReleaseimages"+ i).src = "images/" + response[i].product_id + ".jpg";
 												}
 											}
 											nextReleaseimages.forEach(nextReleaseImages)
+											/*var nextReleaseimages = [ "images/Crop Top.jpg","images/Frock.jpg", "images/Anarkali Gown.jpg",
+												"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
+											function nextReleaseImages() {
+												for (var i = 0; i < response.length; i++) {
+													document.getElementById("nextReleaseimages"+ i).src = "images/" + response[i].product_name + ".jpg";
+												}
+											}
+											nextReleaseimages.forEach(nextReleaseImages)*/
+											
 											// -------------------on click of view category -------------------- //
 											$(document).on('click','button[id]',function(e) {
 
@@ -550,10 +564,18 @@ section {
 												"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
 											function trendingImages() {
 												for (var i = 0; i < result.length; i++) {
-													document.getElementById("trendImages"+ i).src = "images/" + result[i].product_name + ".jpg";
+													document.getElementById("trendImages"+ i).src = "images/" + result[i].product_id + ".jpg";
 												}
 											}
 											trendImages.forEach(trendingImages)
+											/* var trendImages = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
+												"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
+											function trendingImages() {
+												for (var i = 0; i < result.length; i++) {
+													document.getElementById("trendImages"+ i).src = "images/" + result[i].product_name + ".jpg";
+												}
+											}
+											trendImages.forEach(trendingImages) */
 
 											// -------------------on click of view category -------------------- //
 												$(document).on('click','button[id]',function(e) {
@@ -705,7 +727,7 @@ section {
 
 												var fontawsome = document
 														.createElement('i');
-												fontawsome.className="font-weight-semibold"; //fa fa-cart-plus mr-2
+												fontawsome.className= "font-weight-semibold"; //fa fa-cart-plus mr-2
 												fontawsome.innerHTML = " View Category ";
 												btn.appendChild(fontawsome);
 

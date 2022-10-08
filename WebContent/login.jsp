@@ -10,19 +10,33 @@
 bar and footer----------------------------------->body {data-spy
 	="scroll";
 	overflow: hidden;
-	font-family: "Brackley Demo Italic";
+	font-family:Roboto, Arial, sans-serif; /* Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
 .footer {
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;
   padding: 1rem;
   background-color: #efefef;
   text-align: center;
-  height: 40px;
+  height: 60px;
+  font-family: Roboto, Arial, sans-serif;
   
+}
+.font {
+font-family: Roboto, Arial, sans-serif;
+}
+
+.bgBox h2 {
+    margin-top: 0;
+    font-size: 30px;
+    color: #484848;
+    text-align: center;
+    margin-bottom: 35px;
+    font-weight: bold;
+    font-family: Roboto, Arial, sans-serif;
 }
 
 #content {
@@ -38,6 +52,13 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-family: Roboto, Arial, sans-serif;
+    serif: ;
+}
+
 </style>
 
 <meta name="viewport"
@@ -62,6 +83,9 @@ html, body {
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
 
 <!--------------------- ----------------Login eye button icon style------------------------------ -->
 
@@ -226,6 +250,7 @@ $(".alert").slideUp(500);
 },
 200: function(response){
 	var myHeaders = response;
+	console.log(response);
 
 console.log(myHeaders.token);
  
@@ -244,7 +269,30 @@ function parseJwt (token) {
 
     return JSON.parse(jsonPayload);
 };
-window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
+
+var data = {
+		username : $('#email').val(),
+		};
+$.ajax({
+	type : "POST",
+	url : 'http://localhost:8081/userRole',
+	contentType : "application/json",
+	data : JSON.stringify(data),
+	success : function(response){
+		console.log(response+" role response");
+		Object.keys(response).forEach((eachScheduledId, index) => {
+			role = response.role;
+			if(role == "admin"){
+				window.location.href = "http://localhost:8080/AIMORCProject/adminhome.jsp";
+			}else if (role == "user"){
+				window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";	
+			}
+		});
+		
+	}
+	
+});
+//window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
 }
 },
 
@@ -288,19 +336,22 @@ window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
 	<form>
 	<div style="text-align: center; height:80px;"> <!-- class="navbar-header text-center" -->
 			 <!--  <a class="navbar-brand" href="#">AIMORC Innovations</a> -->
-			<img height="100px" width=125px" src="https://media-exp1.licdn.com/dms/image/C4E0BAQE-SkEaq5vRnA/company-logo_200_200/0/1595501923133?e=2147483647&v=beta&t=-ZHFBvv2m1EWw4KBBepTPIZHfzf3rjc8_hInFQYJYo4">
+			 <img height="100px" width="125px" src="https://media-exp1.licdn.com/dms/image/C4E0BAQE-SkEaq5vRnA/company-logo_200_200/0/1595501923133?e=2147483647&v=beta&t=-ZHFBvv2m1EWw4KBBepTPIZHfzf3rjc8_hInFQYJYo4">
+			  
+			<!--<img height="100px" width="125px" src="images/aimorclogo.jpg" alt="..."> -->
 			 </div>
+			 <br>
 		
 		<!-- <button data-toggle="collapse" data-target="#navbarToggler"
 			type="button" class="navbar-toggler">
 			<span class="navbar-toggler-icon"></span>
 		</button>  -->
 		<div class="bgBox">
-			<h2>Login</h2>
+			<h2 style="font-size:30px;">Login</h2>
 			<div class="inputRow">
 				<label for="email">Email:</label> <i class="fa fa-user icon"></i> <!-- Username -->
 				<input type="email" name="login" id="email"
-					placeholder="Enter your email" value="" autofocus> <small
+					placeholder="Enter your email" value="" style="font-family: Roboto, Arial, sans-serif;" autofocus> <small
 					id="usercheck"></small>
 			</div>
 
@@ -308,7 +359,7 @@ window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
 				<label for="password">Password:</label> <i id="toggle"
 					class="fa fa-fw fa-eye pass-icon"></i> <input type="password"
 					name="password" id="password" value=""
-					placeholder="Enter your password"> <small id="passcheck"></small>
+					placeholder="Enter your password" style="font-family: Roboto, Arial, sans-serif;"> <small id="passcheck"></small>
 			</div>
 
 			<div class="alert alert-danger alert-dismissible"
@@ -318,13 +369,13 @@ window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
 
 
 			<div class="inputRow submit">
-				<input type="button" value="Login" class="signIn" id="sign_in">
+				<input type="button" value="Login" class="signIn font" id="sign_in">
 			</div>
 
 			<div class="checkbox">
 				<p class="text-center">
 					<a href="forgotpassword.jsp" data-toggle="form"
-						data-target="amnesiaForm" data-type="amnesia">Forgot your
+						data-target="amnesiaForm" data-type="amnesia" style="font-family: Roboto, Arial, sans-serif; font-size:18px;">Forgot your
 						password?</a>
 				</p>
 
@@ -334,12 +385,12 @@ window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="nav-item active"><a class="nav-link"
-					href="registration.jsp"><i class="fa fa-user"
+					href="registration.jsp" style="font-family: Roboto, Arial, sans-serif; font-size:20px;"><i class="fa fa-user"
 						aria-hidden="true"></i> Register</a></li>
 			</ul>
 		    </div>
 		</div>
-		<div class="footer">Email : <strong>aimorc.ecomm@gmail.com</strong> &nbsp; Contact  us : <strong>+91-9887682458</strong></div>
+		<div class="footer">Email : <strong>aimorc.ecomm@gmail.com</strong></div>
 
 	</form>
 	
