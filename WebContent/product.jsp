@@ -122,12 +122,12 @@ for cart display button------------------------------ -->body {
 .card-img {
 	width: 350px;
 }
-
+/*
 #product_id {
 	background-color: #004d80;
 	color: #fff;
 }
-
+*/
 #product_price {
 	color: black;
 }
@@ -232,6 +232,18 @@ for cart display button------------------------------ -->body {
 	background: #004d80;
 	border-color: #004d80;
 }
+
+.add-to-cart {
+  background-color: #34A853;
+  /*border: 2px solid #333333;*/
+  border:none;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 50px;
+  padding: 0 15px;
+}
 </style>
 
 <meta name="viewport"
@@ -279,6 +291,25 @@ for cart display button------------------------------ -->body {
                         //document.getElementById('username').innerHTML = "Welcome" +" "+ username; //"Welcome" +" "+ username
                         //val =  document.getElementById('quantity').value;
                         var quantity=0;
+                        $('.quantity-right-plus').click(function(e) {
+                            e.preventDefault();
+                            var currentQuantity = parseInt($('#quantity').val());
+                            var newQuantity = currentQuantity + 1;
+                            $('#quantity').val(newQuantity);
+                            quantity = newQuantity; // Update the quantity variable
+                        });
+
+                        $('.quantity-left-minus').click(function(e) {
+                            e.preventDefault();
+                            var currentQuantity = parseInt($('#quantity').val());
+                            if (currentQuantity > 1) {
+                                var newQuantity = currentQuantity - 1;
+                                $('#quantity').val(newQuantity);
+                                quantity = newQuantity; // Update the quantity variable
+                            }
+                        });
+
+                        /*
                         $('.quantity-right-plus').click(function(e){
                              
                              // Stop acting like a button
@@ -311,7 +342,8 @@ for cart display button------------------------------ -->body {
                                 
                                  }
                          });
-                         
+                          
+                         */
                         
                         var jwt = localStorage.getItem('token');
                         var username = localStorage.getItem('username');
@@ -319,6 +351,14 @@ for cart display button------------------------------ -->body {
 					
 			                    
 			                       getObj = localStorage.getItem('product_Id');
+						console.log(getObj);
+						if(getObj==null){
+							const url = window.location.href;
+							const productId = url.match(/product_id=(\d+)/)[1];
+							getObj = productId;
+							console.log(productId); 
+							
+						}
 
                         
                              var data = {
@@ -464,15 +504,59 @@ function displayProductInfo(){
 																return false;
 															}
 															var product= $(this).val();
+															if ($('#quantity').val() === '') {
+													            quantity = 0;
+													        } else {
+													            quantity = parseInt($('#quantity').val());
+													        }
                                                            
 															var data = {
 																product_id :product,
-																quantity : val,
+																quantity : quantity, //quantity : val,
 																token:jwt
 };
-console.log(data);
-														
+//console.log(data);
+function getProductsFromCart() {
+$.ajax({
+    type: "POST",
+    url: "http://localhost:8082/getProductsFromCart",
+    contentType: "application/json",
+    data: JSON.stringify(data),
+    success: function(response) {
+    	console.log(response);
+    	var isProductInCart = false; // Flag to track whether the product is already in the cart
+
+        // Iterate over categories
+        for (var categoryId in response) {
+            var category = response[categoryId];
+            var cartProducts = category.products;
+
+            // Iterate over products in the category
+            for (var i = 0; i < cartProducts.length; i++) {
+                var cartProduct = cartProducts[i];
+
+                if (cartProduct.product_id === product) {
+                    // Product already exists in the cart
+                    console.log("Product already in the cart");
+                    isProductInCart = true;
+                    // Display an error message or take appropriate action
+                    break; // Exit the loop since we found the product
+                }
+            }
+
+            if (isProductInCart) {
+                break; // Exit the outer loop since we found the product
+            }
+        }
+        if (!isProductInCart) {
+        	addToCart(); // Add the product to the cart only if it is not already in the cart
+          }
+    },
+});
+}	
+
 // --------------------------------inside success 3rd ajax------------------------------------------------------- /
+function addToCart() {
 $.ajax({
 																		type : "POST",
 																		url : "http://localhost:8082/addToCart",
@@ -512,11 +596,16 @@ $.ajax({
 																				
 																			
 																				cart();
+																				
 																			}
 																			 
 																		},
 
 																	});
+        }    
+        	getProductsFromCart();
+        
+
 
 														}); 
 									},
@@ -567,7 +656,11 @@ displayProductInfo();
 					<div class="dropdown-menu dropdown-menu-right" id="dropdown-item">
 						<a class="dropdown-item " id="text" href="profile.jsp"><i
 							class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
-							Profile</a> <a class="dropdown-item " id="text"
+							Profile</a> 
+							<a class="dropdown-item " id="text"
+							href="myorders.jsp"><i class="fa fa-shopping-bag"
+							aria-hidden="true" style="padding: 5px;"></i> My Orders</a>
+							<a class="dropdown-item " id="text"
 							href="loginsecurityquestion.jsp"><i class="fa fa-edit"
 							aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a
 							class="dropdown-item " id="text" href="login.jsp"><i
@@ -575,13 +668,11 @@ displayProductInfo();
 							Logout</a>
 					</div>
 				</div>
-
 				<div class="nav-item active">
 					<a class="nav-link" href="cartdisplay.jsp"><i
 						class="fa fa-shopping-cart fa_custom fa-2x"></i> <i id="Value">
 					</i> </a>
 				</div>
-
 			</ul>
 		</div>
 	</div>
@@ -648,8 +739,8 @@ displayProductInfo();
 					</h6>
 				</div>
 				<div class="col-sm" style="margin-top: 0 !important;">
-					<button type="button" class="btn btn-default" id="product_id"
-						style="margin-top: 0 !important;">
+					<button type="button" class="add-to-cart" id="product_id"
+						style="margin-top: 0 !important;"> <!-- btn btn-default -->
 						<i class="fa fa-shopping-cart pr-2"></i>Add to cart
 					</button>
 				<!-- <button type="button" class="btn btn-default" id="product_id"

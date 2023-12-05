@@ -224,14 +224,14 @@ display button------------------------------ -->.mt-50 {
 #product_description {
 	font-size: 12px;
 }
-
+/*
 #btn {
 	background-color: #004d80;
 	border: 0;
 	color: #fff;
 	font-weight: 600;
 	width: 120px;
-}
+}*/
 
 .quantity {
 	width: 70px;
@@ -440,6 +440,65 @@ display: none;
       background:url('https://i.ya-webdesign.com/images/edit-delete-icon-png.png') center no-repeat;
       background-size:contain;
     }
+    
+#Noitem {
+    background-color: #f8f9fa;
+    color: #dc3545;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-align: center;
+  width: 80%;
+  left: 10%;
+    top: 10%;
+    height: 10%
+    position: absolute;
+  display: flex;
+  
+  justify-content: center;
+  transform: translateY(-50%);
+}
+.shop-now-link {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.shop-now-link:hover {
+  background-color: #0056b3;
+}
+
+
+.primary-button {
+  background-color: #E8F2FC;
+  border: 2px solid #001F3F;
+  color: #333333;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height : 40px;
+  padding: 0 25px;
+}
+
+.secondary-button {
+  border: 2px solid #001F3F;
+  /*color: #333333;*/
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  background-color:none;
+  height : 40px;
+  padding: 0 5px;
+}
+
+/* Styling for secondary button's font color */
+.secondary-button {
+  color: #001F3F;
+}
+
 
 </style>
 
@@ -811,9 +870,10 @@ let casualWearData = responseData[3];
 if (responseData == '{}')
 {
 $('#page').hide();
-var textMore = "No items in cart";
+var textMore = "No items in your cart, Shop Now --> ";
+$('#Noitem').show();
 
-$('#Noitem').append(textMore).css({"justify-content": "center","color":"red","font-size":"70px"}).show().hide(3000);
+//$('#Noitem').append(textMore).css({"justify-content": "center","color":"red","font-size":"70px"}).show().hide(3000);
 }
 
 console.log("westernWearData is" + westernWearData);
@@ -841,7 +901,7 @@ Object.keys(data).forEach((eachCategoryId, index) => {
 	allProdsCount = allProdsCount + currCat;
   	cartValue = allProdsCount;
  	
-document.getElementById('Value').innerHTML = "[" + cartValue + "]";   
+document.getElementById('Value').innerHTML = "[" + cartValue + "]"; 
 
 //Creating Category Name element
 //var categoryDiv = document.createElement('div');
@@ -1050,6 +1110,9 @@ return false;
 if(this.id == "deleteproduct_id") {
 	return false;
 }
+if (this.id == "payNow") {
+	return false;
+}
 if(this.id == "send_button") {
 	return false;
 }
@@ -1101,6 +1164,9 @@ $(document).on('click', 'button[id]', function(e) {
 	if (this.id == "dropdownMenuButton") {
 		return false;
 	}	
+	if (this.id == "payNow") {
+		return false;
+	}
 	if(this.id == "send_button") {
 		return false;
 	}
@@ -1158,12 +1224,181 @@ $(document).on('click', 'button[id]', function(e) {
 });
 
 });
+console.log("Total products count: " + allProdsCount);
+if(allProdsCount == 0){
+	$('.totals').hide();
+    $('#deliveryaddress').hide();
+}
 
 },
 error: function(error) {
 console.log(error);
 }
 }); 
+
+
+function updateCartTotal() {
+    var cartItemContainer = document.getElementsByClassName('row ')[0];
+    var cartRows = cartItemContainer.getElementsByClassName('col-md-8 mt-2');
+    var total = 0;
+    for (var i = 0; i < cartRows.length; i++) {
+        var cartRow = cartRows[i];
+        var priceElement = cartRow.getElementsByClassName('mb-0 font-weight-semibold')[0];
+
+        var price = parseFloat(priceElement.innerHTML.replace('<i class="fa fa-rupee" id="rupees"></i>', ' '));
+
+        total = total + price;
+    }
+    return total;
+}
+document.getElementById('payNow').onclick = function() {
+    var jwt = localStorage.getItem('token');
+    console.log(jwt);
+    var data = {
+        token: jwt,
+        // Other data
+    };
+
+    $.ajax({
+        type: 'Post',
+        url: 'http://localhost:8082/getProductsFromCart',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(cartData) {
+            var totalCost = updateCartTotal(); //total cost
+         // Getting today's date
+            var today = new Date();
+            var transaction_date = today.toISOString().slice(0, 10); // YYYY-MM-DD format
+            
+            // AJAX request to store order details
+            var data = {
+            		token: jwt,
+                	transaction_amount: totalCost,
+                    transaction_date: transaction_date	
+            }
+            console.log(data);
+            
+            $.ajax({
+                type: 'Post',
+                url: 'http://localhost:8082/storeOrderDetails',
+                contentType: 'application/json',
+                data : JSON.stringify(data),
+                success: function(orderDetailsResponse) {
+                    var order_id = orderDetailsResponse.order_id; // Assuming the response contains order_id
+                    console.log("order id : "+ order_id);
+                    // Iterate through the keys of cartData and process each item
+                    Object.keys(cartData).forEach(function(categoryId) {
+                        var category = cartData[categoryId];
+                        category.products.forEach(function(cartItem) {
+                            var product_id = cartItem.product_id;
+                            var quantity = cartItem.quantity;
+                            var item_cost = cartItem.product_price * quantity; // Calculate item cost
+                            console.log(item_cost);
+                            
+                            // AJAX request to store data in order_items table
+                            $.ajax({
+                                type: 'Post',
+                                url: 'http://localhost:8082/storeOrderItem',
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    order_id: order_id,
+                                    product_id: product_id,
+                                    quantity: quantity,
+                                    item_cost: item_cost
+                                }),
+                                success: function(response) {
+                                    // Handle success
+                                },
+                                error: function(error) {
+                                    // Handle error
+                                }
+                            });
+                        });
+                    }); 
+                    
+                },
+                error: function(error) {
+                    // Handle error
+                }
+            }); 
+        },
+        error: function(error) {
+            // Handle error
+        }
+    });
+};
+
+
+/*
+document.getElementById('payNow').onclick = function() {
+    var jwt = localStorage.getItem('token');
+    var data = {
+        token: jwt,
+        // Other data
+    };
+
+    $.ajax({
+        type: 'Post',
+        url: 'http://localhost:8082/getProductsFromCart',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(cartData) {
+            var totalCost = updateCartTotal(); // Calculate total cost
+            console.log(totalCost);
+            // Iterate through the keys of cartData and process each item
+            Object.keys(cartData).forEach(function(categoryId) {
+                var category = cartData[categoryId];
+                category.products.forEach(function(cartItem) {
+                    var product_id = cartItem.product_id;
+                    var quantity = cartItem.quantity;
+                    var item_cost = cartItem.product_price * quantity; // Calculate item cost
+                    console.log(product_id);
+                    console.log(quantity);
+                    console.log(item_cost);
+
+                    // AJAX request to store data in order_items table
+                    
+                    $.ajax({
+                        type: 'Post',
+                        url: 'http://localhost:8082/storeOrderItem',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            product_id: product_id,
+                            quantity: quantity,
+                            item_cost: item_cost
+                        }),
+                        success: function(response) {
+                            // Handle success
+                        },
+                        error: function(error) {
+                            // Handle error
+                        }
+                    }); 
+                });
+            });
+
+            
+            // AJAX request to store data in orderdetails table
+            $.ajax({
+                type: 'Post',
+                url: 'http://localhost:8082/storeOrderDetails',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    total_cost: totalCost
+                }),
+                success: function(response) {
+                    // Handle success
+                },
+                error: function(error) {
+                    // Handle error
+                }
+            }); 
+        },
+        error: function(error) {
+            // Handle error
+        }
+    });
+}; */
 
 
 
@@ -1257,7 +1492,10 @@ $(".bd-example-modal-sm").click(function(){
 							class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
 							Profile</a> <a class="dropdown-item " id="text"
 							href="productimage.jsp"><i class="fa fa-list-alt"
-							aria-hidden="true" style="padding: 5px;"></i> Product</a> <a
+							aria-hidden="true" style="padding: 5px;"></i> Product</a> 
+							<a class="dropdown-item " id="text"
+							href="myorders.jsp"><i class="fa fa-shopping-bag"
+							aria-hidden="true" style="padding: 5px;"></i> My Orders</a><a
 							class="dropdown-item " id="text" href="loginsecurityquestion.jsp"><i
 							class="fa fa-edit" aria-hidden="true" style="padding: 5px;"></i>
 							Change Password</a> 
@@ -1338,9 +1576,9 @@ $(".bd-example-modal-sm").click(function(){
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
+							<button type="button" class="secondary-button"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" id="send_button" data-dismiss="modal">Add
+							<button type="button" class="primary-button" id="send_button" data-dismiss="modal">Add
 								address</button>
 						</div>
 					</div>
@@ -1378,9 +1616,9 @@ $(".bd-example-modal-sm").click(function(){
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
+							<button type="button" class="secondary-button"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" id="edit_button" data-dismiss="modal">Save
+							<button type="button" class="primary-button" id="edit_button" data-dismiss="modal">Save
 								address</button>
 						</div>
 					</div>
@@ -1402,13 +1640,23 @@ $(".bd-example-modal-sm").click(function(){
 					 
 					<div class="spacewidth">&nbsp;&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div> <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
 					
-					<a href="selectpaymentmethod.jsp" class="btn btn-light" id="btn" style="height:40px;">Pay Now <span
+					<button type="button" id="payNow" onClick="payNow()" class="primary-button"
+					style="padding: 10px auto; height:40px;">Pay</button>
+					
+					<!--
+					<a href="selectpaymentmethod.jsp" class="primary-button" id="btn" style="height:40px;">Pay Now <span
 						class="totals-value cart-total"
 						style="font-size: 25px; margin-left: 17px; height:5px;"></span></a>
 						<br> <br>
+						<!-- btn btn-light -->
+						
+						<a href="ordersinvoice.jsp" class="primary-button" id="btn" style="height:40px;">Invoice <span
+						class="totals-value cart-total"
+						style="font-size: 25px; margin-left: 17px; height:5px;"></span></a>
+						<br><br>
 					<div class="spacewidth">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div> <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
 					
-					<button type="button" id="add" class="btn btn-primary" data-toggle="modal"
+					<button type="button" id="add" class="primary-button" data-toggle="modal"
 					data-target="#exampleModal" data-whatever="@mdo"
 					style="padding: 10px auto; height:40px;">Add Delivery Address</button>	
 					&nbsp;			
@@ -1432,7 +1680,7 @@ $(".bd-example-modal-sm").click(function(){
 					<div class='child inline-block-child' id="locationdiv"><i style='font-size:18px' class='fas'>&#xf3c5; </i></div>
 					<div class='child inline-block-child'><strong><p class="text-capitalize" align="left" style="height:10px;" id="deliveryAddress">
 						</p></strong></div>
-					<div class='child inline-block-child' id="editdiv" style="padding-left:110px;"><button id="edit" style="border:none;" type="button" class="btn btn-primary" data-toggle="modal"
+					<div class='child inline-block-child' id="editdiv" style="padding-left:110px;"><button id="edit" style="border:none;" type="button" class="primary-button" data-toggle="modal"
 					data-target="#editModal" data-whatever="@mdo"></button></div>
 					
 				</div> 
@@ -1440,8 +1688,13 @@ $(".bd-example-modal-sm").click(function(){
 				
 				
 			</div>
-
-				<div class="alert alert-success" role="alert" id="Noitem"
-					style="align-items: center; display: none"></div>
+			<div class="alert alert-success" role="alert" id="Noitem" style="align-items: center; display: none">
+				    No Items in Cart &nbsp; &nbsp;
+				    <a class="shop-now-link" id="text"
+							href="productimage.jsp"> Shop Now</a>
+				</div>
+			
+		<!--	<div class="alert alert-success" role="alert" id="Noitem"
+					style="align-items: center; display: none"></div> -->
 </body>
 </html>	

@@ -6,13 +6,22 @@
 <head>
 <style type="text/css">
 <!--
------------------------------------scrool
+-----------------------------------scrool 
  
 bar and footer----------------------------------->body {data-spy
 	="scroll";
 	overflow: hidden;
 	font-family: Roboto, Arial, sans-serif;/*Roboto, Arial, sans-serif;*/
 	height: 100%;
+}
+
+#categoryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  /*min-height: 100%;  Set a minimum height */
+  height : auto;
 }
 
 
@@ -60,13 +69,12 @@ body {
 .mb-50 {
 	margin-bottom: 50px;
 }
-
+/*
 #category_id {
 	background-color: #004d80;
 	color: #fff;
-	font-family: Roboto, Arial, sans-serif; /*"Brackley Demo Bold"; serif*/
-	
-}
+	font-family: Roboto, Arial, sans-serif; 
+}*//*"Brackley Demo Bold"; serif*/	
 
 .input-group.md-form.form-sm.form-2 input.red-border {
 	border: 1px solid #ef9a9a;
@@ -110,7 +118,8 @@ body {
   width:95%;
   align:center;
   margin: auto;
-  height: 130%;
+  /* height: 130%; */
+  overflow : visible;
 }
 
 .a {
@@ -169,6 +178,57 @@ body {
 section {
 	display: block;
 }
+
+.view-product {
+  background-color: #428BCA;
+  border: 2px solid #333333;
+  color: #ffffff;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 40px;
+  padding: 0 25px;
+}
+
+.view-category {
+  background-color: #428BCA;
+  border: 2px solid #333333;
+  color: #ffffff;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 40px;
+  padding: 0 25px;
+}
+
+
+/* styles.css */
+
+/* Chatbox and chat icon styling */
+.chat-icon {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    /* Your icon styles */
+    font-size:48px;
+    color:#004D80 ;
+}
+
+.chatbox {
+    /* Your styles for the chatbox */
+}
+
+/* Style for the webchat at the bottom right */
+#webchat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    /* Other styles for the webchat div */
+}
+
+
+
+
 </style>
 
 <meta name="viewport"
@@ -180,25 +240,61 @@ section {
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--  <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<!--  
+<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script> -->
+<!--  
+<script src="https://mediafiles.botpress.cloud/0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2/webchat/bot.html"></script>
+-->
+<!--  
+<script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+<script src="https://mediafiles.botpress.cloud/0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2/webchat/config.js" defer></script>
+
+-->
+<!--  
+<script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+-->
+ 
+
+
+<script src="https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.min.js"></script>
+
+<!--
+<script src="https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.0/lib/index.js"></script>
+-->
+
+
+
+
+
+<link rel="shortcut icon" href="#">
+
 <link href='https://fonts.googleapis.com/css?family=Roboto'
 	rel='stylesheet'>
 
 <link rel="stylesheet" type="text/css" href="style.css">
 <script>
 <!-------------------------------------callback function------------------------------ -->
+
 	$(document)
 			.ready(
 					function() {
+						
+						
 
 						var cartValue;
 						var data2;
@@ -366,7 +462,7 @@ section {
 												var btn = document
 														.createElement('button');
 												btn.type = "button"
-												btn.className = 'btn btn-primary';
+												btn.className = 'view-product'; //btn btn-primary
 												btn.id = "product";
 												btn.value = response[i].product_id;												
 												childDiv.appendChild(btn);
@@ -547,7 +643,7 @@ section {
 												var btn = document
 														.createElement('button');
 												btn.type = "button"
-												btn.className = 'btn btn-primary';
+												btn.className = 'view-product'; //btn btn-primary
 												btn.id = "product_id";
 												btn.value = result[i].product_id;
 												childDiv.appendChild(btn);
@@ -719,7 +815,7 @@ section {
 												var btn = document
 														.createElement('button');
 												btn.type = "button"
-												btn.className = 'btn btn-primary';
+												btn.className = 'view-category'; //btn btn-primary
 												btn.id = "category_id";
 												btn.value = data[i].category_id;
 												 btn.setAttribute('onclick', 'GetTableValues()');
@@ -732,11 +828,14 @@ section {
 												btn.appendChild(fontawsome);
 
 											}
-
+											//adjustBackgroundHeight();
 											var images = [
 													"images/Churidar.jpg",
 													"images/Frock.jpg",
-													"images/Jump Suit.jpg" ];
+													"images/Jump Suit.jpg",
+													"images/Men's Casual Wear.jpg "];
+											
+											
 
 											function myImages() {
 												for (var i = 0; i < data.length; i++) {
@@ -809,8 +908,338 @@ $(document).on('click','button[id]',function(e) {
 									});
 						}
 						displayCategory();
+						/*function adjustBackgroundHeight() {
+							var categoryContainer = $("#categoryContainer");
+							  var formContainer = $("#form");
+							  var formHeight = formContainer.height();
+
+							  categoryContainer.css("min-height", formHeight);
+							} */
+						function updateCategoryContainerHeight() {
+							  var categoryContainer = document.getElementById('categoryContainer');
+							  var form = document.getElementById('form');
+							  var categoryHeight = form.offsetHeight;
+							  categoryContainer.style.height = categoryHeight + 'px';
+							}
+
+						//	chatbot code 
+							/*
+							// Call the function when the page finishes loading and whenever the form changes
+							window.addEventListener('DOMContentLoaded', updateCategoryContainerHeight);
+							window.addEventListener('resize', updateCategoryContainerHeight);
+
+							const webChatElement = document.getElementById('webchat');
+					        window.WebChat.renderWebChat(
+					            {
+					                directLine: window.WebChat.createDirectLine({ token: 'YOUR_DIRECT_LINE_SECRET' }),
+					            },
+					            webChatElement
+					        );
+							
+							
+					        document.getElementById('chatIcon').addEventListener('click', function() {
+					            var webchat = document.getElementById('webchat');
+					            var chatIcon = document.getElementById('chatIcon');
+					            
+					            // Toggle visibility of webchat and chatIcon
+					            if (webchat.style.display === 'none') {
+					                webchat.style.display = 'block';
+					                chatIcon.style.display = 'none';
+					            } else {
+					                webchat.style.display = 'none';
+					                chatIcon.style.display = 'block';
+					            }
+					        });
+					     */
+					     
+					     //
+					     //microsoft bot frame work
+					     /*
+						(async function () {
+					        const directLine = await window.WebChat.createDirectLine({
+					            token: 'YOUR_DIRECT_LINE_SECRET', // Replace with your Direct Line Secret
+					        });
+
+					        window.WebChat.renderWebChat(
+					            {
+					                directLine,
+					            },
+					            document.getElementById('webchat')
+					        );
+
+					        // Toggling the visibility of chat icon and webchat on click
+					        document.getElementById('chatIcon').addEventListener('click', function () {
+					            const webchat = document.getElementById('webchat');
+					            const chatIcon = document.getElementById('chatIcon');
+
+					            webchat.style.display = webchat.style.display === 'none' ? 'block' : 'none';
+					            chatIcon.style.display = chatIcon.style.display === 'none' ? 'block' : 'none';
+					        });
+
+					        // Function to handle sending messages to the chatbot
+					        const sendMessageToBot = async message => {
+					            const userMessage = message;
+					            // Send the message to the bot
+					            await directLine.postActivity({
+					                from: { id: 'user', name: 'User' },
+					                type: 'message',
+					                text: userMessage,
+					            });
+					        };
+
+					        // Send button click event
+					        document.querySelector('.send-btn').addEventListener('click', async () => {
+					            const userInput = document.querySelector('.user-input');
+					            const message = userInput.value;
+					            document.querySelector('.chat-messages').innerHTML += `<div class="user-message">${message}</div>`;
+					            userInput.value = '';
+
+					            // Send the user's message to the bot
+					            await sendMessageToBot(message);
+					        });
+					    })();
+						*/
+						/*
+						//bot press code
+						document.getElementById('chatIcon').addEventListener('click', function() {
+						    // Open a new window with the specified URL
+						    window.open('https://mediafiles.botpress.cloud/0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2/webchat/bot.html', '_blank');
+						    
+						});*/
+						
+						//botpress working code not fully working
+						/*
+						  window.botpressWebChat.init({
+						      "composerPlaceholder": "E-Commerece bot",
+						      "botId": "0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2",
+						      "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+						      "messagingUrl": "https://messaging.botpress.cloud",
+						      "clientId": "0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2",
+						      "webhookId": "0b1ee5ef-9e85-4a69-bafe-cb88c4c7897d",
+						      "lazySocket": true,
+						      "themeName": "prism",
+						      "frontendVersion": "v1",
+						      "showPoweredBy": false,
+						      "theme": "prism",
+						      "themeColor": "#004D80",      
+						      "showBotInfoPage":false,
+						
+						  });
+						
+						window.botpressWebChat.sendEvent({
+							  type: "proactive-trigger",
+							  channel: "web",
+							  payload: {
+							    text: "fake message",
+							  },
+							})
+							
+							*/
+							//rasa
+						
+						/*
+						WebChat.default.init({
+				            selector: "#webchat",
+				            initPayload: "/get_started",
+				            customData: {"language": "en"},  // Customize as needed
+				            socketUrl:    "http://localhost:5005", //"http://localhost:5005",  // Replace with your Rasa server URL
+				            socketPath: "/socket.io/",
+				            title: "Your Bot's Name",
+				            subtitle: "Your Bot's Description",
+				        });*/
+						//window.botpressWebChat.sendPayload({ type: 'text', text: 'I am a message sent through code' })
 						
 						
+						
+
+
+
+
+
+						  /*
+						  async function getRecords() {
+							    const response = await fetch("http://localhost:8082/releaseTrendingProducts");
+							    const records = await response.json();
+							    return records;
+							  }
+
+							  // Function to call the chatbot to show the records
+							  async function showRecords() {
+							    // Get the records
+							    const records = await getRecords();
+
+							    // Create a new card object
+							    const card = {
+							      type: "card",
+							      name: "Get Record",
+							      variableName: "workflow.track_my_orders",
+							      data: records,
+							    };
+
+							    // Send the card payload to the chatbot
+							    window.botpressWebChat.sendEvent('webchat.sendPayload', card);
+							  }
+
+							  // Show the records in the chatbot
+							  await showRecords();
+						})();
+						*/
+
+						
+						
+						/*
+						// Function to simulate conversation flow
+						  function startConversation() {
+						    // Simulate the start of the conversation
+						    window.botpressWebChat.sendEvent({
+						      type: 'message',
+						      text: "Hi, Welcome to your personalized bot"
+						    });
+
+						    // Simulate asking a multiple-choice question
+						    window.botpressWebChat.sendEvent({
+						      type: 'message',
+						      text: "What's your query?",
+						      quick_replies: [
+						        { title: "Track Order", payload: "track_order" },
+						        { title: "Order Status", payload: "order_status" }
+						      ]
+						    });
+						  }
+
+						  // Simulate the conversation flow
+						  startConversation();
+
+						  // Listen for incoming messages
+						  window.botpressWebChat.onEvent('message', (event) => {
+						    const messageType = event.payload.type;
+						    const receivedText = event.payload.text;
+
+						    // Example: Respond based on user's choice
+						    if (receivedText === "Track Order") {
+						      window.botpressWebChat.sendEvent({
+						        type: 'message',
+						        text: "You chose 'Track Order'."
+						      });
+						    } else if (receivedText === "Order Status") {
+						      window.botpressWebChat.sendEvent({
+						        type: 'message',
+						        text: "You chose 'Order Status'."
+						      });
+						    }
+
+						    // Add more logic to respond to user choices or other incoming messages
+						  });
+						
+
+						/*
+						const chatWidget = window.botpressWebChat.init({
+						      "composerPlaceholder": "Chat with bot",
+						      "botName":"E-Commerce Bot",
+						      "botId": "0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2",
+						      "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+						      "messagingUrl": "https://messaging.botpress.cloud",
+						      "clientId": "0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2",
+						      "webhookId": "0b1ee5ef-9e85-4a69-bafe-cb88c4c7897d",
+						      "lazySocket": true,
+						      "themeName": "prism",
+						      "frontendVersion": "v1",
+						      "showPoweredBy": true,
+						      "theme": "prism",
+						      "themeColor": "#004D80",      
+						      "showBotInfoPage":false,
+						});
+						
+						/*
+						
+						const userMessages = window.botpressWebChat.getState().messages;
+
+						// Iterate over the user messages and log them to the console
+						for (const message of userMessages) {
+						  console.log(`User message: ${message.text}`);
+						}*/
+						/*
+						window.botpressWebChat.onEvent((event) => {
+							  if (event.type === 'MESSAGE.RECEIVED') {
+							    // Get the result of the multiple choice option
+							    const menuResponse = window.botpressWebChat.getState().workflow.menu_response;
+
+							    // If the result is defined, log it to the console
+							    if (menuResponse !== undefined) {
+							      console.log(`User has selected: ${menuResponse.selection.text}`);
+							    }
+							  }
+							}, ['MESSAGE.RECEIVED']);
+
+						/*
+						window.botpressWebChat.onEvent(
+							    (event) => {
+							      if (event.type === 'MESSAGE.RECEIVED') {
+							        // Get the received message
+							        const message = event.payload.message;
+
+							        // If the message is a multiple choice option, get the selected option text
+							        if (event.payload.type === 'builtin_single-choice') {
+							          const selectedOptionText = event.payload.content.selection.text;
+
+							          // Log the received message or selected multiple choice option
+							          console.log(`Received message: ${message} | Selected option text: ${selectedOptionText}`);
+							        } else {
+							          // Log the received message
+							          console.log(`Received message: ${message}`);
+							        }
+							      }
+							    },
+							    ['MESSAGE.RECEIVED']
+							  );*/
+						
+						/*
+						window.botpressWebChat.on('ready', () => {
+						    // Event listener to capture user input
+						    window.botpressWebChat.sendEvent({
+						      type: 'visit',
+						      text: 'User has visited the chat.'
+						    });
+
+						    window.botpressWebChat.on('text', (payload) => {
+						      console.log('User input:', payload.text);
+						    });
+
+						    window.botpressWebChat.on('quickReply', (payload) => {
+						      console.log('User selected:', payload.title);
+						    });
+						  });*/
+
+
+						/*
+						window.botpressWebChat.onEvent(
+								 (event) => {
+								  if (event.type === 'MESSAGE_TEMPLATE_RECEIVED' && event.message.type === 'quickReplies') {
+								    // Check if the message is a template with quick replies (multiple-choice options)
+								    console.log('Multiple Choice Options:', event.message.content.text);
+
+								    // Listen for the user's selection within the quick replies
+								    event.message.content.quick_replies.forEach((reply, index) => {
+								      console.log(`Option ${index + 1}: ${reply.title}`);
+								    });
+
+								    // Handle user selection (when a quick reply is clicked)
+								    window.botpressWebChat.onEvent('quickReply', (payload) => {
+								      console.log('Selected Option:', payload.message.content.quick_replies[payload.index].title);
+								    });
+								  }
+								 },
+								 ['MESSAGE_TEMPLATE_RECEIVED']
+								);*/
+								
+						
+
+
+
+
+						
+							
+
 					});
 </script>
 </head>
@@ -848,7 +1277,10 @@ $(document).on('click','button[id]',function(e) {
 							class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
 							Profile</a><a class="dropdown-item " id="text"
 							href="productimage.jsp"><i class="fa fa-list-alt"
-							aria-hidden="true" style="padding: 5px;"></i> Product</a> <a
+							aria-hidden="true" style="padding: 5px;"></i> Product</a> 
+							<a class="dropdown-item " id="text"
+							href="myorders.jsp"><i class="fa fa-shopping-bag"
+							aria-hidden="true" style="padding: 5px;"></i> My Orders</a><a
 							class="dropdown-item " id="text" href="datepicker.jsp"><i
 							class="fa fa-calendar" aria-hidden="true" style="padding: 5px;"></i>
 							Schedule Pick Up</a> <a class="dropdown-item " id="text"
@@ -917,7 +1349,9 @@ $(document).on('click','button[id]',function(e) {
         <hr style="height:2px;border-width:0;color:white;background-color:white">
 		<div class="container d-flex justify-content-center mt-50 mb-50">
 			<div class="row" id="form2"></div>
+			
 		</div>
+		<br>
 	</div>
 	<br>
 	<div class="center-justify">
@@ -927,18 +1361,168 @@ $(document).on('click','button[id]',function(e) {
 		<div class="container d-flex justify-content-center mt-50 mb-50">
 			<div class="row" id="form1"></div>
 		</div>
+		<br>
 	</div>
 	<br>
 	<div class="center-justify">
 	<br>
 		<h1 align="center">Shop by Category</h1>
-		<hr style="height:2px;border-width:0;color:white;background-color:white">
-		<div class="container d-flex justify-content-center mt-50 mb-50">
+		<hr style="height:2px;border-width:0;color:white;background-color:white; margin:0">
+		<div class="container d-flex justify-content-center mt-50 mb-50" id="categoryContainer">
 			<div class="row" id="form"></div>
 		</div>
 	</div>
 	<br>
 	</div>
+	
+	<!--  
+	 <div id="webchat"></div>
+	 -->
+	
+	<!--  
+  	<div id="rasa-chat-widget" data-websocket-url="http://localhost:5005/socket.io"></div>
+	<script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>
+	-->
+	<script>!(function () {
+	  let e = document.createElement("script"),
+	    t = document.head || document.getElementsByTagName("head")[0];
+	  (e.src =
+	    "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"), //1.x.x
+	    // Replace 1.x.x with the version that you want
+	    (e.async = !0),
+	    (e.onload = () => {
+	    	console.log("WebChat script loaded");
+	      window.WebChat.default(
+	        {
+	          customData: { language: "en" },
+	          socketUrl: "http://localhost:5005/", //http://localhost:5005
+	          //socketUrl: "https://bf-botfront.development.agents.botfront.cloud",
+	          title: 'Your bot',
+	          // add other props here
+	        },
+	        null
+	      );
+	    }),
+	    t.insertBefore(e, t.firstChild);
+	})();
+	</script>
+	 <!--  
+    <script>
+        WebChat.default.init({
+            selector: "#webchat",
+            initPayload: "/get_started",
+            customData: {"language": "en"},  // Customize as needed
+            socketUrl:    "http://localhost:5005", //"http://localhost:5005",  // Replace with your Rasa server URL
+            socketPath: "/socket.io/",
+            title: "Your Bot's Name",
+            subtitle: "Your Bot's Description",
+        });
+    </script>
+	-->
+	
+	<!--  
+	<script>!(function () {
+	  let e = document.createElement("script"),
+	    t = document.head || document.getElementsByTagName("head")[0];
+	  (e.src =
+	    "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"),
+	    // Replace 1.x.x with the version that you want
+	    (e.async = !0),
+	    (e.onload = () => {
+	      window.WebChat.default(
+	        {
+	          customData: { language: "en" },
+	          socketUrl: "https://bf-botfront.development.agents.botfront.cloud",
+	          // add other props here
+	        },
+	        null
+	      );
+	    }),
+	    t.insertBefore(e, t.firstChild);
+	})();
+	</script> -->
+
+	
+	<!--  
+	<div id="webchat" id="webChat" style="display:none"></div>
+	
+	<div class="chat-icon" id="chatIcon">
+		<i class="fas fa-comment"></i>
+	</div>
+	
+	
+    <div class="chatbox">
+        
+        <div class="chat-messages"></div>
+        <input type="text" class="user-input" placeholder="Type a message...">
+        <button class="send-btn">Send</button>
+    </div>
+    -->
+    
+    <!--  
+    <div class="chatbox">
+	    <div id="webchat" style="display: none"></div>
+	    <div class="chat-messages"></div>
+	    <input type="text" class="user-input" placeholder="Type a message...">
+	    <button class="send-btn">Send</button>
+	</div>
+    
+    <div class="chat-icon" id="chatIcon">
+	    <i class="fas fa-comment"></i>
+	</div> -->
+	<!--  
+	<div id="webchat" id="webChat" style="display:none"></div>
+	
+	<div class="chat-icon" id="chatIcon">
+		<i class="fas fa-comment"></i>
+	</div>
+	
+	-->
+	<!--  
+<script>
+
+	const chatWidget = window.botpressWebChat.init({
+						      "composerPlaceholder": "Chat with bot",
+						      "botName":"E-Commerce Bot",
+						      //"botConversationDescription": "This chatbot was built surprisingly fast with Botpress",
+						      "botId": "0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2",
+						      "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+						      "messagingUrl": "https://messaging.botpress.cloud",
+						      "clientId": "0c4f8f83-34f1-43a7-bf55-08d0cc9b35c2",
+						      "webhookId": "0b1ee5ef-9e85-4a69-bafe-cb88c4c7897d",
+						      "lazySocket": true,
+						      "themeName": "prism",
+						      "frontendVersion": "v1",
+						      "showPoweredBy": true,
+						      "theme": "prism",
+						      "themeColor": "#004D80",      
+						      "showBotInfoPage":false,
+	});
+	
+	window.botpressWebChat.onEvent(
+		(event) => {
+			if (event.type === 'MESSAGE.RECEIVED' && event.payload && event.payload.type === 'quick_reply' && event.payload.value) {
+			    const userSelection = event.payload.value;
+			    handleUserSelection(userSelection);
+			 }
+		},
+		['MESSAGE.RECEIVED']
+	);
+	
+	function handleUserSelection(selection) {
+		if (selection === "Track orders") {
+			   
+			 console.log("Track orders");
+		} else if (selection === "Order status") {
+			    
+			  console.log("Order status");
+		}
+			  
+	}
+
+	
+</script> -->
+
 
 
 </body>

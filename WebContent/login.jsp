@@ -59,6 +59,17 @@ label {
     serif: ;
 }
 
+.primary-button {
+  background-color: #34A853;
+  /*border: 2px solid #333333;*/
+  border:none;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 50px;
+  padding: 0 15px;
+}
 </style>
 
 <meta name="viewport"
@@ -182,7 +193,7 @@ return false;
 } else {
 $('#passcheck').hide();
 document.getElementById('sign_in').disabled = false;
-$('#sign_in').css("background", "blue");
+$('#sign_in').css("background", "#34A853"); //blue
 }
 if (!pattern.test(password)) {
 $('#passcheck').show();
@@ -198,7 +209,7 @@ return false;
 } else {
 $('#passcheck').hide();
 document.getElementById('sign_in').disabled = false;
-$('#sign_in').css("background", "blue");
+$('#sign_in').css("background", "#34A853"); //blue
 }
 }
 <!--------------------- ----------------login on click------------------------------ -->
@@ -286,6 +297,8 @@ $.ajax({
 				window.location.href = "http://localhost:8080/AIMORCProject/adminhome.jsp";
 			}else if (role == "user"){
 				window.location.href = "http://localhost:8080/AIMORCProject/home.jsp";	
+			}else if (role == "designer"){
+				window.location.href = "http://localhost:8080/AIMORCProject/designerhome.jsp";	
 			}
 		});
 		
@@ -369,7 +382,7 @@ $.ajax({
 
 
 			<div class="inputRow submit">
-				<input type="button" value="Login" class="signIn font" id="sign_in">
+				<input type="button" value="Login" class="primary-button font" id="sign_in" style="border-radius:10px; color:#FFFFFF;"><!-- primary-button -->
 			</div>
 
 			<div class="checkbox">

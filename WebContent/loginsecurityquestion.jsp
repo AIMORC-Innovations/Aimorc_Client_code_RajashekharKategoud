@@ -61,6 +61,18 @@ footer {
 #text:hover {
 	background: #3c78b3;
 }
+.primary-button {
+  background-color: #34A853;
+  /*border: 2px solid #333333;*/
+  border:none;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 50px;
+  padding: 0 15px;
+}
+
 </style>
 
 <meta name="viewport"
@@ -238,7 +250,7 @@ footer {
 			<div class="inputRow">
 				<label for="security_id">Enter Security Question :</label> <select
 					name="security_id" id="security_id">
-					<option value="0">Select Security Question?</option>
+					<option value="0" hidden>Select Security Question?</option>
 					<option value="1">What is your pet name?</option>
 					<option value="2">Which city were you born?</option>
 					<option value="3">Favorite place to vacation?</option>
@@ -255,7 +267,7 @@ footer {
 
 
 			<div class="inputRow submit">
-				<input type="button" value="Submit" class="signIn" id="sign_in">
+				<input type="button" value="Submit" class="primary-button" id="sign_in" style="border-radius:10px; color:#FFFFFF;"><!-- signIn -->
 			</div>
 
 			<div class="alert alert-danger alert-dismissible"

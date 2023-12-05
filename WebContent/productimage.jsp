@@ -44,10 +44,11 @@ header {
 #product_name {
 	font-size: 30px;
 }
+/*
 #product_id{
 	font-family:  Roboto, Arial, sans-serif; 
 	color:white;
-}
+}*/
 
 #product_description {
 	font-size: 15px; /* 12px */
@@ -126,12 +127,12 @@ header {
 	width: 350px;
 }
 
+/*
 #product_id {
 	background-color: #004d80;
 	font-color: #fff; 
-/*	margin-top: 10px; */
 	margin-top: -3px
-}
+}*/
 
 /* #product_id:hover {
 	color: #fff
@@ -215,6 +216,18 @@ header {
     -webkit-font-smoothing: antialiased;
     color: white;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.add-to-cart {
+  background-color: #34A853;
+  /*border: 2px solid #333333;*/
+  border:none;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 35px;
+  padding: 0 15px;
 }
 
 
@@ -337,8 +350,8 @@ function displayProduct(page){
 		};
 	$.ajax({
 
-																type : "POST",
-																url : "http://localhost:8082/viewCategory",
+									type : "POST",
+									url : "http://localhost:8082/viewCategory", //url : "http://localhost:8082/viewCategory",
 									contentType : "application/json", // NOT dataType!
 									data : JSON.stringify(data),
 									success : function(response) {
@@ -414,6 +427,7 @@ function displayProduct(page){
   
   
 										for (var i = 0; i < result.content.length; i++) {
+											if(result.content[i].status=="Available"){
 											 dataLength++;
 											 console.log(result.content[i].max_quantity);
 											var parentDiv = document
@@ -511,7 +525,7 @@ function displayProduct(page){
 											var btn = document
 													.createElement('button');
 											btn.type = "button"
-											btn.className = 'btn btn-default';
+											btn.className = 'add-to-cart'; //btn btn-default
 											btn.id = "product_id";
 											btn.value = result.content[i].product_id;
 											childDiv.appendChild(btn);
@@ -558,19 +572,25 @@ function displayProduct(page){
 												label.style.color="red";
 											}
 											addDiv.appendChild(label);  */
+											}
 									 
 
 										}
 									
 
-										var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
+										var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg", 
 											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
 										function myImages() {
 											for (var i = 0; i < result.content.length; i++) {
-												document.getElementById("images"+ i).src = "images/" + result.content[i].product_id + ".jpg";
+												//document.getElementById("images"+ i).src = "images/" + result.content[i].product_id + ".jpg";
+												var imageElement = document.getElementById("images" + i);
+												if (imageElement) {
+												  imageElement.src = "images/" + result.content[i].product_id + ".jpg";
+												}
+
 											}
 										}
-										images.forEach(myImages)
+										images.forEach(myImages);
 										
 										/* var images = [ "images/Frock.jpg", "images/Anarkali Gown.jpg",
 											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg"];
@@ -634,9 +654,9 @@ $.ajax({
 																						function() {
 																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
 																							$("html").scrollTop(0);
-																						/*	$(
-																							'#notadded')
-																							.hide();	*/
+																						//	$(
+																						//	'#notadded')
+																						//	.hide();	
 																						},
 																						500); //2000
 																						setTimeout(
@@ -661,8 +681,8 @@ $.ajax({
 																						function() {
 																						//	window.location.href = "http://localhost:8080/AIMORCProject/productimage.jsp";
 																						$("html").scrollTop(0);
-																					/*	$(
-																						'#added').hide(); */
+																					//	$(
+																					//	'#added').hide(); 
 																						},
 																						500);
 																				setTimeout(
@@ -694,6 +714,7 @@ $.ajax({
 
 }
 	displayProduct();
+	
 
 	 function dynamicPage() {
 		 var  getObj =localStorage.getItem('category_Id');
@@ -828,8 +849,8 @@ $.ajax({
 	    		};
 	    	$.ajax({
 
-	    																type : "POST",
-	    																url : "http://localhost:8082/viewCategory",
+	    									type : "POST",
+	    									url : "http://localhost:8082/viewCategory", //url : "http://localhost:8082/viewCategory",
 	    									contentType : "application/json", // NOT dataType!
 	    									data : JSON.stringify(data),
 	    									success : function(response) {
@@ -909,6 +930,7 @@ $.ajax({
 	      
 	      
 	    										for (var i = 0; i < result.content.length; i++) {
+	    											if(result.content[i].status=="Available"){
 	    											 dataLength++;
 	    												console.log(result.content[i].max_quantity);
 	    											var parentDiv = document
@@ -1006,7 +1028,7 @@ $.ajax({
 	    											var btn = document
 	    													.createElement('button');
 	    											btn.type = "button"
-	    											btn.className = 'btn btn-default';
+	    											btn.className = 'add-to-cart'; //btn btn-default
 	    											btn.id = "product_id";
 	    											btn.value = result.content[i].product_id;
 	    											childDiv.appendChild(btn); //childDiv.appendChild(btn);
@@ -1053,6 +1075,7 @@ $.ajax({
 	    												label.style.color="red";
 	    											}
 	    											addDiv.appendChild(label);  */
+	    											}
 
 	    										}
 	    									
@@ -1061,7 +1084,12 @@ $.ajax({
 	    											"images/Party Wear.jpg", "images/Denim Jacket.jpg" , "images/Salwar Suit.jpg","images/Flared Skirt.jpg","images/Capri.jpg","images/Jump Suit.jpg","images/Track Suit.jpg","images/Printed Night Suit.jpg","images/Skater Dress.jpg"];
 	    										function myImages() {
 	    											for (var i = 0; i < result.content.length; i++) {
-	    												document.getElementById("images"+ i).src = "images/" + result.content[i].product_id + ".jpg";
+	    												//document.getElementById("images"+ i).src = "images/" + result.content[i].product_id + ".jpg";
+	    												var imageElement = document.getElementById("images" + i);
+	    												if (imageElement) {
+	    												  imageElement.src = "images/" + result.content[i].product_id + ".jpg";
+	    												}
+
 	    											}
 	    										}
 	    										images.forEach(myImages)
@@ -1282,6 +1310,7 @@ $.ajax({
 		   	     			<a class="dropdown-item " id="text" href="profile.jsp" onclick="window.location = 'http://localhost:8080/AIMORCProject/profile.jsp';" ><i
 							class="fa fa-user" aria-hidden="true" style="padding: 5px;"></i>
 							Profile</a>
+							
 							<a class="dropdown-item " id="text"
 							href="loginsecurityquestion.jsp" onclick="window.location = 'http://localhost:8080/AIMORCProject/loginsecurityquestion.jsp';" ><i class="fa fa-edit"
 							aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a

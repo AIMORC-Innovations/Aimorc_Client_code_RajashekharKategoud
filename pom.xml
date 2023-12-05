@@ -28,6 +28,20 @@
 			<version>2.2.2</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- below 2 dependencies added for rasa -->
+		<dependency>
+		    <groupId>org.java-websocket</groupId>
+		    <artifactId>Java-WebSocket</artifactId>
+		    <version>1.5.2</version> <!-- Use the latest version available -->
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.socket</groupId>
+		    <artifactId>socket.io-client</artifactId>
+		    <version>1.0.0</version> <!-- Use the version compatible with Rasa -->
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>

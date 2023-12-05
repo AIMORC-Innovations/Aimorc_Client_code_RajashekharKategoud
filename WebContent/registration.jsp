@@ -25,9 +25,9 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
 
-<link
+<!--<link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet">
+	rel="stylesheet">-->
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
 <link rel="stylesheet" type="text/css" href="style.css">
@@ -81,7 +81,7 @@
 	font-size: 16px;
 }
 
-<!-------------------------------------scrool button and footer------------------------------ -->
+<!-- -----------------------------------scrool button and footer------------------------------ -->
 body {
 data-spy="scroll";
 overflow: hidden;
@@ -103,6 +103,7 @@ html, body {
 	padding: 0;
 }
 
+
 footer {
 	width: 100%;
 	height: 0px;
@@ -121,6 +122,7 @@ footer {
 	margin: 2% auto;
 	background: #d4edda;
 	border-color: #c3e6cb;
+	left:-90px;
 }
 
 #userfail {
@@ -133,6 +135,19 @@ footer {
 	margin: 2% auto;
 	background: #f8d7da;
 	border-color: #f5c6cb;
+	left:-90px;
+}
+
+.primary-button {
+  background-color: #34A853;
+  /*border: 2px solid #333333;*/
+  border:none;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 50px;
+  padding: 0 15px;
 }
 </style>
 
@@ -441,6 +456,7 @@ created_on : dateTime
 
 var select = document.getElementById('security_id');
 var value = select.options[select.selectedIndex].value;
+
 <!--------------------- ----------------ajax-------------------------------->
 $.ajax({
 type : "POST",
@@ -449,26 +465,37 @@ contentType : "application/json", // NOT dataType!
 data : JSON.stringify(data),
 statusCode : {
 409 : function() {
-alert("Registration Failed");
-$('#form').hide();
-$('#userfail').slideDown();
+//showMessageAndRedirect("Registration Failed");
+//alert("Registration Failed");
+//$('html, body').animate({ scrollTop: 0 }, 'fast');
+//var contentElement = document.getElementById('content');
+//contentElement.scrollTop = 0;
+//$('#form').hide();
+//$('#userfail').slideDown();
+$('#content').scrollTop(0);
+$('#userfail').show();
 
 setTimeout(function()
 		{
-	window.location.href = "http://localhost:8080/AIMORC_Client/login.jsp"; },3000);
+	window.location.href = "http://localhost:8080/AIMORCProject/login.jsp"; },3000); //AIMORC_Client
 },
 200: function(){
+//showMessageAndRedirect("User Registered Successfully");
 localStorage.clear();
 localStorage.setItem('data',JSON.stringify(data));
-
-
-$('#form').hide();
-$('#userregister').slideDown();
+//$('html, body').animate({ scrollTop: 0 }, 'fast');
+//var contentElement = document.getElementById('content');
+//contentElement.scrollTop = 0;
+//document.getElementById('userregister').style.display = 'block';
+//$('#form').hide();
+//$('#userregister').slideDown();
+$('#content').scrollTop(0);
+$('#userregister').show();
 
 console.log("User Registered successfully");
 setTimeout(function()
 		{ 
-	window.location.href = "http://localhost:8080/AIMORC_Client/login.jsp"; }, 3000);
+	window.location.href = "http://localhost:8080/AIMORCProject/login.jsp"; }, 3000);
 }
 
 },
@@ -515,9 +542,28 @@ console.log(error);
 
 		<div id="form">
 			<form>
+			<div style="text-align: center; height:80px;"> <!-- class="navbar-header text-center" -->
+			 <!--  <a class="navbar-brand" href="#">AIMORC Innovations</a> -->
+			 <img height="100px" width="125px" src="https://media-exp1.licdn.com/dms/image/C4E0BAQE-SkEaq5vRnA/company-logo_200_200/0/1595501923133?e=2147483647&v=beta&t=-ZHFBvv2m1EWw4KBBepTPIZHfzf3rjc8_hInFQYJYo4">
+			  
+			<!--<img height="100px" width="125px" src="images/aimorclogo.jpg" alt="..."> -->
+			 </div>
+			 <br>
+			<!--  
 			<div class="navbar-header" align="center">
 			    <a class="navbar-brand" href="#">AIMORC Innovations </a>
-		    </div>
+		    </div> -->
+		    <!--<div id="message"></div>-->
+		    <div class="container" id="statusDiv">
+				<div class="alert alert-success " id="userregister" role="alert"
+					style="display: none;">
+					<strong>Registered Successfully!</strong>
+				</div>
+				<div class="alert alert-danger alert-dismissible" id="userfail"
+					role="alert" style="display: none;">
+					<strong>Registration Failed!</strong>
+				</div>
+			</div>  
 				<div class="bgBox ">
 					<h2>Register</h2>
 					<div class="inputRow">
@@ -576,7 +622,7 @@ console.log(error);
 
 					<div class="inputRow">
 						<label for="phonenum">Phone Number :</label> <input type="tel"
-							name="phonenum" maxlength="10" placeholder="Enter phonenum" id="phonenum">
+							name="phonenum" maxlength="10" placeholder="Enter phone number" id="phonenum">
 						<small id='phonenumcheck'></small>
 					</div>
 
@@ -646,14 +692,14 @@ console.log(error);
 						<label for="security_answer" style="font-size:1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left;">Security Answer :</label>
 						<textarea name="security_answer" placeholder="Enter Security Answer" id="security_answer"
 							style=" font-weight: normal !important; font-size:15px ;height: 45px;"></textarea>
-						<small id='addresscheck'><small>
+						<small id='addresscheck'></small>
 					</div>
 					
 			
 
 					<div class="inputRow submit ">
 					
-						<input type="button" value="Register" class="signIn" id="sign_in">
+						<input type="button" value="Register" class="primary-button" id="sign_in" style="border-radius:10px; color:#FFFFFF;"> <!-- signIn -->
 						<br><br>
 					</div>
 					<div class="inputRow" align="center">
@@ -675,7 +721,7 @@ console.log(error);
 		
 	</div>
 	
-	<div class="container" id="statusDiv">
+	<!-- <div class="container" id="statusDiv">
 		<div class="alert alert-success " id="userregister" role="alert"
 			style="display: none;">
 			<strong>Registered Successfully!</strong>
@@ -684,7 +730,7 @@ console.log(error);
 			role="alert" style="display: none;">
 			<strong>Registration Failed!</strong>
 		</div>
-	</div>
+	</div>  -->
 	
 
 

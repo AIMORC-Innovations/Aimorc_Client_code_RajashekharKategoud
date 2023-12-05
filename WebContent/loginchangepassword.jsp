@@ -61,6 +61,18 @@ footer {
 #text:hover {
 	background: #3c78b3;
 }
+
+.primary-button {
+  background-color: #34A853;
+  /*border: 2px solid #333333;*/
+  border:none;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 50px;
+  padding: 0 15px;
+}
 </style>
 
 <meta name="viewport"
@@ -359,7 +371,7 @@ function password_check() {
 			</div>
 
 			<div class="inputRow submit">
-				<input type="button" value="Submit" class="signIn" id="sign_in">
+				<input type="button" value="Submit" class="primary-button" id="sign_in" style="border-radius:10px; color:#FFFFFF;"><!-- signIn -->
 
 				<div class="alert alert-danger alert-dismissible"
 					id="passwordsNoMatchRegister" role="alert" style="display: none;">

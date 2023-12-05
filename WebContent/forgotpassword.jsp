@@ -52,6 +52,18 @@ footer {
 	position: fixed;
 	bottom: 0;
 }
+
+.primary-button {
+  background-color: #34A853;
+  /*border: 2px solid #333333;*/
+  border:none;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height: 50px;
+  padding: 0 15px;
+}
 </style>
 
 <meta name="viewport"
@@ -113,7 +125,7 @@ footer {
 							} else {
 								$('#usercheck').hide();
 								document.getElementById('sign_in').disabled = false;
-								$('#sign_in').css("background", "blue");
+								$('#sign_in').css("background", "#34A853"); //blue
 							}
 							if (!regex.test(username)) {
 								$('#usercheck').show();
@@ -128,7 +140,7 @@ footer {
 							} else {
 								$('#usercheck').hide();
 								document.getElementById('sign_in').disabled = false;
-								$('#sign_in').css("background", "blue");
+								$('#sign_in').css("background", "#34A853"); //blue
 							}
 
 						}
@@ -248,7 +260,7 @@ footer {
 
 
 			<div class="inputRow submit font">
-				<input type="button" value="Submit" class="signIn" id="sign_in">
+				<input type="button" value="Submit" class="primary-button" id="sign_in" style="border-radius:10px; color:#FFFFFF;"> <!-- signIn -->
 			</div>
 			
 			<div class="text-center font" >

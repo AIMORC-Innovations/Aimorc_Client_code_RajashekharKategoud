@@ -11,7 +11,10 @@
 <meta name="description" content="$1">
 
 <title>Profile Details</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
@@ -35,7 +38,7 @@ body {data-spy ="scroll";
 	font-family: Roboto, Arial, sans-serif; serif /*Roboto, Arial, sans-serif;*/
 	height: 100%;
 }
-
+/*
 #edit, #delete{
       display:block;
       width:25px;
@@ -50,7 +53,30 @@ body {data-spy ="scroll";
       cursor: pointer;
       background:url('https://i.ya-webdesign.com/images/edit-delete-icon-png.png') center no-repeat;
       background-size:contain;
-    }
+    }  */
+
+.edit-button, .delete-button {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 25px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+}
 
 #content {
 	max-height: calc(100% - 120px);
@@ -169,6 +195,101 @@ border : none;
     		background: #3c78b3;
 			} */
 
+.measurement-container {
+  border: none;
+  margin-bottom: 20px;
+}
+
+.table-bordered {
+}
+
+.table-responsive-sm, 
+.table-responsive-md, 
+.container1 {
+  border: 1px solid #E5E5E5; /* You can adjust the color, size, and style of the border as per your requirement */
+  border-radius : 10px;
+  border-width : 2.5px;
+  
+  
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+}
+.menu button {
+  background-color: transparent;
+  color: #333333;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+outline: none;
+height: 50px;
+    font-size: 17px;
+    text-align: left;
+    margin-left:30px;
+}
+
+.menu button:hover {
+ /* background-color: rgba(255, 255, 255, 0.2);*/
+}
+
+.menu button i {
+  margin-right: 10px;
+}
+
+/* Add this CSS to style the selected button */
+.menu .nav-button.selected {
+    position: relative;
+    width:auto;
+}
+
+.menu .nav-button.selected::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #333333;
+}
+
+/* Primary Button */
+.primary-button {
+  background-color: #E8F2FC;
+  border: 2px solid #001F3F;
+  color: #333333;
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  height : 40px;
+  padding: 0 25px;
+}
+
+/* Secondary Button */
+.secondary-button {
+  border: 2px solid #001F3F;
+  /*color: #333333;*/
+  border-radius: 10px;
+  width: auto;
+  font-weight: bold;
+  background-color:none;
+  height : 40px;
+  padding: 0 5px;
+}
+
+/* Styling for secondary button's font color */
+.secondary-button {
+  color: #001F3F;
+}
+
+
+
+
+
 
 
 </style>
@@ -208,7 +329,9 @@ border : none;
 						<div class="dropdown-menu dropdown-menu-right" id="dropdown-item">
 							<a class="dropdown-item " id="text" href="productimage.jsp"><i
 								class="fa fa-list-alt" aria-hidden="true" style="padding: 5px;"></i>
-								Product</a> <a class="dropdown-item " id="text"
+								Product</a><a class="dropdown-item " id="text"
+							href="myorders.jsp"><i class="fa fa-shopping-bag"
+							aria-hidden="true" style="padding: 5px;"></i> My Orders</a> <a class="dropdown-item " id="text"
 								href="loginsecurityquestion.jsp"><i class="fa fa-edit"
 								aria-hidden="true" style="padding: 5px;"></i> Change Password</a> <a
 								class="dropdown-item " id="text" href="login.jsp"> <!-- href="logoutServlet" -->
@@ -234,7 +357,32 @@ border : none;
 
 	<!--<p id="demo" align="center"></p>-->
 	<form class="divScroll">
-		<div class="container" id="form">
+		<div class = "schedulecontainer" style="display:flex; margin-left:-140px;">
+			<br>
+			<div class="menu-icon"  style="margin-left:50px; " id="menuDiv">
+				<br>
+	    		<button  id="menuNavigationButton"><i class="fas fa-bars"></i>&nbsp; Menu </button><!-- Menu icon (you can use any icon of your choice) -->
+			  </div>
+			  <br><br>
+			<div class="navigation" style="width:20%; height:460px; background-color:#E8F2FC; border-radius:10px; margin-left: 20px; margin-top: 45px; border: 2px solid #001F3F;">
+			<br>
+			<h4 style="margin-left:30px; font-size: 30px; color: #333333;">Profile Details</h4>
+			<hr style="color:white; background-color: #001F3F;">
+			  <ul class="menu">
+			  
+			    <br>
+			    <li><button  id="profileDetails" class="nav-button"><i class="fas fa-user"></i>&nbsp; My Details</button></li>
+			    <br>
+   				<li><button  id="addressDetails" class="nav-button"><i class="fas fa-map-marker-alt"></i>&nbsp; Address Details</button></li>
+      			<br>
+      			<li><button  id="myMeasurements" class="nav-button"><i class="fas fa-ruler"></i>&nbsp; My Clothing Measurements</button></li>
+			    <br>
+			  </ul>
+			</div>
+			
+			<div class = "rightcontainer" style="width:60%; float: right; margin-left: 30px;">
+			<br>
+		<div class="container" style="border: 5px solid #E5E5E5; border-radius : 10px; border-width : 2.5px;" id="form">
 
                 
 			 <table class="table table-condensed"> <!--table-striped  -->
@@ -271,19 +419,57 @@ border : none;
 				<hr>
 				<div class="container"><input type="button" class="btn btn-primary" value="Edit "
 					         data-toggle="modal" data-target="#editProfileDetailsModal"
-					         data-whatever="@mdo"
-					         style="background-color: #112549;"></div>
+					         data-whatever="@mdo" id="editButton"
+					         style="background-color: #E8F2FC; border: 2px solid #001F3F; color:#333333; border-radius:10px;
+					         width:100px; font-weight:bold;"></div><br> <!-- #112549 -->
 			<!--  	<a href="editprofile.jsp">
 					<button type="button" id="edit-profile-button"
 						class="btn btn-primary">Edit</button>
 				</a>  -->
 			</div>
 			<br>
-			
-			<div class="table-responsive-sm table-responsive-md container">
+			  
+			<div class="table-responsive-sm table-responsive-md container" id="addresses" style="display:none;">
 					<table class="table table-bordered table-striped mb-0" id="address">
-						
+						<br>
 						<h2>Address Details</h2>
+						<hr>
+						<tbody style="border: none !important;">
+							<tr style="border: none !important;"> 
+							
+							</tr>
+						</tbody>
+
+					</table>
+					<hr>
+					<div class="container"><input type="button" class="primary-button" value="Add New Address "
+					         data-toggle="modal" data-target="#exampleModal"
+					         data-whatever="@mdo"
+					         style="width:required;"></div>
+					         <br>
+				</div> 
+				<!--
+				<div class="container" id="addresses">
+				  <h4>Address Details</h4>
+				  <br>
+				  <div class="row" id="addressCardsContainer">
+				  </div>
+				  <hr>
+					<div class="container"><input type="button" class="primary-button" value="Add New Address "
+					         data-toggle="modal" data-target="#exampleModal"
+					         data-whatever="@mdo"
+					         style="width:required;"></div>
+				  <br>
+				</div>-->
+				
+				<br>
+				
+				
+				
+				<div class="table-responsive-sm table-responsive-md container" id="myClothingMeasurements" style="display:none; margin-top:-25px;">
+					<table class="table table-striped  mb-0" id="measurements"> <!-- table-bordered table-striped  -->
+						 <br>
+						<h2>My Clothing Measurements</h2>
 						<hr>
 						<tbody style="border: none !important;">
 							<tr style="border: none !important;">
@@ -292,15 +478,10 @@ border : none;
 						</tbody>
 
 					</table>
-					<hr>
-				</div>
-				<br>
-				
-				<div class="container"><input type="button" class="btn btn-primary" value="Add New Address "
-					         data-toggle="modal" data-target="#exampleModal"
-					         data-whatever="@mdo"
-					         style="background-color: #112549;"></div>
-					         <br>
+					
+				</div> 
+			</div>
+			</div>
 			
 			<div>
 			<div class="modal fade" id="deleteModal" tabindex="-1"
@@ -316,8 +497,8 @@ border : none;
 									</button>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel_button">No</button> <!-- class="btn btn-secondary" -->
-									<button type="button" class="btn btn-primary" id="delete_button">Yes</button>
+									<button type="button" class="secondary-button" data-dismiss="modal" id="cancel_button">No</button> <!-- class="btn btn-secondary" -->
+									<button type="button" class="primary-button" id="delete_button">Yes</button>
 								</div>
 							</div>
 						</div>
@@ -386,9 +567,9 @@ border : none;
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal" id="cancel">Close</button>
-									<button type="button" class="btn btn-primary" id="send_button">Add</button>
+									<button type="button" class="secondary-button"
+										data-dismiss="modal" id="cancel">Close</button> <!-- btn btn-secondary -->
+									<button type="button" class="primary-button" id="send_button">Add</button> <!--btn btn-primary -->
 								<!--  	<button type="button" class="btn btn-primary" id="edit_button">Edit</button> -->
 								</div>
 							</div>
@@ -460,9 +641,9 @@ border : none;
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
+									<button type="button" class="secondary-button"
 										data-dismiss="modal" id="cancel_button1">Cancel</button>
-								 	<button type="button" class="btn btn-primary" id="save_button1">Save</button> 
+								 	<button type="button" class="primary-button" id="save_button1">Save</button> 
 								</div>
 							</div>
 						</div>
@@ -529,10 +710,10 @@ border : none;
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
+									<button type="button" class="secondary-button"
 										data-dismiss="modal" id="close">Cancel</button>
 							<!--  		<button type="button" class="btn btn-primary" id="send_button">Add</button>-->
-								 	<button type="button" class="btn btn-primary" id="edit_button">Save</button> 
+								 	<button type="button" class="primary-button" id="edit_button">Save</button> 
 								</div>
 							</div>
 						</div>
@@ -551,6 +732,87 @@ border : none;
 					//document.getElementById('username').innerHTML ="Welcome" +" "+ username ;
 					var jwt = localStorage.getItem('token');
 				//	  alert(jwt);
+				var editButton = document.getElementById("editButton");
+
+    editButton.addEventListener("click", function () {
+      // Remove the background color when clicked
+      editButton.style.backgroundColor = "#d9dbfa";
+      editButton.style.borderColor = "";
+    });
+	function setInitialSelectedState() {
+        const defaultSelectedButtonId = 'profileDetails'; // ID of the button to be selected by default
+        document.getElementById(defaultSelectedButtonId).classList.add('selected');
+    }
+
+    // Attach onload event handler to set the initial selected state
+    window.onload = setInitialSelectedState;
+			function showProfileDetails() {
+			  const profileDetailsDiv = document.getElementById('form');
+			  const addressesDiv = document.getElementById('addresses');
+			  const myClothingMeasurementsDiv = document.getElementById('myClothingMeasurements');
+			  
+
+			  // Show the Completed Addresses div
+			  profileDetailsDiv.style.display = 'block';
+			  
+			  // Hide the Scheduled Addresses div
+			  addressesDiv.style.display = 'none';
+			  myClothingMeasurementsDiv.style.display = 'none';
+			  
+			  document.getElementById('profileDetails').classList.add('selected');
+			    document.getElementById('addressDetails').classList.remove('selected');
+			    document.getElementById('myMeasurements').classList.remove('selected');
+			  
+        	}
+			function showAddressDetails() {
+				const profileDetailsDiv = document.getElementById('form');
+				  const addressesDiv = document.getElementById('addresses');
+				  const myClothingMeasurementsDiv = document.getElementById('myClothingMeasurements');
+				  
+
+				  // Show the Completed Addresses div
+				  profileDetailsDiv.style.display = 'none';
+				  
+				  // Hide the Scheduled Addresses div
+				  addressesDiv.style.display = 'block';
+				  myClothingMeasurementsDiv.style.display = 'none';	
+				  document.getElementById('profileDetails').classList.remove('selected');
+				    document.getElementById('addressDetails').classList.add('selected');
+				    document.getElementById('myMeasurements').classList.remove('selected');
+	        	}
+			function showMyMeasurements() {
+				const profileDetailsDiv = document.getElementById('form');
+				  const addressesDiv = document.getElementById('addresses');
+				  const myClothingMeasurementsDiv = document.getElementById('myClothingMeasurements');
+				  
+
+				  // Show the Completed Addresses div
+				  profileDetailsDiv.style.display = 'none';
+				  
+				  // Hide the Scheduled Addresses div
+				  addressesDiv.style.display = 'none';
+				  myClothingMeasurementsDiv.style.display = 'block';
+				  document.getElementById('profileDetails').classList.remove('selected');
+				    document.getElementById('addressDetails').classList.remove('selected');
+				    document.getElementById('myMeasurements').classList.add('selected');
+				  
+	        	}
+		  
+		
+
+		  
+		// Add this JavaScript code after your existing code
+
+		// Get the buttons by their IDs
+		const profileDetailsBtn = document.getElementById('profileDetails');
+		const addressDetailsBtn = document.getElementById('addressDetails');
+		const myMeasurementsBtn = document.getElementById('myMeasurements');
+
+		// Attach onclick event handlers to the buttons
+		profileDetailsBtn.onclick = showProfileDetails;
+		//createNewScheduleBtn.onclick = createNewSchedule;
+		addressDetailsBtn.onclick = showAddressDetails;
+		myMeasurementsBtn.onclick = showMyMeasurements;
 					var data1 = {
 							token :jwt  
 						};
@@ -605,10 +867,11 @@ border : none;
 						contentType : "application/json",
 						data : JSON.stringify(data),
 						success : function(response) { 
-						
+							var addressNumber =0;
 							//console.log(response);
+							
 							Object.keys(response).forEach((eachAddressId, index) => {
-								
+								addressNumber++;
 								var count=0;
 								count = count+index;
 								console.log(count+"--------count-------");
@@ -626,19 +889,56 @@ border : none;
 								.createElement('tr');
 								address.className = 'text-center';
 								address.id = "addresses";
-								address.style.borderColor = 'white';
-
-								document.getElementsByClassName('table')[1].appendChild(address); 
+								//address.style.border = '2px solid #333333';
+								//address.style.borderRadius = '5px';
+								//address.style.marginBottom = '10px';
+								
+								document.getElementsByClassName('table')[1].appendChild(address); 	
+								
+								var countCell = document.createElement('td'); // Cell for the count
+							    countCell.className = 'text-center';
+							    countCell.innerHTML = addressNumber+". ";
+							    countCell.style.borderColor = 'white';
+							    address.appendChild(countCell);
+							    
+							    var hrElement = document.createElement('hr');
+								hrElement.style.border = 'none';//'1px solid #333333';  
+								hrElement.style.backgroundColor = '#E5E5E5';
+								hrElement.style.height = '1px';
+								hrElement.style.width='2200%';
+								document.getElementsByClassName('table')[1].appendChild(hrElement);
 								
 								var addresses = document
 								.createElement('td'); //td
 								addresses.className = 'text-left';
 								addresses.id = "fulladdress";
-								addresses.innerHTML = address1+", " + address2+", " + city+", " + state+", " + country +" - "+ zip;
+								addresses.innerHTML =address1+", " + address2+", " + city+", " + state+", " + country +" - "+ zip;
 								address.appendChild(addresses);  
 								addresses.style.borderColor = 'white';
-								addresses.style.width="1000px";
+								addresses.style.width="900px";
 								
+								var editBtn = document.createElement('button');
+								editBtn.type = 'button';
+								editBtn.className = 'btn btn-default';
+								editBtn.id = 'editAddress';
+								editBtn.value = eachAddressId; // or any other value you want to assign
+								address.appendChild(editBtn);
+
+								var editIcon = document.createElement('i');
+								editIcon.className = 'fas fa-edit';
+								editBtn.appendChild(editIcon);
+
+								var deleteBtn = document.createElement('button');
+								deleteBtn.type = 'button';
+								deleteBtn.className = 'btn btn-default';
+								deleteBtn.id = 'deleteAddress';
+								deleteBtn.value = eachAddressId; // or any other value you want to assign
+								address.appendChild(deleteBtn);
+
+								var deleteIcon = document.createElement('i');
+								deleteIcon.className = 'fas fa-trash-alt';
+								deleteBtn.appendChild(deleteIcon);
+								/*
 								var btn = document.createElement('button');
 								btn.type = "button"
 								btn.className = 'btn btn-default';
@@ -662,7 +962,7 @@ border : none;
 								var fontawsome1 = document.createElement('i');
 								fontawsome1.id="delete";
 								btn1.appendChild(fontawsome1);
-								
+								*/
 							
 							/*	$('#editAddress').click(function (event){
 									$('#exampleModal').modal('show');
@@ -671,7 +971,88 @@ border : none;
 									document.getElementById("send_button").innerHTML="Save";
 								});
 								document.getElementById("addaddress").value=response[eachAddressId].address;
-								*/
+								*//*
+								Object.keys(response).forEach((eachAddressId, index) => {
+								    addressNumber++;
+								    var count = 0;
+								    count = count + index;
+								    console.log(count + "--------count-------");
+								    var countValue = localStorage.setItem('count', count);
+								    address_id = eachAddressId;
+								    address1 = response[eachAddressId].address;
+								    address2 = response[eachAddressId].address1;
+								    city = response[eachAddressId].city;
+								    state = response[eachAddressId].state;
+								    country = response[eachAddressId].country;
+								    zip = response[eachAddressId].zip;
+
+								    var addressCard = document.createElement('div');
+								    addressCard.className = 'card';
+								    addressCardsContainer.appendChild(addressCard);
+
+								    var cardBody = document.createElement('div');
+								    cardBody.className = 'card-body';
+								    addressCard.appendChild(cardBody);
+
+								    function createCardElement(label, value) {
+								        var cardRow = document.createElement('div');
+								        cardRow.className = 'row';
+
+								        var labelCell = document.createElement('div');
+								        labelCell.className = 'col-4';
+								        labelCell.innerText = label;
+
+								        cardRow.appendChild(labelCell);
+								        return cardRow;
+								    }
+
+								    var row = document.createElement('div');
+								    row.className = 'row';
+								    cardBody.appendChild(row);
+
+								    // Create the cell for address numbers
+								    var numberCell = document.createElement('div');
+								    numberCell.className = 'col'; // Each cell takes an equal width
+								    numberCell.innerText = addressNumber + '.';
+								    numberCell.style.width='10px';
+								    row.appendChild(numberCell);
+
+								    var addressInfoCell = document.createElement('div');
+								    addressInfoCell.className = 'col'; // Each cell takes an equal width
+								    row.appendChild(addressInfoCell);
+
+								    addressInfoCell.appendChild(createCardElement(address1 + ', ' + address2 + ', ' + city + ', ' + state + ', ' + country + ' - ' + zip));
+
+								    var editBtnContainer = document.createElement('div');
+								    editBtnContainer.className = 'col'; // Each cell takes an equal width
+								    editBtnContainer.className = 'edit-btn';
+								    row.appendChild(editBtnContainer);
+
+								    var editBtn = document.createElement('button');
+								    editBtn.type = 'button';
+								    editBtn.className = 'btn btn-default';
+								    editBtn.id = 'editAddress';
+								    editBtn.value = eachAddressId;
+								    editBtnContainer.appendChild(editBtn);
+
+								    var editIcon = document.createElement('i');
+								    editIcon.className = 'fas fa-edit';
+								    editBtn.appendChild(editIcon);
+
+								    var deleteBtn = document.createElement('button');
+								    deleteBtn.type = 'button';
+								    deleteBtn.className = 'btn btn-default';
+								    deleteBtn.id = 'deleteAddress';
+								    deleteBtn.value = eachAddressId;
+								    editBtnContainer.appendChild(deleteBtn);
+
+								    var deleteIcon = document.createElement('i');
+								    deleteIcon.className = 'fas fa-trash-alt';
+								    deleteBtn.appendChild(deleteIcon);*/
+
+
+								
+
 					
 							});
 							
@@ -693,6 +1074,15 @@ border : none;
 												if (this.id == 'deleteAddress') {
 													
 													return false; //false
+												}
+												if (this.id == 'profileDetails') {	
+													return false; 
+												}
+												if (this.id == 'addressDetails') {	
+													return false; 
+												}
+												if (this.id == 'myMeasurements') {	
+													return false; 
 												}
 												if (this.id == 'send_button'){
 													return false;
@@ -834,6 +1224,15 @@ border : none;
 											'button[id]',
 											function(e) {
 												if (this.id == 'editAddress') {	
+													return false; 
+												}
+												if (this.id == 'profileDetails') {	
+													return false; 
+												}
+												if (this.id == 'addressDetails') {	
+													return false; 
+												}
+												if (this.id == 'myMeasurements') {	
 													return false; 
 												}
 												if (this.id == 'send_button'){
@@ -1044,6 +1443,169 @@ border : none;
 					function deleteAddress(){
 						
 					}
+					var jwt = localStorage.getItem('token');
+					var data=  {
+							token :jwt  
+					};
+					function getMyMeasurements(){
+						$.ajax({
+							type : "Post",
+							url : 'http://localhost:8083/getMyMeasurements',
+							contentType : "application/json",
+							data : JSON.stringify(data),
+							success : function(response) { 
+								console.log(response);
+								if(response.length !=0){
+								Object.keys(response).forEach((eachMeasurementId, index) => {
+									var measurementIdData = response[eachMeasurementId];
+								    var measurement_id = measurementIdData.measurement_id;
+								    console.log(measurementIdData.measurement_id);
+								    var gender = measurementIdData.gender;
+								    var capitalizedGender = gender.charAt(0).toUpperCase() + gender.slice(1);
+								    var dressing_category = measurementIdData.dressing_category;
+								    var formatted_dressing_category = dressing_category.replace(/_/g, " ").replace(/\b\w/g, function (match) {
+									      return match.toUpperCase();
+								    });
+								    var measurement_type = measurementIdData.measurement_unit;
+								    var capitalized_measurement_type = measurement_type.charAt(0).toUpperCase() + measurement_type.slice(1);
+								    var fabric_collected = measurementIdData.fabric_collected;
+								    
+								    
+								    
+								    var measurement = document
+									.createElement('tr');
+								    measurement.className = 'text-center';
+								    measurement.id = "measurements";
+								    measurement.style.borderColor = 'white';
+
+									document.getElementsByClassName('table')[2].appendChild(measurement); 
+									
+									var hrElement = document.createElement('hr');
+									hrElement.style.border = 'none';//'1px solid #333333';  
+									hrElement.style.backgroundColor = '#E5E5E5';
+									hrElement.style.height = '1px';
+									hrElement.style.width='800%';
+									document.getElementsByClassName('table')[2].appendChild(hrElement);
+								    
+								    var measurements = document
+									.createElement('td'); //td
+									measurements.className = 'text-left';
+									measurements.id = "gender";
+									measurements.innerHTML = "<strong>Gender : </strong> "+capitalizedGender;
+									measurement.appendChild(measurements);  
+									measurements.style.borderColor = 'white';
+									//measurements.style.width="100px";
+									
+									var measurements = document
+									.createElement('td'); //td
+									measurements.className = 'text-left';
+									measurements.id = "gender";
+									measurements.innerHTML = "<strong>Dressing Category : </strong> "+formatted_dressing_category;
+									measurement.appendChild(measurements);  
+									measurements.style.borderColor = 'white';
+									//measurements.style.width="1000px";
+									
+									var measurements = document
+									.createElement('td'); //td
+									measurements.className = 'text-left';
+									measurements.id = "gender";
+									measurements.innerHTML = "<strong>Measurement Type : </strong> "+capitalized_measurement_type;
+									measurement.appendChild(measurements);  
+									measurements.style.borderColor = 'white';
+									//measurements.style.width="1000px";
+									for (var key in measurementIdData) {
+									  // Check if the property starts with 'dressing_category'
+									  if (key.startsWith(dressing_category)) {
+									    // Remove the "_" from the key string and capitalize the first letter of each word
+									    var formattedKey = key.replace(/_/g, " ").replace(/\b\w/g, function (match) {
+									      return match.toUpperCase();
+									    });
+									    var measurementDataElement = document.createElement('td');
+									    measurementDataElement.className = 'text-left';
+									    measurementDataElement.innerHTML = "<strong>" + formattedKey + ":</strong> " + measurementIdData[key];
+									    measurement.appendChild(measurementDataElement);
+									    measurementDataElement.style.borderColor = 'white';
+									  }
+									} 
+									
+								});
+									/*
+								Object.keys(response).forEach((eachAddressId, index) => {
+									var height = repsonse.height;
+									var chest = repsonse.chest;
+									var hip = repsonse.hip;
+									var waist = repsonse.waist;
+									var inseam = repsonse.inseam;
+									
+									var measurements = document
+									.createElement('tr');
+									measurements.className = 'text-center';
+									measurements.id = "addresses";
+									measurements.style.borderColor = 'white';
+
+									document.getElementsByClassName('table')[1].appendChild(measurements); 
+									
+									// Creating a measurement heading
+						            var measurementHeading = document.createElement('h3');
+						            measurementHeading.innerText = 'Measurement ' + (index + 1);
+						            measurementContainer.appendChild(measurementHeading); 
+						            
+									var measurements = response[eachAddressId];
+
+						            // Creating a measurement container
+						            var measurementContainer = document.createElement('div');
+						            measurementContainer.className = 'measurement-container';
+						            measurementContainer.style.borderColor='white';
+
+						            // Creating a measurement heading
+						            var measurementHeading = document.createElement('h3');
+						            measurementHeading.innerText = 'Measurement ' + (index + 1);
+						            measurementContainer.appendChild(measurementHeading);
+
+						            // Creating a table for measurement details
+						            var measurementTable = document.createElement('table');
+						            //measurementTable.className = 'table table-bordered table-striped mb-0';
+						            measurementTable.style.borderColor='white';
+
+						            // Creating table rows for measurement values
+						            Object.keys(measurements).forEach((key) => {
+						                var measurementRow = document.createElement('tr');
+						                var measurementLabelCell = document.createElement('td');
+						                measurementLabelCell.innerText = key;
+						                var measurementValueCell = document.createElement('td');
+						                measurementValueCell.innerText = measurements[key];
+
+						                measurementRow.appendChild(measurementLabelCell);
+						                measurementRow.appendChild(measurementValueCell);
+						                measurementLabelCell.style.borderColor='white';
+						                measurementValueCell.style.borderColor='white';
+
+						                measurementTable.appendChild(measurementRow);
+						            });
+
+						            measurementContainer.appendChild(measurementTable);
+						            document.getElementById('measurements').appendChild(measurementContainer);
+								}); */
+								}
+								else{
+									var measurementsTable = document.getElementById('measurements');
+									  var textContainer = document.createElement('div');
+									  textContainer.className = 'measurement-container';
+									  textContainer.style.borderColor = 'white';
+
+									  var text = document.createElement('h5');
+									  text.innerText = "Schedule a pick up for Clothing measurements";
+
+									  textContainer.appendChild(text);
+									  measurementsTable.appendChild(textContainer);
+								}
+						        
+								
+							}
+						});
+						
+					}
+					getMyMeasurements();
 					
 					
 					
