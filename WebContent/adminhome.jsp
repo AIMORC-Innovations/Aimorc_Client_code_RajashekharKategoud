@@ -542,7 +542,8 @@ position: absolute;
     										data : JSON.stringify(data),
     										success : function(data) {
     											let responseData = JSON.stringify(data);
-    											//console.log("--"+data);
+    											
+    											console.log("--"+data);
     											let allProdsCount = 0;
 
     											Object.keys(data).forEach((eachCategoryId, index) => {
@@ -551,7 +552,7 @@ position: absolute;
     											let currCat = data[eachCategoryId].products.length;
     											allProdsCount = allProdsCount + currCat;
     											cartValue = allProdsCount;
-
+												console.log(cartValue);
     											document.getElementById('Value').innerHTML = "[" + cartValue + "]";
     											}); 
 
